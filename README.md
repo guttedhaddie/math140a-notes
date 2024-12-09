@@ -2,7 +2,7 @@ Notes for Math 140A: Elementary Analysis I at UC Irvine (https://www.math.uci.ed
 
 Much of the organization/ordering is based on Elementary Analysis: The Theory of Calculus by Ross
 
-Run PDFLaTeX on the master file math147-notes.tex. Select chapters you want via \includeonly
+Run PDFLaTeX on the master file math140a-notes.tex. Select chapters you want via \includeonly
 
 Graphics editing requires Asymptote (http://asymptote.sourceforge.io/)
 
