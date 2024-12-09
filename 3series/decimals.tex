@@ -1,0 +1,208 @@
+\graphicspath{{notes/3series/asy/}}
+
+\thispagestyle{empty}
+
+\subsection*{Decimal Expansions of Real Numbers}
+
+We are typically introduced to decimals in elementary mathematics; for many in grade-school they become a working \emph{definition} of the real numbers. Strictly speaking, the decimals must be given a formal meaning in terms of the real numbers.
+
+\begin{defn*}
+A \emph{decimal} $d_0.d_1d_2d_3\cdots$ is an infinite series of the form
+\[\sum_{n=0}^\infty d_n\,10^{-n}\text{ where }d_0\in\Z\text{ and }\forall n\in\N,\ d_n\in\{0,1,2,\ldots,9\}\]
+Let $x$ be a non-negative real number. Define sequences $(d_n)_{n=0}^\infty$ and $(R_n)_{n=0}^\infty$ as follows:\footnote{Recall the \emph{floor} function: $\lfloor x\rfloor =\max\{n\in\Z:n\le x\}$.}
+\begin{gather*}
+d_0=\lfloor x\rfloor\qquad R_0=x-d_0\\
+\forall n\in\N_0:\quad d_{n+1}=\lfloor 10R_n\rfloor,\qquad R_{n+1}=10R_n-d_{n+1}
+\end{gather*}
+The \emph{decimal expansion} of $x$ is the decimal $D(x):=d_0.d_1d_2d_3\cdots$.\\
+If $x<0$, first find the decimal expansion of $\nm x=-x$, then change the sign of $d_0$.
+\end{defn*}
+
+%There are many things to check with this definition, but first a couple of examples.
+
+\paragraph{Examples}
+\begin{enumerate}
+  \item Let $x=\frac{27}{20}$. We compute:
+  \[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c|c}
+  n&0&1&2&3&4&\cdots\\\hline
+  d_n&\left\lfloor\frac{27}{20}\right\rfloor=1 &\left\lfloor\frac{70}{20}\right\rfloor=3 &\left\lfloor\frac{10}{2}\right\rfloor=5 &\left\lfloor 0\right\rfloor=0 &0 &\cdots\\\hline
+  R_n&\frac 7{20} &\frac{1}{2} &0 &0 &0&\cdots
+  \end{array}\]
+  Both sequences continue with zeros forever: we obtain the terminating decimal $D(\frac{27}{20})=1.35$.
+	\item Let $x=\frac 13$. We have
+	\[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c}
+  n&0&1&2&3&\cdots\\\hline
+  d_n&\left\lfloor\frac{1}{3}\right\rfloor=0 &\left\lfloor\frac{10}3\right\rfloor=3 &\left\lfloor\frac{10}3\right\rfloor=3 &\left\lfloor\frac{10}3\right\rfloor=3 &\cdots\\\hline
+  R_n&\frac 13 &\frac 13 &\frac 13 &\frac 13&\cdots
+  \end{array}\]
+  By induction, all $R_n=\frac 13$ and we recover the periodic decimal $D(\frac 13)=0.33333\cdots$.
+  \item If $x=\frac 17$, we obtain
+  \[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c|c|c|c|c}
+  n&0&1&2&3&4&5&6&7&\cdots\\\hline
+  d_n&0&\left\lfloor\frac{10}7\right\rfloor=1 &\left\lfloor\frac{30}7\right\rfloor=4 &\left\lfloor\frac{20}7\right\rfloor=2 &\left\lfloor\frac{60}7\right\rfloor=8 &\left\lfloor\frac{40}7\right\rfloor=5 &\left\lfloor\frac{50}7\right\rfloor=7 &1 &\cdots\\\hline
+  R_n&\frac 17 &\frac 37 &\frac 27 &\frac 67 &\frac 47 &\frac 57 &\frac 17 &\frac 37 &\cdots
+  \end{array}\]
+  Since $R_6=R_0$, both sequences will now repeat: $R_{n+6}=R_n$ and $d_{n+6}=d_n$. We recover the \emph{period-six} decimal $D(\frac 17)=0.142857142857\cdots$.
+\end{enumerate}
+
+
+\pagebreak
+
+In the main result, we check that the decimal expansion is well-defined and that it behaves as expected. We also give two well-known properties of decimal representations.
+
+\begin{thm*}
+Let $x\in\R$ have decimal expansion $D(x)=\sum\limits_{n=0}^\infty d_n\,10^{-n}$.
+\begin{enumeratea}
+  \item Every decimal (infinite series) converges.
+  \item Each $d_n\in\{0,1,2,\ldots,9\}$ whenever $n\ge 1$.
+  \item $x=D(x)$.
+  \item The sequence $(d_n)$ is \emph{eventually periodic} if and only if $x\in\Q$.
+  \item $x$ equals a unique decimal, except when $D(x)$ is terminating, in which case there are exactly two decimal representations:
+  \[x=D(x)=\sum_{n=0}^md_n\,10^{-n}=\sum_{n=0}^{m-1}d_n\,10^{-n}+(d_m-1)10^{-m}+9\sum_{n=m+1}^\infty 10^{-n}\]
+  Otherwise said, we subtract 1 from the final term of $(d_n)$ and insert an infinite string of 9's.
+\end{enumeratea}
+\end{thm*}
+
+\paragraph{Examples}
+
+\begin{enumerate}
+  \item Part (d) explains why so many people consider memorizing the digits (decimal expansion) of $\pi$ to be interesting: since $\pi$ is irrational, the pattern never repeats. 
+  \item We explicitly evaluate a \emph{period-three} decimal:
+  \begin{align*}
+  3.1279279279279\cdots&=\frac{31}{10}+\frac{279}{10000}\sum_{n=0}^\infty 1000^{-n}=\frac{31}{10}+\frac{279}{10000}\cdot\frac 1{1-\frac 1{1000}}\\
+  &=\frac{31}{10}+\frac{279}{9990} =\frac{1736}{555}
+  \end{align*}
+  \item Here are two examples of part (e): 
+  \[1=0.99999\cdots\qquad 27.164=27.1639999\cdots\]
+\end{enumerate}
+
+\paragraph{Questions}
+
+\begin{enumerate}
+  \item Compute the decimal expansions of $\dfrac{32}{13}$.
+  \item Prove all parts of the Theorem. Here are some hints:
+	\begin{enumeratea}
+  	\item Use a series test\ldots
+  	\item Prove by induction: it should be obvious that $0\le R_0<1$, etc.
+  	\item Let $\displaystyle E_n=x-\sum\limits_{k=0}^nd_k\,10^{-k}$. Prove by induction that $R_n=10^nE_n$ and conclude that $E_n\to 0$.
+  	\item A decimal is eventually periodic with period $r$ if
+  	\[d_0.d_1\cdots d_md_{m+1}\cdots d_{m+r}d_{m+1}\cdots d_{m+r}\cdots =\sum_{k=0}^md_k\, 10^{-k}+\left(\sum_{j=1}^rd_{m+j}\,10^{-m-j}\right)\sum_{l=0}^\infty 10^{-rl}\]
+  	Convince yourself this is a rational number. For the converse, suppose that $x=\frac pq$ is a rational number in lowest terms where $q\in\N$, and observe that there are only \emph{finitely many} possible values for the remainders:
+  	\[R_n=\frac aq\text{ where }a\in\{0,1,\ldots,q-1\}\]
+  	\item Suppose that $d_0.d_1d_2\cdots=c_0.c_1c_2\cdots$ but where $(d_n)\neq(c_n)$. WLOG there is a minimal $m$ such that $c_m<d_m$\ldots
+	\end{enumeratea}
+	\item\begin{enumerate}
+	  \item Can you find a simple way to describe all the real numbers $x$ for which $D(x)$ is terminating? Prove your assertion.\\
+	  (\emph{Hint: what form can the denominator of $R_n$ take if $x=\frac pq$?})
+	  \item Given a rational number $x=\frac pq$ in lowest terms and with $q\in\N$, what is the \emph{largest} possible period of $D(x)$? Explain.
+	\end{enumerate}
+	\item Similar analyses can be done for other representations of real numbers. For instance, by replacing 10 with 3 in the definition, one could consider the \emph{ternary} expansion of a real number
+	\[T(x)=[t_0.t_1t_2\cdots]_3=\sum_{n=0}^\infty t_n\,3^{-n}\text{ where }t_n\in\{0,1,2\}\text{ whenever }n\ge 1\]
+	For example, $\frac 13=[0.1]_3$ and $[0.12]_3=\frac 13+\frac 2{3^2}=\frac 59$.
+	\begin{enumerate}
+  	\item Compute $[0.02020202\cdots]_3$ and find the ternary representation of $\frac 12$ and $\frac 15$.
+  	\item Read over the Theorem. How can we modify its statements for ternary representations?
+  	\item Describe all real numbers $x$ whose ternary representation is terminating. More generally, describe all real numbers $x$ whose $n$-ary (base $n$) representation is terminating. 
+	\end{enumerate}
+\end{enumerate}
+
+%  . We can similarly conclude that every rational number has an eventually periodic ternary expansion, and that ternary representations are unique unless one terminates: for example
+% \[\frac 53=[1.2]_3=[1.1222222\cdots]_3\]
+The major take-away from this discussion is that there is \emph{nothing special} about representing real numbers using decimals. Computers typically use base 2, 8 or 16; the ancient Babylonians used base 60. We only like decimals because they're familiar, and because we're blessed with 10 fingers\ldots 
+
+
+\newpage
+
+\paragraph{Solutions}
+
+\begin{enumerate}
+  \item If $x=\frac{32}{13}$, we obtain
+  \[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c|c|c|c|c}
+  	n&0&1&2&3&4&5&6&7&\cdots\\\hline
+  	d_n&\left\lfloor\frac{32}{13}\right\rfloor=2 &\left\lfloor\frac{60}{13}\right\rfloor=4 &\left\lfloor\frac{80}{13}\right\rfloor=6 &\left\lfloor\frac{20}{13}\right\rfloor=1 &\left\lfloor\frac{70}{13}\right\rfloor=5 &\left\lfloor\frac{50}{13}\right\rfloor=3 &\left\lfloor\frac{110}{13}\right\rfloor=8 &\left\lfloor\frac{60}{13}\right\rfloor=4&\cdots\\\hline
+  	R_n&\frac 6{13} &\frac 8{13} &\frac 2{13} &\frac 7{13} &\frac 5{13} &\frac{11}{13} &\frac{6}{13} &\frac 8{13} &\cdots
+  \end{array}\]
+  The process repeats and we obtain $D(\frac{32}{13})=2.461538461538\cdots$
+  
+  \item\begin{enumeratea}
+  	\item This is trivial by the comparison test, since $d_n\, 10^{-n}\le 9\cdot 10^{-n}$.
+  	\item Formally this requires induction. Informally, it is clear that $0\le R_0<1$, whence $d_1=\lfloor 10R_0\rfloor$ is an integer $0\le d_0\le 9$. Now iterate.
+  	\item Following the hint, let $E_n=x-\sum\limits_{k=0}^nd_k\,10^{-k}$. We prove by induction that $R_n=10^nE_n$.\\[5pt]
+  	The base case is obvious, since $R_0=x-d_0=10^0E_0$.\\
+  	For the induction step, fix $n\in\N_0$ and assume $R_n=10^nE_n$. Then
+  	\begin{align*}
+  	R_{n+1}&=10R_n-d_{n+1} =10^{n+1}E_n-d_{n+1}\\
+  	&=10^{n+1}x-\sum\limits_{k=0}^nd_k\,10^{n-k}-d_{n+1}\\
+  	&=10^{n+1}\left(x-\sum\limits_{k=0}^{n+1}d_k\,10^{-k}\right) =10^{n+1}E_{n+1}
+  	\end{align*}
+		But now $E_n=\frac 1{10^n}R_n\to 0$, since $0\le R_n<1$ for all $n$.
+  	\item Following the hint, since $\sum\limits_{l=0}^\infty 10^{-rl}=\frac 1{1-10^{-r}}\in\Q$, we see that
+  	\[d_0.d_1\cdots d_md_{m+1}\cdots d_{m+r}d_{m+1}\cdots d_{m+r}\cdots =\sum_{k=0}^md_k\, 10^{-k}+\left(\sum_{j=1}^rd_{m+j}\,10^{-m-j}\right)\sum_{l=0}^\infty 10^{-rl}\]
+  	is rational.\\
+  	Conversely, suppose that $x=\frac pq$ is a rational number in lowest terms where $q\in\N$. At each stage of the algorithm, one is subtracting an integer after multiplying by 10. The result is that the denominator of $R_n$ is always a divisor of $q$. It follows that
+  	\[R_n=\frac aq\text{ where }a\in\{0,1,\ldots,q-1\}\]
+  	For $n\in\{0,1,\ldots,q\}$ there are only $q$ possible remainders: at least one remainder must appear twice; $R_i=R_j$ where $0\le i<j\le q$. Suppose $r=j-i$. It follows that
+  	\[\forall k\ge i,\ d_{k+r}=d_k\]
+  	whence the decimal is eventually periodic.
+  	\item That the two series are equal is easy to check via the geometric series formula:
+  	\[9\sum_{n=m+1}^\infty 10^{-n}=\frac{9\cdot 10^{-m-1}}{1-1/10}=10^{-m}\]
+  	Now suppose that two different decimals are equal: that is
+  	\[\sum_{n=0}^\infty d_n\,10^{-n}=\sum_{n=0}^\infty c_n\,10^{-n}\]
+  	Suppose $m\in\N_0$ is minimal such that $c_m\neq d_m$ and assume WLOG that $c_m<d_m$. Then
+  	\begin{align*}
+  		&(d_m-c_m)10^{-m}+\sum_{n=m+1}^\infty d_n\,10^{-n}=\sum_{n=m+1}^\infty c_n\,10^{-n}\\
+  		\implies&(d_m-c_m)+\sum_{n=1}^\infty d_{n+m}\,10^{-n}=\sum_{n=1}^\infty c_{n+m}\,10^{-n}
+  	\end{align*}
+  	Consider the left and right sides of this equation:
+  	\begin{description}
+  		\item[Left Side] Since $d_m>c_m$, this is \emph{greater than or equal to} 1 with equality if and only if \emph{all} $d_{n+m}=0$.
+  		\item[Right Side] Since $9\sum_{n=1}^\infty 10^{-n}=1$, the right side is \emph{less than or equal to} 1 with equality if and only if \emph{all} $c_{n+m}=9$.
+  	\end{description}
+		We conclude that $d_m=c_m+1$, and that
+		\[\forall n>m,\quad d_n=0,\ c_n=9\]
+	\end{enumeratea}
+	
+	\item\begin{enumeratea}
+		\item $D(x)$ terminates if and only if $x=\frac p{2^a5^b}$ is rational in lowest terms. Thus, for example, $x=\frac{193}{250} =\frac{193}{2\cdot 5^2}$ has a terminating decimal, namely $0.772$. Here is a proof.\\[5pt]
+		By the Theorem, we know that all possible candidates for a terminating decimal have to be rational. Thus we assume $x=\frac pq$ is rational in lowest terms. Observe that
+		\[R_0=\frac pq-d_0=\frac{p-d_0q}q\]
+		is a fraction with denominator $q$. Similarly,
+		\[R_1=10R_0-\left\lfloor 10R_0\right\rfloor\]
+		is $10R_0$ \emph{minus an integer}: it is therefore a fraction whose denominator is either $q$, $\frac 12q$, $\frac 15q$ or $\frac 1{10}q$. Repeating this process, we see that $R_n$ is a fraction with denominator
+		\[q_n=\frac 1{2^a5^b}q\quad\text{where}\quad a,b\in\N_0\]
+		$D(x)$ terminates if and only if some $q_n=1$ (then $R_n=\frac 01=0$). This clearly happens if and only if $x$ has the form described above.
+		\item Think back to the proof. If $x=\frac pq$ is in lowest terms, then in the first $q+1$ remainders, one remainder has to be repeated, so the seemingly largest period is $q$ (if $R_0=R_q$). However, if any remainder is ever zero, the period is 1. Thus the longest possible period will be $q-1$, which will happen if the remainders $R_0,R_1,\ldots,R_{q-2}$ are distinct and non-zero, and we have $R_{q-1}=R_0$. The example with $\frac 17$ (period 6) shows this. Similarly,
+		\[\frac 1{23}=0.\textcolor{red}{0434782608695652173913}0434782609\cdots\]
+		has period 22.
+	\end{enumeratea}
+	
+	\item\begin{enumeratea}
+		\item $\displaystyle [0.02020202\cdots]_3=\frac 2{3^2}[1.010101\cdots]_3=\frac 29\sum\limits_{n=0}^\infty 3^{-2n}=\frac 2{9(1-\frac 19)}=\frac 14$.\\
+		
+		Following the algorithm,
+		\[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c|}
+  	n&0&1&2&3&\cdots\\\hline
+  	d_n&\left\lfloor\frac{1}{2}\right\rfloor=0 &\left\lfloor\frac 32\right\rfloor=1 &\left\lfloor\frac 32\right\rfloor=1 &\left\lfloor\frac 32\right\rfloor=1 &\cdots\\\hline
+  	R_n&\frac 12 &\frac 12 &\frac 12 &\frac 12 &\cdots
+  	\end{array} \implies \frac 12=[0.11111\cdots]_3\]
+  	We could also have done this by multiplying the expression for $\frac 14$ by 2\ldots\\
+  	
+  	Now for $\frac 15$:
+		\[\def\arraystretch{1.5}\begin{array}{l||c|c|c|c|c|c|}
+  	n&0&1&2&3&4&\cdots\\\hline
+  	d_n&\left\lfloor\frac{1}{5}\right\rfloor=0 &\left\lfloor\frac 35\right\rfloor=0 &\left\lfloor\frac 95\right\rfloor=1 &\left\lfloor\frac{12}5\right\rfloor=2 &\left\lfloor\frac 65\right\rfloor=1&\cdots\\\hline
+  	R_n&\frac 15 &\frac 35 &\frac 45 &\frac 25 &\frac 15 &\cdots
+  	\end{array}\]
+		from which we see that the ternary representation repeats:
+		\[\frac 15=[0.012101210121\cdots]_3\]
+% 		$\displaystyle [0.02020202\cdots]_3=\frac{16}{81}[1.000100010\cdots]_3=\frac{16}{81}\sum\limits_{n=0}^\infty 3^{-4n}=\frac{16}{81(1-\frac 1{81})}=\frac{16}{80}=\frac 15$.
+		\item The theorem goes through almost unchanged: every ternary expression converges, each $t_n\in\{0,1,2\}$ whenever $n\ge 1$, $x=T(x)$, rational number have eventual periodicity of $(t_n)$. Finally, terminating ternary expressions have a secondary representation: e.g.
+		\[[1.2012]_3=[1.20112222222\cdots]_3\]
+		where the final non-zero term is reduced by 1 and an infinite string of 2's added.
+		\item Suppose $n=p_1^{\mu_1}\cdots p_k^{\mu_k}$ is the unique prime factorization of $n$. The real numbers $x$ whose $n$-ary represenation terminates are precisely those rational numbers whose (lowest-term) denominators are divisible by no other primes than $p_1,\ldots,p_n$. For example, base $60=2^2\cdot 3\cdot 5$, the representation of $\frac{1001}{450}$ will terminate, but $\frac 17$ will not. In case you are curious\ldots
+		\[\frac{1001}{450}=[2;13,28]_{60}=2+\frac{13}{60}+\frac{28}{60^2},\qquad \frac 17=[0;8,34,17,8,34,17,\ldots]_{60}\]
+	\end{enumeratea}
+\end{enumerate}
+
+  
+
