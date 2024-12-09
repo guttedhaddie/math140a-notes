@@ -1,6 +1,6 @@
-Notes for Math 147: Complex Analysis at UC Irvine (https://www.math.uci.edu/~ndonalds/math147/math147.html)
+Notes for Math 140A: Elementary Analysis I at UC Irvine (https://www.math.uci.edu/~ndonalds/math140a/math140a.html)
 
-Much of the organization/ordering is based on Complex Variables and Applications (9th ed) by Brown and Churchill
+Much of the organization/ordering is based on Elementary Analysis: The Theory of Calculus by Ross
 
 Run PDFLaTeX on the master file math147-notes.tex. Select chapters you want via \includeonly
 
