@@ -12,7 +12,7 @@ size(400);
 scale(Broken(0.1,0.9));
 
 xaxis(-0.05,sqrt(2)+0.1,red,RightTicks(new real[]{0,1}));
-xtick(Label("$x$",align=S),1.3,S,red);
+xtick(Label("$M$",align=S),1.3,S,red);
 xtick(Label("$\sqrt{2}$",align=S),sqrt(2),S,red);
 xtick(Label("$s_0$",align=N),1,N,blue);
 xtick(Label("$s_{N-1}$",align=N),1.25,N,blue);
