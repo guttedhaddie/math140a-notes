@@ -100,6 +100,8 @@ Reversing this observation provides an explicit construction of $\Z$ from $\N$: 
 
 
 \begin{exercises}{}{}
+	\emph{Key concepts/results:\quad Peano's Axioms,\quad Induction}\smallbreak
+	
 	Most of these exercises are to refresh your memory of induction. Use either the language of Peano's axiom 5, or the (possibly) more familiar base-case/induction-step formulation.	
 	\begin{enumerate}
 	  \item%[1.]
@@ -127,8 +129,8 @@ Reversing this observation provides an explicit construction of $\Z$ from $\N$: 
 	  The principle of mathematical induction can be extended as follows. A list $P_m,P_{m+1},\ldots$ of propositions is true provided (i) $P_m$ is true, (ii) $P_{n+1}$ is true whenever $P_n$ is true and $n\ge m$.
 	  \begin{enumerate}
 	  	\item Prove that $n^2>n+1$ for all integers $n\ge 2$.
-	  	\item Prove that $n!>n^2$ for all integers $n\ge 4$.\par
-	  	(\emph{Recall that $n!=n(n-1)\cdots 2\cdot 1$})
+	  	\item Prove that $n!>n^2$ for all integers $n\ge 4$.\hfill
+	  	(\emph{recall that $n!=n(n-1)\cdots 2\cdot 1$})
 	  \end{enumerate}
 	  
 	  
@@ -246,7 +248,7 @@ The next result is helpful for deciding whether a given number is rational and c
 	Since none of the values $\pm 1,\pm 2$ satisfy $x^2-2=0$, we have a contradiction.
 
 	\begin{enumerate}\setcounter{enumi}{1}
-		\item $y=(\sqrt 3-1)^{1/3}$ satisfies $(y^3+1)^2=3$, from which $y^6+2y^3-2=0$. If $y=\frac pq$ were rational in lowest terms, then $p\mid 2$ and $q\mid 1$, whence $y=\pm 1,\pm 2$; none of these satisfy the polynomial, whence $y$ is irrational.
+		\item $y=(\sqrt 3-1)^{1/3}$ satisfies $(y^3+1)^2=3$, whence $y^6+2y^3-2=0$. If $y=\frac pq$ were rational in lowest terms, then $p\mid 2$ and $q\mid 1$, whence $y=\pm 1,\pm 2$; none of which satisfy the polynomial.
 		
 		\item $z=\left(\frac{4+\sqrt 3}{5}\right)^{1/2}$ satisfies $5z^2-4=\sqrt 3$, from which $25z^4-40z^2+13=0$. If $z=\frac pq$ were rational in lowest terms, then $p\mid 13$ and $q\mid 25$. There are twelve possibilities: it is tedious to check, but none satisfy the required polynomial,
 		\[
@@ -270,9 +272,14 @@ It is far from clear that non-algebraic (\emph{transcendental}) numbers exist: $
 
 
 \begin{exercises}{}
-	\exstart Describe all linear equations corresponding to the rational number $\frac{101}{29}$.\vspace{-5pt}
+	\emph{Key concepts:\quad Algebraic Numbers,\quad Rational Roots Theorem/Testing for Irrationality}%\smallbreak
+
+
+% 	\exstart Describe all linear equations corresponding to the rational number $\frac{101}{29}$.\vspace{-5pt}
 	
-	\begin{enumerate}\setcounter{enumi}{1}
+	\begin{enumerate}%\setcounter{enumi}{1}
+	  \item Describe all linear equations corresponding to the rational number $\frac{101}{29}$.
+	  
 	  \item %[1.]
 	  Show that $\sqrt 3$, $\sqrt 5$ and $\sqrt{24}$ are not rational numbers: what are the relevant polynomials?
 	  
@@ -429,13 +436,17 @@ We finish with a final useful ingredient.
 	\item $\nm a\ge 0$
 	\item $\nm{ab}=\nm a\cdot \nm b$
 	\item $\nm{a+b}\le \nm a+\nm b$ \lstsp ($\triangle$-inequality)
+	\item $\nm{a-b}\ge \nm{\nm a-\nm b}$ \lstsp (reverse/extended $\triangle$-inequality)
 	\end{enumerate}
 \end{thm}
 
-All three parts are straightforward if you consider the $\pm$-cases separately for $a,b$.
+All parts are straightforward if you consider the $\pm$-cases separately for $a,b$.
 
 
 \begin{exercises}{}{}
+	\emph{Key concepts:\quad Ordered Field ($\Q$ an example arising naturally from $\Z$),\quad $\triangle$-inequality}
+
+
 	\exstart %[1.]
 	Which of the axioms of an ordered field fail for $\N$? For $\Z$?
 	\begin{enumerate}\setcounter{enumi}{1}
@@ -466,6 +477,9 @@ All three parts are straightforward if you consider the $\pm$-cases separately f
 	  \item%[8.]*
 	  Let $a,b\in\R$. Show that if $a\le b_1$ for every $b_1>b$, then $a\le b$.\par
 	  (\emph{Hint: draw a picture if you're stuck. This is a very important example!})
+	  
+	  
+	  \item In an ordered field, suppose that $0\le a$ and $0\le b$. Explain carefully why $0\le a+b$.
 	  
 	  
 	  \item Following Example \ref{ex:qordered}, prove that $\Q$ satisfies axiom O5.\par
@@ -535,7 +549,7 @@ Though we haven't provided an explicit \emph{definition} of the real numbers, yo
 }
 
 
-\begin{lemm}{}{}
+\begin{lemm}{}{simpleupperbound}
 	\exstart If $M$ is an upper bound for $S$, so is $M+\varepsilon$ for any $\varepsilon\ge 0$.
 	%
 	\begin{enumerate}\setcounter{enumi}{1}
@@ -638,7 +652,9 @@ We generalize the idea of maximum and minimum values to any bounded sets.
 	If $S\subseteq\R$ is non-empty and bounded above, then $\sup S$ exists (and is a real number!).
 \end{axiom}
 
-It is precisely this property that distinguishes the real numbers from the rationals.\footnote{\label{fn:syntheticR}More formally (the details are too much for us): if $\F$ is an ordered field with $0\neq 1$ and which satisfies the completeness axiom, then $\F$ is isomorphic to the real numbers.} Certainly every bounded set $S$ of \emph{rational} numbers has a supremum; the issue is that $\sup S$ \emph{need not be rational}!\smallbreak
+It is precisely this property that distinguishes the real numbers from the rationals.\footnote{%
+	\label{fn:syntheticR}More formally (the details are too much for us): if $\F$ is an ordered field with $0\neq 1$ and which satisfies the completeness axiom, then $\F$ is isomorphic to the real numbers.%
+} Certainly every bounded set $S$ of \emph{rational} numbers has a supremum; the issue is that $\sup S$ \emph{need not be rational}!\smallbreak
 By reflecting across zero (Exercise \ref{exs:infexist}), we obtain the same thing for the infimum.
 
 \begin{thm}{Existence of Infima}{infexist}
@@ -647,7 +663,7 @@ By reflecting across zero (Exercise \ref{exs:infexist}), we obtain the same thin
 
 \boldinline{A Useful Contrapositive}
 
-Part (b) of the Definition is plainly a biconditional: if $\sup S\le M$, then $M$ is at least as large as an upper bound and is therefore also an upper bound for $S$! As in Example \ref{ex:supbasic}, one often uses the contrapositive of part (b):
+Part (b) of the Definition is plainly a biconditional: if $\sup S\le M$, then $M$ is at least as large as an upper bound and is therefore also an upper bound for $S$ (Lemma \ref{lemm:simpleupperbound})! As in Example \ref{ex:supbasic}, one often uses the contrapositive of part (b):
 
 \begin{quote}
 	$M<\sup S$ if and only if $M$ is \emph{not} an upper bound for $S$.
@@ -783,15 +799,21 @@ The idea is hopefully straightforward: given $a<b$, \textcolor{blue}{stretch} th
 
 By iterating this result we see that any interval $(a,b)$ contains \emph{infinitely many} rational numbers. It can moreover be established that the irrational numbers are also dense in $\R$ (Exercise \ref{exs:irrdense}).
 
-\bigbreak
+%\bigbreak
 
 
 
 \begin{exercises}{}{}
-	\exstart %(4) parts b,c,f,h,j,l,r,s,v%
-	Decide whether each set is bounded above and/or below. If so, state its supremum and/or infimum (no working is required).
-	\begin{enumerate}\setcounter{enumi}{1}
-	  \item[]\begin{enumerate}
+	\emph{Key concepts:\quad Suprema,\quad Completeness (distinguishes $\R$),\quad Contrapositive criterion,}%\vspace{-2pt}
+	\begin{quote}
+		\emph{Archimedean property/Density of $\Q\subset\R$}
+	\end{quote}
+	
+% 	\exstart %(4) parts b,c,f,h,j,l,r,s,v%
+% 	Decide whether each set is bounded above and/or below. If so, state its supremum and/or infimum (no working is required).
+	\begin{enumerate}%\setcounter{enumi}{1}
+	  \item Decide whether each set is bounded above and/or below. If so, state its supremum and/or infimum (no working is required).
+	  \begin{enumerate}
 	    \item \makebox[130pt][l]{$(0,1)$\hfill (b)} \makebox[170pt][l]{\ $\{2,7\}$\hfill (c)} \ $\{0\}$
 	    \setcounter{enumii}{3}
 	    \item \makebox[130pt][l]{$\bigcup\limits_{n=1}^\infty[2n,2n+1]$\hfill (e)} \makebox[170pt][l]{\ $\left\{1-\frac 1{3^n}:n\in\N\right\}$\hfill (f)} \ $\{r\in\Q:r^2<2\}$
@@ -802,6 +824,9 @@ By iterating this result we see that any interval $(a,b)$ contains \emph{infinit
   
   	\item Modelling Example \ref{ex:qsqqrt2nomax}, \emph{sketch} an argument that $S=\Q\cap (\pi,4]$ has no minimum.\par
   	(\emph{Hint: let $s_n$ be $\pi$ rounded \underline{up} to $n$ decimal places})
+  
+  
+  	\goodbreak
   
   
 		\item %(6)
@@ -906,10 +931,14 @@ The symbols $\pm\infty$ have \emph{no other meaning} (as yet); in particular, th
 
 
 \begin{exercises}{}{}
-	\exstart %2
-	Give the infimum and supremum of each of the following sets:
-	\begin{enumerate}\setcounter{enumi}{1}
-	  \item[]\begin{enumerate}
+	\emph{Key concepts:\quad $\pm\infty$ are shorthands for \textbf{unboundedness}: they are \textbf{not numbers}!}
+
+
+% 	\exstart %2
+% 	Give the infimum and supremum of each of the following sets:
+	\begin{enumerate}%\setcounter{enumi}{1}
+	  \item Give the infimum and supremum of each of the following sets:
+	  \begin{enumerate}
 	    \item \makebox[160pt][l]{$\{x\in\R:x<0\}$ \hfill (b)} \ $\{x\in\R:x^3\le 8\}$
 	    \setcounter{enumii}{2}
 	    \item \makebox[160pt][l]{$\{x^2:x\in\R\}$ \hfill (d)} \ $\{x\in\R:x^2<8\}$
@@ -992,13 +1021,22 @@ An alternative approach to $\R$ using sequences of rational numbers will be give
 
 
 \begin{exercises}{}{}
-	\exstart %(2) 
-  Show that if $\alpha^*,\beta^*$ are Dedekind cuts, then so is
-  \[
-  	\alpha^*+\beta^*=\{r_1+r_2:r_1\in\alpha^*,r_2\in\beta^*\}
-  \]
+	\emph{Key concepts:\quad $\R$ is unnatural and difficult to construct in a logical manner}
 
-	\begin{enumerate}\setcounter{enumi}{1}
+
+% 	\exstart %(2) 
+%   Show that if $\alpha^*,\beta^*$ are Dedekind cuts, then so is
+%   \[
+%   	\alpha^*+\beta^*=\{r_1+r_2:r_1\in\alpha^*,r_2\in\beta^*\}
+%   \]
+
+	\begin{enumerate}%\setcounter{enumi}{1}'
+	  \item Show that if $\alpha^*,\beta^*$ are Dedekind cuts, then so is
+  	\[
+  		\alpha^*+\beta^*=\{r_1+r_2:r_1\in\alpha^*,r_2\in\beta^*\}
+  	\]
+	  
+	  
 	  \item %(4)
 	  Let $\alpha^*,\beta^*$ be Dedekind cuts and define the `product':
 	  \[
