@@ -1,88 +1,118 @@
 \graphicspath{{2limits/asy/}}
 
-%\section*{Sequences}
-
-\section{Limits of Sequences}
+\section{Sequences}
+\setcounter{subsection}{6}
 
 Sequences are the fundamental tool in our approach to analysis.
 
+\subsection{Limits of Sequences}
+
 \begin{defn}{}{sequence}
-A \emph{sequence} of real numbers is a list indexed by the natural numbers
-\[(s_n)=(s_1,s_2,s_3,\ldots)\]
-We call $s_1$ the \emph{initial term/element.}
+	A \emph{sequence} of real numbers is a list indexed by the natural numbers
+	\[
+		(s_n)=(s_1,s_2,s_3,\ldots)
+	\]
+	We call $s_1$ the \emph{initial term/element.}
 \end{defn}
 
-This is strictly the definition of an \emph{infinite sequence}; finite sequences don't appear in this course. Other letters may be used ($a_n,b_n$, etc.), though $s_n$ is most common in the abstract. It is also common to have sequences which start with a different initial term ($n=0$ is particularly common). If you need to be explicit, describe the range of indices with sub/superscripts, e.g.{} $(s_n)_{n=0}^\infty$.
+More formally, we could view a sequence as a function $s_n:\N\to\R$. Other letters may be used ($a_n,b_n$, etc.), though $s_n$ is typical in the abstract. It is also common to have sequences which start with a different initial term (e.g., $n=0$). If you need to be explicit, write, e.g., $(s_n)_{n=0}^\infty$.
 
 
 \begin{examples}{}{easylimits}
 	\exstart Explicit sequences are often defined by providing a formula for the $n\th$ term. For instance, $s_n=\left(1+\frac 1n\right)^n$ defines a sequence whose first three terms are
-	\[s_1=2,\quad s_2=\tfrac 94,\quad s_3=\tfrac{64}{27},\quad\ldots\]
+	\[
+		s_1=2,\quad s_2=\tfrac 94,\quad s_3=\tfrac{64}{27},\quad\ldots
+	\]
 	Since each term is a rational number, $(s_n)$ could be described as a \emph{rational sequence.}
 	\begin{enumerate}\setcounter{enumi}{1}
-	  \item\label{ex:easylimits2} Sequences can be defined inductively. For instance $t_1=1$ and $t_{n+1}=3t_n-1$ together define the sequence
-	  \[(t_n)=(1,2,5,14,41,\ldots)\]
+	  \item\label{ex:easylimits2} Sequences can be defined inductively. For instance, if $t_1=1$ and $t_{n+1}=3t_n-1$, then
+	  \[
+	  	(t_n)=(1,2,5,14,41,\ldots)
+	  \]
 	  \item $u_n=\frac 1{n^2-4}$ defines a sequence with initial term $u_3=\frac 15$:
-	  \[(u_n)_{n=3}^\infty =\bigl(\tfrac 15,\tfrac 1{12},\tfrac 1{21},\ldots\bigr)\]
+	  \[
+	  	(u_n)_{n=3}^\infty =\bigl(\tfrac 15,\tfrac 1{12},\tfrac 1{21},\ldots\bigr)
+	  \]
 	\end{enumerate}
 \end{examples}
 
 
 \boldinline{Limits}
 
-In analysis we are typically interested in what happens to the terms of a sequence $(s_n)$ when $n$ gets \emph{large} (as such, it is common to be non-explicit as to the initial term). In elementary calculus, you should have become used to writing expressions such as\footnote{If there are multiple letters in your expression, then for clarity it can be helpful to write $\lim\limits_{n\to\infty}$ with a subscript.}
+We are typically most interested in what happens to the terms of a sequence when $n$ gets \emph{large} (one reason it is common to be non-explicit as to the initial term). In elementary calculus you should have become used to examples such as\footnote{%
+	If there are multiple letters around, writing $\lim\limits_{n\to\infty}$ with a subscript can aid the reader.%
+}
 \[
 	\lim\frac{2n^2+3n-1}{3n^2-2}=\frac 23
 \]
-which encapsulates the idea that the expression $s_n=\frac{2n^2+3n-1}{3n^2-2}$ gets close to $\frac 23$ when $n$ is large. We can easily convince ourselves of this with a calculator/computer: to 4 decimal places, we have
-\[(s_n)=(4,\,1.3,\,1.04,\,
- 0.9348,\,
- 0.8767,\,
- 0.8396,\,
- 0.8138,\,
- 0.7947,\,\ldots),\qquad s_{1000}=0.6677\]
-Our primary business is to make this idea logically watertight. In the next section we will do so by developing the formal definition of limit. Before seeing this, we quickly refresh a few simple examples from elementary calculus. At the moment, all these rely on your intuition and experience. This is a good thing to practice: in analysis it is often essential to have a good idea of the correct answer \emph{before} you try to prove it!
+which encapsulates the idea that the expression $s_n=\frac{2n^2+3n-1}{3n^2-2}$ gets close to $\frac 23$ when $n$ is large. We can easily convince ourselves of this with a calculator/computer: to 4 decimal places,
+\[
+	(s_n)=\bigl(4,\,1.3,\,1.04,\,
+ 	0.9348,\,
+ 	0.8767,\,
+ 	0.8396,\,
+ 	0.8138,\,
+ 	0.7947,\,\ldots\bigr),\qquad 
+ 	s_{1000}=0.6677
+\]
+Our primary business is to make this idea logically watertight. In the next section we will do so by developing the formal definition of limit. Before seeing this, we quickly refresh a few simple examples. All these example can be made formal later, but for the present just rely on your intuition and experience: it is essential to have a good idea of the correct answer \emph{before} you try to prove it!
 
 \goodbreak
 
 \begin{examples}{}{}
-	\exstart $\lim \frac 1n=0$. Our instinct is $s_n=\frac 1n$ becomes arbitrarily small as $n$ becomes large. 
+	\exstart $\lim \frac 1n=0$. Our instinct is that $s_n=\frac 1n$ becomes arbitrarily small as $n$ becomes large. 
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item $\lim\frac{7n+9}{2n-4}=\frac 72$. To convince yourself of this, you might write $\frac{7n+9}{2n-4}=\frac{7+\frac 9n}{2-\frac 4n}$
 	  and observe that the $\frac 1n$ terms become tiny as $n$ increases.
-	  \item The sequence with $n\th$ term $s_n=(-1)^n$ does not converge to anything (it \emph{diverges}). Indeed
-	  \[(s_n)_{n=0}^\infty=(1,-1,1,-1,1,-1,\ldots)\]
-	  isn't getting closer to any real number.
+	  \item The sequence with $n\th$ term $s_n=(-1)^n$ does not converge to anything: it \emph{diverges}.
+	  \[
+	  	(s_n)_{n=0}^\infty=(1,-1,1,-1,1,-1,\ldots)
+	  \]
 	  \item If $c_n=\frac 1n\cos\left(\frac{\pi n}6\right)$, then $\lim c_n=0$. To see this, observe that the cosine term lies between $\pm 1$, while $\frac 1n$ has limit 0.
 	  \item The sequence defined inductively by $s_0=2$, \ $s_{n+1}:=\frac 12s_n+3$ begins
-	  \[(s_n)=\bigl(2,4,5,\tfrac{11}2,\tfrac{23}4,\tfrac{47}8,\ldots\bigr)\]
-	  This appears to have limit $\lim s_n=6$. Indeed it is not hard to spot the pattern $s_n=6-\frac{4}{2^n}$ which is easily verified by induction: for the induction step, simply observe that
-	  \[\frac 12s_n+3=\frac 12\left(6-\frac 4{2^n}\right) +3 =6-\frac 4{2^{n+1}}\]
+	  \[
+	  	(s_n)=\bigl(2,4,5,\tfrac{11}2,\tfrac{23}4,\tfrac{47}8,\ldots\bigr)
+	  \]
+	  This appears to have limit $\lim s_n=6$. It is not hard to spot the pattern $s_n=6-\frac{4}{2^n}$, which may easily be verified by induction: for the induction step, observe that
+	  \[
+	  	\frac 12s_n+3=\frac 12\left(6-\frac 4{2^n}\right) +3 =6-\frac 4{2^{n+1}}
+	  \]
 	\end{enumerate}
 \end{examples} 
 
 
 %	\lim_{n\to\infty}\sqrt{n^2+4}-n=\lim_{n\to\infty}\frac 4{\sqrt{n^2+4}+n}=0
 
-\vfil
+%\vfil
 
-\begin{exercisessec}{}{}
-	\exstart %[2]
-	Decide whether each sequence converges; if it does, give the limit. No proofs are required; if you're unsure what's going on, try writing out the first few terms.
-	\begin{enumerate}\setcounter{enumi}{1}
-	  \item[]\begin{enumerate}
-	    \item \makebox[100pt][l]{$a_n=\dfrac 1{3n+1}$\hfill (b)} \ \makebox[100pt][l]{$b_n=\dfrac{3n+1}{4n-1}$\hfill (c)} \ \makebox[100pt][l]{$c_n=\dfrac n{3^n}$\hfill (d)} \ $d_n=\sin\left(\dfrac{n\pi}4\right)$
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad Sequence,\quad Use your intuition!}
+	
+	\begin{enumerate}
+	  \item%[2.]
+	  Decide whether each sequence converges; if it does, state the limit. No proofs are required; if you're unsure what's going on, try writing out the first few terms.
+		\begin{enumerate}
+	    \item \makebox[100pt][l]{$a_n=\dfrac 1{3n+1}$\hfill (b) }\ 
+	    \makebox[100pt][l]{$b_n=\dfrac{3n+1}{4n-1}$\hfill (c) }\ 
+	    \makebox[100pt][l]{$c_n=\dfrac n{3^n}$\hfill (d) }\ 
+	    $d_n=\sin\left(\dfrac{n\pi}4\right)$
 	  \end{enumerate}
 
 	  
 	  \item Repeat the previous question for sequences whose $n\th$ term is as follows:
 	  \begin{enumerate}
-	    \item \makebox[85pt][l]{$\dfrac{n^2+3}{n^2-3}$\hfill (b)} \ \makebox[85pt][l]{$1+\dfrac 2n$\hfill (c)} \ \makebox[85pt][l]{$2^{1/n}$\hfill (d)} \ \makebox[85pt][l]{$(-1)^nn$\hfill (e)}  \ $\dfrac{7n^3+8n}{2n^3-31}$
+	    \item \makebox[85pt][l]{$\dfrac{n^2+3}{n^2-3}$\hfill (b) }\ 
+	    \makebox[85pt][l]{$1+\dfrac 2n$\hfill (c) }\ 
+	    \makebox[85pt][l]{$2^{1/n}$\hfill (d) }\ 
+	    \makebox[85pt][l]{$(-1)^nn$\hfill (e) }\
+			$\dfrac{7n^3+8n}{2n^3-31}$
 	    \setcounter{enumii}{5}
-	    \item \makebox[85pt][l]{$\sin\left(\dfrac{n\pi}2\right)$\hfill (g)} \ \makebox[85pt][l]{$\sin\left(\dfrac{2n\pi}3\right)$\hfill (h)} \ \makebox[85pt][l]{$\dfrac{2^{n+1}+5}{2^n-7}$\hfill (i)} \ \makebox[85pt][l]{$\left(1+\dfrac 1n\right)^2$\hfill (j)}  \ $\dfrac{6n+4}{9n^2+7}$
+	    \item \makebox[85pt][l]{$\sin\left(\dfrac{n\pi}2\right)$\hfill (g) }\ 
+	    \makebox[85pt][l]{$\sin\left(\dfrac{2n\pi}3\right)$\hfill (h) }\ 
+	    \makebox[85pt][l]{$\dfrac{2^{n+1}+5}{2^n-7}$\hfill (i) }\ 
+	    \makebox[85pt][l]{$\left(1+\dfrac 1n\right)^2$\hfill (j) }\ 
+	    $\dfrac{6n+4}{9n^2+7}$
 	  \end{enumerate}
-% 	  \ \=(b)\quad\=$b_n=\dfrac{n^2+3}{n^2-3}$\qquad \=(d)\quad\=$t_n=1+\dfrac 2n$\qquad \=(f)\quad\=$s_n=2^{1/n}$\qquad \=(h)\quad\=$d_n=(-1)^nn$\qquad \=(j)\quad\=$\dfrac{7n^3+8n}{2n^3-31}$\\[0.5cm]
-% 	  \>(l)\>$\sin\left(\dfrac{n\pi}2\right)$ \>(n)\>$\sin\left(\dfrac{2n\pi}3\right)$ \>(p)\>$\dfrac{2^{n+1}+5}{2^n-7}$ \>(r)\>$\left(1+\dfrac 1n\right)^2$ \>(t)\>$\dfrac{6n+4}{9n^2+7}$
 
 	  
 	  \item Give an example of:
@@ -91,19 +121,25 @@ Our primary business is to make this idea logically watertight. In the next sect
 		  \item A sequence $(r_n)$ of rational numbers having a limit $\lim r_n$ that is an irrational number.
 	  \end{enumerate}
 	  
+	  
 	  \item Prove by induction that the sequence defined in Example \ref*{ex:easylimits}.\ref{ex:easylimits2} has $n\th$ term $t_n=\frac 12\bigl(3^{n-1}+1\bigr)$.
 	  
+	  
 	  \item In future courses, you'll meet sequences of \emph{functions.} For instance,  we could define a sequence $(f_n)$ of functions $f_n:\R\to\R$ inductively via
-	  \[f_0(x)\equiv 1,\qquad f_{n+1}(x):=1+\int_0^x f_n(t)\,\dt\]
+	  \[
+	  	f_0(x)\equiv 1,\qquad f_{n+1}(x):=1+\int_0^x f_n(t)\,\dt
+	  \]
 	  Compute the functions $f_1,f_2$ and $f_3$. The sequence $(f_n)$ should seem familiar if you think back to elementary calculus; why?
 	\end{enumerate}
-\end{exercisessec}
+\end{exercises}
+
 
 \clearpage
 
+\iffalse
 
 
-\section{The Formal Definition of Limit}\label{sec:limitdef}
+\subsection{The Formal Definition of Limit}\label{sec:limitdef}
 
 
 \begin{defn}{}{limit}
@@ -473,67 +509,69 @@ The expression \emph{for all but finitely many $n$} can be added to many abstrac
 
 \vfil
 
-\begin{exercisessec}{}{}
-	\exstart For each sequence, determine the limit and prove your claim.
-	\begin{enumerate}\setcounter{enumi}{1}
-  \item[]\begin{enumerate}
-    \item\makebox[120pt][l]{$a_n=\frac{n}{n^2+1}$\hfill (b)} \ \makebox[120pt][l]{$b_n=\frac{7n-19}{3n+7}$\hfill (c)} \ $c_n=\frac{4n+3}{7n-5}$
-    \setcounter{enumii}{3}
-    \item\makebox[120pt][l]{$d_n=\frac{2n+4}{5n+2}$\hfill (e)} \ \makebox[120pt][l]{$e_n=\frac 1n\sin n$\hfill (f)} \ $f_n=\frac{n^2+n-1}{3n^2-10}$
-  \end{enumerate}
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad ????}
 
-
-  \item\label{exs:tbddproduct}%[4.]
-  Let $(t_n)$ be a bounded sequence (there exists $M$ such that $\nm{t_n}\le M$ for all $n$), and let $(s_n)$ be a sequence such that $\lim s_n=0$. Prove that $\lim(s_nt_n)=0$.\par
-  (\emph{Hint: given $\epsilon$, note that $\frac\epsilon{\nm M}$ is also a small number\ldots})
- 
- 
-  \item%[8.]
-  Prove the following
-  \begin{enumerate}
-	  \item $\lim[\sqrt{n^2+1}-n]=0$ \hspace{30pt} (b) \ $\lim[\sqrt{n^2+n}-n]=\frac 12$\hspace{30pt} (c) \ $\lim[\sqrt{4n^2+n}-2n]=\frac 14$
-  \end{enumerate}
-  
-
-  \item\label{exs:convlowerbound}%[10.]
-  Let $(s_n)$ be a convergent sequence, and suppose $\lim s_n>a$. Prove that there exists $N$ such that $n>N\implies s_n>a$.
-  
-    
-  \item\label{exs:conv23again}
-  \begin{enumerate}
-    \item Show that $n\ge 2\implies 2n^2+9n+5\le 9n^2$.
-    \item (Recall Example \ref*{ex:moreeasylimits}.\ref{ex:conv3})\quad Provide another argument that $\lim \frac{2n^4-3n+1}{3n^4+n^2+4}=\frac 23$ by choosing $N=\max\{2,\frac 1{\sqrt\epsilon}\}$.
- 	\end{enumerate}
- 	
- 	
-  \item\begin{enumerate}
-   	\item Prove that the sequence with $n\th$ term $s_n=\frac 2{n^2}$ does not converge to $-1$.
-		\item Prove that $(s_n)$ does not converge to 1.
-	\end{enumerate}
-    
-  \item Prove that the sequence defined by $t_n=n^2$ diverges.
-  
- 	
- 	\item Provide a contradiction argument to justify Example \ref*{ex:divergenceeasy}.\ref{ex:divergence3}: $(\ln n)$ diverges.
-
+	\begin{enumerate}
+	  \item For each sequence, determine the limit and prove your claim.
+	  \begin{enumerate}
+	    \item\makebox[120pt][l]{$a_n=\frac{n}{n^2+1}$\hfill (b)} \ \makebox[120pt][l]{$b_n=\frac{7n-19}{3n+7}$\hfill (c)} \ $c_n=\frac{4n+3}{7n-5}$
+	    \setcounter{enumii}{3}
+	    \item\makebox[120pt][l]{$d_n=\frac{2n+4}{5n+2}$\hfill (e)} \ \makebox[120pt][l]{$e_n=\frac 1n\sin n$\hfill (f)} \ $f_n=\frac{n^2+n-1}{3n^2-10}$
+	  \end{enumerate}
+	
+	
+	  \item\label{exs:tbddproduct}%[4.]
+	  Let $(t_n)$ be a bounded sequence (there exists $M$ such that $\nm{t_n}\le M$ for all $n$), and let $(s_n)$ be a sequence such that $\lim s_n=0$. Prove that $\lim(s_nt_n)=0$.\par
+	  (\emph{Hint: given $\epsilon$, note that $\frac\epsilon{\nm M}$ is also a small number\ldots})
+	 
+	 
+	  \item%[8.]
+	  Prove the following
+	  \begin{enumerate}
+		  \item $\lim[\sqrt{n^2+1}-n]=0$ \hspace{30pt} (b) \ $\lim[\sqrt{n^2+n}-n]=\frac 12$\hspace{30pt} (c) \ $\lim[\sqrt{4n^2+n}-2n]=\frac 14$
+	  \end{enumerate}
+	  
+	
+	  \item\label{exs:convlowerbound}%[10.]
+	  Let $(s_n)$ be a convergent sequence, and suppose $\lim s_n>a$. Prove that there exists $N$ such that $n>N\implies s_n>a$.
+	  
+	    
+	  \item\label{exs:conv23again}
+	  \begin{enumerate}
+	    \item Show that $n\ge 2\implies 2n^2+9n+5\le 9n^2$.
+	    \item (Example \ref*{ex:moreeasylimits}.\ref{ex:conv3})\quad Give another proof that $\lim \frac{2n^4-3n+1}{3n^4+n^2+4}=\frac 23$ by choosing $N=\max\{2,\frac 1{\sqrt\epsilon}\}$.
+	 	\end{enumerate}
+	 	
+	 	
+	  \item\begin{enumerate}
+	   	\item Prove that the sequence with $n\th$ term $s_n=\frac 2{n^2}$ does not converge to $-1$.
+			\item Prove that $(s_n)$ does not converge to 1.
+		\end{enumerate}
+	    
+	  \item Prove that the sequence defined by $t_n=n^2$ diverges.
+	  
+	 	
+	 	\item Provide a contradiction argument to justify Example \ref*{ex:divergenceeasy}.\ref{ex:divergence3}: $(\ln n)$ diverges.
+	
+			
+		\item (Recall Theorem \ref{thm:limitgreatk})\quad Suppose $\lim s_n=s$ where every $s_n>m$. Can we conclude that $s>m$? Explain your answer.
 		
-	\item (Recall Theorem \ref{thm:limitgreatk})\quad Suppose $\lim s_n=s$ where every $s_n>m$. Can we conclude that $s>m$? Explain your answer.
-	
-	
-	\item\begin{enumerate}
-		\item If $\nm{s_n-s}<1$, explain why $\nm{s_n^2+ss_n+s^2}< 1+3\nm s+3\nm s^2$
-		\item Suppose $s_n\to s$. Prove that $s_n^3\to s^3$.  
+		
+		\item\begin{enumerate}
+			\item If $\nm{s_n-s}<1$, explain why $\nm{s_n^2+ss_n+s^2}< 1+3\nm s+3\nm s^2$
+			\item Suppose $s_n\to s$. Prove that $s_n^3\to s^3$.  
+		\end{enumerate}
+		
 	\end{enumerate}
-	
-\end{enumerate}
-\end{exercisessec}
+\end{exercises}
 
 \clearpage
 
 
 
 
-\section{Limit Theorems for Sequences}
+\subsection{Limit Theorems for Sequences}
 
 We'd like to develop some rules for working with limits so that we don't have to resort to an $\epsilon$--$N$ proof every time. The rough idea is that limits respect the basic rules of algebra. For instance\ldots
 
@@ -799,82 +837,84 @@ Indeed, you should be able to confirm the familiar result from elementary calcul
 \goodbreak
 
 
-\begin{exercisessec}{}{}
-\exstart Suppose $\lim x_n=3$, $\lim y_n=7$ and that all $y_n$ are non-zero. Determine the following:
-\begin{enumerate}\setcounter{enumi}{1}
-	\item[]%[2.]
-  \begin{enumerate}
-    \item $\lim(x_n+y_n)$\qquad (b) \ $\lim\frac{3y_n-x_n}{y_n^2}$ \qquad (c) \ $\lim \sqrt{x_ny_n+4}$
-  \end{enumerate}
-  
-  
-  \item Consider $s_n=(100n)^{\frac{100}n}$. Describe $s_1$ (1 followed by how many zeros?). Repeat for $s_{10}$. Now compute the limit $\lim s_n$.
-  
-  
-  \item%[4.]
-  Define $(s_n)$ inductively via $s_1=1$ and $s_{n+1}=\sqrt{s_n+1}$ for $n\ge 1$.
-  \begin{enumerate}
-	  \item List the first four terms of $(s_n)$.
-	  \item It turns out that $(s_n)$ converges. Assume this and prove that $\lim s_n=\frac 12(1+\sqrt 5)$.
-  \end{enumerate}
-  
-  
-  \item Prove the following:
-  \begin{enumerate}
-    \item $\lim(n^3-98n)=\infty$\qquad\qquad (b) \ $\lim \bigl(\sqrt n-n+\frac 4n\bigr)=-\infty$
-  \end{enumerate}
-  
-  
-  \item%[6.]
-  Let $x_1=1$ and $x_{n+1}=3x_n^2$ for $n\ge 1$.
-  \begin{enumerate}
-	  \item Show that if $(x_n)$ converges with limit $a$, then $a=\frac 13$ or $a=0$.
-	  \item What is $\lim x_n$? Prove your assertion and explain what is going on.
-  \end{enumerate}
-  
-
-	\item\label{exs:limitlawsfinish} We prove parts 3 and 4 of the limit laws (Theorem \ref{thm:limitbasic}). Assume $\lim s_n= s$ and $\lim t_n=t$.
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad ????}
+ 
 	\begin{enumerate}
-	  \item Suppose $t\neq 0$. Explain why $\exists N_1$ such that $n>N_1\implies \nm{t_n}>\frac 12\nm t$.
-	  \item Let $\epsilon>0$ be given. Since $t_n\to t$, $\exists N_2$ such that $n>N_2\implies \nm{t_n-t}<\frac 12\nm t^2\epsilon$. Combine $N_1$ and $N_2$ to provide a proof that $\lim\frac 1{t_n}=\frac 1t$.
-	  \item Explain how to conclude part 3: $\lim\frac{s_n}{t_n}=\frac st$.
-	  \item Use the following inequality (valid when $s_n,s>0$) to help construct a proof for part 4
-		\[\nm{s_n^{1/k}-s^{1/k}}=\frac{\nm{s_n-s}}{{s_n^{\frac{k-1}k}+s_n^{\frac{k-2}k}s^{\frac 1k}+\cdots +s^{\frac{k-1}k}}}\le \frac{\nm{s_n-s}}{s^{\frac{k-1}k}}\]
- 	\end{enumerate}
-
-
-		\item\label{exs:nrootlimit}
-		We finish the proof of Theorem \ref{thm:limlaw2}.
+		\item%[2.]
+		Suppose $\lim x_n=3$, $\lim y_n=7$ and that all $y_n$ are non-zero. Determine the following:
+	  \begin{enumerate}
+	    \item $\lim(x_n+y_n)$\qquad (b) \ $\lim\frac{3y_n-x_n}{y_n^2}$ \qquad (c) \ $\lim \sqrt{x_ny_n+4}$
+	  \end{enumerate}
+	  
+	  
+	  \item Consider $s_n=(100n)^{\frac{100}n}$. Describe $s_1$ (1 followed by how many zeros?). Repeat for $s_{10}$. Now compute the limit $\lim s_n$.
+	  
+	  
+	  \item%[4.]
+	  Define $(s_n)$ inductively via $s_1=1$ and $s_{n+1}=\sqrt{s_n+1}$ for $n\ge 1$.
+	  \begin{enumerate}
+		  \item List the first four terms of $(s_n)$.
+		  \item It turns out that $(s_n)$ converges. Assume this and prove that $\lim s_n=\frac 12(1+\sqrt 5)$.
+	  \end{enumerate}
+	  
+	  
+	  \item Prove the following:
+	  \begin{enumerate}
+	    \item $\lim(n^3-98n)=\infty$\qquad\qquad (b) \ $\lim \bigl(\sqrt n-n+\frac 4n\bigr)=-\infty$
+	  \end{enumerate}
+	  
+	  
+	  \item%[6.]
+	  Let $x_1=1$ and $x_{n+1}=3x_n^2$ for $n\ge 1$.
+	  \begin{enumerate}
+		  \item Show that if $(x_n)$ converges with limit $a$, then $a=\frac 13$ or $a=0$.
+		  \item What is $\lim x_n$? Prove your assertion and explain what is going on.
+	  \end{enumerate}
+	  
+	
+		\item\label{exs:limitlawsfinish} We prove parts 3 and 4 of the limit laws (Theorem \ref{thm:limitbasic}). Assume $\lim s_n= s$ and $\lim t_n=t$.
 		\begin{enumerate}
-		  \item Suppose $0<a<1$. Prove that $\lim a^{1/n}=1$.\par
-			(\emph{Hint: consider $b=\frac 1a$\ldots})
-			\item Let $s_n=n^{1/n}-1$. Apply the binomial theorem to $n=(1+s_n)^n$ to prove that $s_n<\sqrt{\frac 2{n-1}}$.
-			Hence conclude that $\lim n^{1/n}=1$.
-		\end{enumerate}
-		
-		
-		\item Prove the remaining parts of Theorem \ref{thm:divlaws}.
-		
-		
-		\item%[12.]
-  	Assume $s_n\neq 0$ for all $n$, and that the limit $L=\lim\smash[b]{\nm{\frac{s_{n+1}}{s_n}}}$ exists.
-  \begin{enumerate}
-	  \item Show that if $L<1$, then $\lim s_n=0$.\par
-	  (\emph{Hint: if $L<a<1$, obtain $N$ so that $n>N\implies\nm{s_n}<a^{n-N}\nm{s_N}$})
-	  \item Show that if $L>1$, then $\lim\nm{s_n}=+\infty$.\par
-	  (\emph{Hint: apply (a) to the sequence $t_n=\frac 1{\nm{s_n}}$})
-	  \item%[14]
-	  Let $p>0$ and $a\in\R$ be given. How does $\lim_{n\to\infty}\frac{a^n}{n^p}$ depend on the value of $a$?
-  \end{enumerate}
+		  \item Suppose $t\neq 0$. Explain why $\exists N_1$ such that $n>N_1\implies \nm{t_n}>\frac 12\nm t$.
+		  \item Let $\epsilon>0$ be given. Since $t_n\to t$, $\exists N_2$ such that $n>N_2\implies \nm{t_n-t}<\frac 12\nm t^2\epsilon$. Combine $N_1$ and $N_2$ to provide a proof that $\lim\frac 1{t_n}=\frac 1t$.
+		  \item Explain how to conclude part 3: $\lim\frac{s_n}{t_n}=\frac st$.
+		  \item Use the following inequality (valid when $s_n,s>0$) to help construct a proof for part 4
+			\[\nm{s_n^{1/k}-s^{1/k}}=\frac{\nm{s_n-s}}{{s_n^{\frac{k-1}k}+s_n^{\frac{k-2}k}s^{\frac 1k}+\cdots +s^{\frac{k-1}k}}}\le \frac{\nm{s_n-s}}{s^{\frac{k-1}k}}\]
+	 	\end{enumerate}
+	
+	
+			\item\label{exs:nrootlimit}
+			We finish the proof of Theorem \ref{thm:limlaw2}.
+			\begin{enumerate}
+			  \item Suppose $0<a<1$. Prove that $\lim a^{1/n}=1$.\par
+				(\emph{Hint: consider $b=\frac 1a$\ldots})
+				\item Let $s_n=n^{1/n}-1$. Apply the binomial theorem to $n=(1+s_n)^n$ to prove that $s_n<\sqrt{\frac 2{n-1}}$.
+				Hence conclude that $\lim n^{1/n}=1$.
+			\end{enumerate}
+			
+			
+			\item Prove the remaining parts of Theorem \ref{thm:divlaws}.
+			
+			
+			\item%[12.]
+	  	Assume $s_n\neq 0$ for all $n$, and that the limit $L=\lim\smash[b]{\nm{\frac{s_{n+1}}{s_n}}}$ exists.
+	  	\begin{enumerate}
+		  	\item Show that if $L<1$, then $\lim s_n=0$.\par
+		  	(\emph{Hint: if $L<a<1$, obtain $N$ so that $n>N\implies\nm{s_n}<a^{n-N}\nm{s_N}$})
+		  	\item Show that if $L>1$, then $\lim\nm{s_n}=+\infty$.\par
+		  	(\emph{Hint: apply (a) to the sequence $t_n=\frac 1{\nm{s_n}}$})
+		  	\item%[14]
+		  	Let $p>0$ and $a\in\R$ be given. How does $\lim\limits_{n\to\infty}\frac{a^n}{n^p}$ depend on the value of $a$?
+	  \end{enumerate}
 
 	\end{enumerate}
-\end{exercisessec}
+\end{exercises}
 
 \clearpage
 
 
 
-\section{Monotone and Cauchy Sequences}\label{sec:monocauchy}
+\subsection{Monotone and Cauchy Sequences}\label{sec:monocauchy}
 
 The definition of limit (Definition \ref{defn:limit}) exhibits a major weakness; to demonstrate the convergence of a sequence, we must already know its limit! What we'd like is a method for determining whether a sequence converges \emph{without} first guessing a suitable limit.\footnote{This gets at the typical role of sequences in analysis: to demonstrate the existence of and define a new object (the limit) and, more broadly, to transfer useful properties from the sequence to the limit. For instance, if $(f_n)$ is a sequence of differentiable functions, we'd like to know if $\lim f_n(x)$ exists and is itself differentiable with derivative $\lim f_n'(x)$: discussions of this ilk will dominate Math 140B.} In this section we consider two important classes of sequence for which this can be done.
 
@@ -1264,107 +1304,110 @@ We then define $\R:=\quotient{\cC}{\sim}$. All this is done without reference to
 
 \goodbreak
 
-\begin{exercisessec}{}{}
-\exstart Use the definition to show that the sequence with $n\th$ term $s_n=\frac 1{n^2}$ is Cauchy. Repeat for $t_n=\frac 1{n(n-2)}$.
-\begin{enumerate}\setcounter{enumi}{1}
-  \item%[9.]
-  Let $s_1=1$ and $s_{n+1}=\frac n{n+1}s_n^2$ for $n\ge 1$.
-  \begin{enumerate}
-	  \item Find $s_2, s_3$ and $s_4$.
-	  \item Show that $\lim s_n$ exists and hence prove that $\lim s_n=0$.
-  \end{enumerate}
-  
-  
-  \item%[10.]
-  Let $s_1=1$ and $s_{n+1}=\frac 13(s_n+1)$ for $n\ge 1$.
-  \begin{enumerate}
-	  \item Find $s_2, s_3$ and $s_4$.
-	  \item Use induction to show that $s_n>\frac 12$ for all $n$, and conclude that $(s_n)$ is monotone-down.
-	  \item Show that $\lim s_n$ exists and find $\lim s_n$.
-  \end{enumerate}
-  
-  
-  \item%[6.]modified
-  \begin{enumerate}
-  	\item Let $(s_n)$ be a sequence such that $\forall n,\ \nm{s_{n+1}-s_n}\le 3^{-n}$. Prove that $(s_n)$ is Cauchy.
-  	\item Let $s_1=10$ and, for each $n$, let $s_{n+1}=s_n+\frac{\cos n}{3^n}$. Explain why $(s_n)$ is convergent.
-  	\item Is the result in (a) true if we only assume that $\nm{s_{n+1}-s_n}\le \frac 1n$ for all $n\in\N$?
-  \end{enumerate}
-  
-    
-  \item\label{exs:unbddmonotone} Suppose $(s_n)$ is \emph{unbounded} and monotone-up. Prove that $\lim s_n=\infty$.\par
-  (\emph{Thus $\lim s_n=\sup\{s_n\}$ for any monotone-up sequence}) 
-  
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad ????}
 
-	\item Let $s_n=\frac{(-1)^n}n$. Find the sequences $(u_N),(v_N)$ and explicitly compute $\limsup s_n$ and $\liminf s_n$.
-  
-  
-  \item\label{exs:cauchygeomeval} Consider the sequence in Example \ref*{ex:cauchy}.\ref{ex:cauchy2}. Explain why $s_{2n}=s_{2n-2}-\frac 2{4^n}+\frac 9{9^n}$.\par
-  Now use the geometric sum formula to evaluate $\lim s_{2n}$.\par
-  (\emph{Since $(s_n)$ converges, this means the original sequence has the same limit})
-  
-  
-  \item%[7.]
-  Let $S$ be a bounded nonempty set for which $\sup S\notin S$. Prove that there exists a monotone-up sequence $(s_n)$ of points in $S$ such that $\lim s_n=\sup S$.\par
-  (\emph{Hint: for each $n$, use $\sup S-\frac 1n$ to build $s_n$})
-  
-  
-  \item%[8.]
-  Let $(s_n)$ be a monotone-up sequence of positive numbers and define $\sigma_n=\frac 1n(s_1+s_2+\cdots+s_n)$. Prove that $(\sigma_n)$ is monotone-up.
-
-  
-  
-  \item\label{exs:edefn} (Hard!)\lstsp We prove that the sequence defined by $s_n=\left(1+\frac 1n\right)^n$ is convergent.
-  \begin{enumerate}
-    \item Show that
-    \[\frac{1+\frac 1{n+1}}{1+\frac 1n}=1-\frac 1{(n+1)^2}\quad \text{and}\quad \frac{1+\frac 1n}{1+\frac 1{n+1}}=1+\frac 1{n(n+2)}\]
-	  \item Prove \emph{Bernoulli's inequality} by induction.
-	  \begin{quote}
-	  	For all real $x>-1$ and $n\in\N_0$ we have $(1+x)^n\ge 1+nx$.
-	  \end{quote}
-		\item Use parts (a) and (b) to prove that $(s_n)$ is monotone-up.\par
-		(\emph{Hint: consider $\frac{s_{n+1}}{s_n}$}) 
-		\item Similarly, show that $t_n:=\left(1+\frac 1n\right)^{n+1} =\left(1+\frac 1n\right)s_n$ defines a monotone-down sequence.
-		\item Prove that $(s_n)$ and $(t_n)$ converge, and to the \emph{same} limit (this limit is $e$).\par
-		(\emph{Hint: compute $t_n-s_n$})
+	\begin{enumerate}
+	  \item Use Definition \ref{defn:cauchy} to show that the sequence with $s_n=\frac 1{n^2}$ is Cauchy. Repeat for $t_n=\frac 1{n(n-2)}$.
+	  
+	  \item%[9.]
+	  Let $s_1=1$ and $s_{n+1}=\frac n{n+1}s_n^2$ for $n\ge 1$.
+	  \begin{enumerate}
+		  \item Find $s_2, s_3$ and $s_4$.
+		  \item Show that $\lim s_n$ exists and hence prove that $\lim s_n=0$.
+	  \end{enumerate}
+	  
+	  
+	  \item%[10.]
+	  Let $s_1=1$ and $s_{n+1}=\frac 13(s_n+1)$ for $n\ge 1$.
+	  \begin{enumerate}
+		  \item Find $s_2, s_3$ and $s_4$.
+		  \item Use induction to show that $s_n>\frac 12$ for all $n$, and conclude that $(s_n)$ is monotone-down.
+		  \item Show that $\lim s_n$ exists and find $\lim s_n$.
+	  \end{enumerate}
+	  
+	  
+	  \item%[6.]modified
+	  \begin{enumerate}
+	  	\item Let $(s_n)$ be a sequence such that $\forall n,\ \nm{s_{n+1}-s_n}\le 3^{-n}$. Prove that $(s_n)$ is Cauchy.
+	  	\item Let $s_1=10$ and, for each $n$, let $s_{n+1}=s_n+\frac{\cos n}{3^n}$. Explain why $(s_n)$ is convergent.
+	  	\item Is the result in (a) true if we only assume that $\nm{s_{n+1}-s_n}\le \frac 1n$ for all $n\in\N$?
+	  \end{enumerate}
+	  
+	    
+	  \item\label{exs:unbddmonotone} Suppose $(s_n)$ is \emph{unbounded} and monotone-up. Prove that $\lim s_n=\infty$.\par
+	  (\emph{Thus $\lim s_n=\sup\{s_n\}$ for any monotone-up sequence}) 
+	  
+	
+		\item Let $s_n=\frac{(-1)^n}n$. Find the sequences $(u_N),(v_N)$ and explicitly compute $\limsup s_n$ and $\liminf s_n$.
+	  
+	  
+	  \item\label{exs:cauchygeomeval} Consider the sequence in Example \ref*{ex:cauchy}.\ref{ex:cauchy2}. Explain why $s_{2n}=s_{2n-2}-\frac 2{4^n}+\frac 9{9^n}$.\par
+	  Now use the geometric sum formula to evaluate $\lim s_{2n}$.\par
+	  (\emph{Since $(s_n)$ converges, this means the original sequence has the same limit})
+	  
+	  
+	  \item%[7.]
+	  Let $S$ be a bounded nonempty set for which $\sup S\notin S$. Prove that there exists a monotone-up sequence $(s_n)$ of points in $S$ such that $\lim s_n=\sup S$.\par
+	  (\emph{Hint: for each $n$, use $\sup S-\frac 1n$ to build $s_n$})
+	  
+	  
+	  \item%[8.]
+	  Let $(s_n)$ be a monotone-up sequence of positive numbers and define $\sigma_n=\frac 1n(s_1+s_2+\cdots+s_n)$. Prove that $(\sigma_n)$ is monotone-up.
+	
+	  
+	  
+	  \item\label{exs:edefn} (Hard!)\lstsp We prove that the sequence defined by $s_n=\left(1+\frac 1n\right)^n$ is convergent.
+	  \begin{enumerate}
+	    \item Show that
+	    \[\frac{1+\frac 1{n+1}}{1+\frac 1n}=1-\frac 1{(n+1)^2}\quad \text{and}\quad \frac{1+\frac 1n}{1+\frac 1{n+1}}=1+\frac 1{n(n+2)}\]
+		  \item Prove \emph{Bernoulli's inequality} by induction.
+		  \begin{quote}
+		  	For all real $x>-1$ and $n\in\N_0$ we have $(1+x)^n\ge 1+nx$.
+		  \end{quote}
+			\item Use parts (a) and (b) to prove that $(s_n)$ is monotone-up.\par
+			(\emph{Hint: consider $\frac{s_{n+1}}{s_n}$}) 
+			\item Similarly, show that $t_n:=\left(1+\frac 1n\right)^{n+1} =\left(1+\frac 1n\right)s_n$ defines a monotone-down sequence.
+			\item Prove that $(s_n)$ and $(t_n)$ converge, and to the \emph{same} limit (this limit is $e$).\par
+			(\emph{Hint: compute $t_n-s_n$})
+		\end{enumerate}
+	  
+	
+	
+	% \begin{enumerate}
+	%   \item This is a simple induction: the induction step requires
+	%   \begin{align*}
+	%   (1+x)^{n+1}&=(1+x)^n(1+x)\ge(1+nx)(1+x)=1+(n+1)x+nx^2\\
+	%   &\ge 1+(n+1)x
+	%   \end{align*}
+	%   \item Consider the quotient
+	% 	\begin{align*}
+	% 		\frac{l_{n+1}}{l_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+1}}{\left(1+\frac 1n\right)^n} =\left[\frac{n}{n+1}\right]^n\left[\frac{n+2}{n+1}\right]^{n+1} =\left[\frac{n(n+2)}{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
+	% 		&=\left[\frac{(n+1)^2-1}{(n+1)^2}\right]^{n+1}\frac{n+1}n =\left[1-\frac 1{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
+	% 		&\ge \left(1-\frac{n+1}{(n+1)^2}\right)\frac{n+1}n=1\tag*{(by part 1.)}
+	% 	\end{align*}
+	%   \item We again use Bernoulli's inequality:
+	% 	\begin{align*}
+	% 		\frac{u_{n+1}}{u_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+2}}{\left(1+\frac 1n\right)^{n+1}} =\left[\frac{n}{n+1}\right]^{n+1}\left[\frac{n+2}{n+1}\right]^{n+2} =\left[\frac{(n+1)^2}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n\\
+	% 		&=\left[\frac{n(n+2)+1}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n =\frac 1{\left[1+\frac 1{n(n+2)}\right]^{n+2}}\frac{n+1}n\\
+	% 		&\le \frac 1{1+\frac 1n}\cdot\frac{n+1}n=1\tag*{\qedhere}
+	% 	\end{align*}
+	% \end{enumerate}
+	
+	% Note that $u_n=(1+\frac 1n)l_n>l_n$ and that $(l_n)$ is non-decreasing and $u_n$ non-increasing. Thus $(l_n)$ is bounded above (by $u_1$ say). Similarly $(u_n)$ is bounded below. The monotone convergence theorem says that both sequences converge.\\
+	% Moreover,
+	% \[\nm{u_n-l_n}=\left[\left(1+\frac 1n\right)-1\right]\left(1+\frac 1n\right) =\frac 1nl_n\to 0\]
+	% since $(l_n)$ is convergent, thus both sequences converge to the same limit.
+	% \end{proof}
+	
+	
 	\end{enumerate}
-  
-
-
-% \begin{enumerate}
-%   \item This is a simple induction: the induction step requires
-%   \begin{align*}
-%   (1+x)^{n+1}&=(1+x)^n(1+x)\ge(1+nx)(1+x)=1+(n+1)x+nx^2\\
-%   &\ge 1+(n+1)x
-%   \end{align*}
-%   \item Consider the quotient
-% 	\begin{align*}
-% 		\frac{l_{n+1}}{l_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+1}}{\left(1+\frac 1n\right)^n} =\left[\frac{n}{n+1}\right]^n\left[\frac{n+2}{n+1}\right]^{n+1} =\left[\frac{n(n+2)}{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
-% 		&=\left[\frac{(n+1)^2-1}{(n+1)^2}\right]^{n+1}\frac{n+1}n =\left[1-\frac 1{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
-% 		&\ge \left(1-\frac{n+1}{(n+1)^2}\right)\frac{n+1}n=1\tag*{(by part 1.)}
-% 	\end{align*}
-%   \item We again use Bernoulli's inequality:
-% 	\begin{align*}
-% 		\frac{u_{n+1}}{u_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+2}}{\left(1+\frac 1n\right)^{n+1}} =\left[\frac{n}{n+1}\right]^{n+1}\left[\frac{n+2}{n+1}\right]^{n+2} =\left[\frac{(n+1)^2}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n\\
-% 		&=\left[\frac{n(n+2)+1}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n =\frac 1{\left[1+\frac 1{n(n+2)}\right]^{n+2}}\frac{n+1}n\\
-% 		&\le \frac 1{1+\frac 1n}\cdot\frac{n+1}n=1\tag*{\qedhere}
-% 	\end{align*}
-% \end{enumerate}
-
-% Note that $u_n=(1+\frac 1n)l_n>l_n$ and that $(l_n)$ is non-decreasing and $u_n$ non-increasing. Thus $(l_n)$ is bounded above (by $u_1$ say). Similarly $(u_n)$ is bounded below. The monotone convergence theorem says that both sequences converge.\\
-% Moreover,
-% \[\nm{u_n-l_n}=\left[\left(1+\frac 1n\right)-1\right]\left(1+\frac 1n\right) =\frac 1nl_n\to 0\]
-% since $(l_n)$ is convergent, thus both sequences converge to the same limit.
-% \end{proof}
-
-
-\end{enumerate}
-\end{exercisessec}
+\end{exercises}
 
 \clearpage
 
 
-\section{Subsequences}\label{sec:subseq}
+\subsection{Subsequences}\label{sec:subseq}
 
 The general behavior of a sequence is often hard to ascertain, but if we delete some of its terms we might obtain a \emph{subsequence} with interesting behavior.
 
@@ -1667,12 +1710,16 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 \goodbreak
 
 
-\begin{exercisessec}{}{}
-	\exstart %[2.]
-	Consider the sequences with the following $n\th$ terms:
-	\[a_n=(-1)^n\qquad b_n=\frac 1n\qquad c_n=n^2\qquad d_n=\frac{6n+4}{7n-3}\]
-	\begin{enumerate}\setcounter{enumi}{1}  
-	  \item[]\begin{enumerate}
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad ????}
+	
+	\begin{enumerate}
+	  \item%[2.]
+	  Consider the sequences with the following $n\th$ terms:
+		\[
+			a_n=(-1)^n\qquad b_n=\frac 1n\qquad c_n=n^2\qquad d_n=\frac{6n+4}{7n-3}
+		\]
+		\begin{enumerate}
 		  \item For each sequence, give an example of a monotone subsequence.
 		  \item For each sequence, state its set of subsequential limits.
 		  \item For each sequence, state its $\limsup$ and $\liminf$.
@@ -1729,12 +1776,12 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 
 
 	\end{enumerate}
-\end{exercisessec}
+\end{exercises}
 
 \clearpage
 
 
-\section{Lim sup and Lim inf}
+\subsection{Lim sup and Lim inf}
 
 In this section we collect a couple of useful results, mostly for later use. First, we observe that the limit laws do not work as tightly for limits superior and inferior.
 
@@ -1827,14 +1874,17 @@ The next result will be critical when we study infinite series, particularly the
 \end{proof}
 \end{examples}
 
-\begin{exercisessec}{}{}
-	\exstart Compute $\lim \frac 1n(n!)^{1/n}$\vspace{-5pt}
+\begin{exercises}{}{}
+	\emph{Key concepts/results:\quad ????}
+	
+	%\exstart Compute $\lim \frac 1n(n!)^{1/n}$\vspace{-5pt}
 %  and consider $s_n=\frac{n!}{n^n}$. Since
 % \[\frac{s_{n+1}}{s_n}=\left(\frac n{n+1}\right)^n=\left(\frac{n+1}n\right)^{-n} = \left(1+\frac 1n\right)^{-n}\to e^{-1}\]
 % we conclude that
 % \[\lim\nm{s_n}^{1/n}=\lim\frac 1n(n!)^{1/n}=e^{-1}\]
-	\begin{enumerate}\setcounter{enumi}{1}
-  	\item[](\emph{Hint: let $s_n=\frac{n!}{n^n}$ in Theorem \ref{thm:rootratio} and recall that $\lim\left(1+\frac 1n\right)^n=e$})
+	\begin{enumerate}
+  	\item Compute $\lim \frac 1n(n!)^{1/n}$\par
+		(\emph{Hint: let $s_n=\frac{n!}{n^n}$ in Theorem \ref{thm:rootratio} and recall that $\lim\left(1+\frac 1n\right)^n=e$})
   
   	\item Evaluate $\lim\left(\frac{(2n)!}{(n!)^2}\right)^{1/n}$
 %    Taking $s_n=\dfrac{(2n)!}{(n!)^2}$, we obtain
@@ -1871,5 +1921,6 @@ The next result will be critical when we study infinite series, particularly the
 
 
 	\end{enumerate}
-\end{exercisessec}
+\end{exercises}
 
+\fi
