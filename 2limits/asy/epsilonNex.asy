@@ -7,7 +7,7 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(380,160,IgnoreAspect);
+size(180,110,IgnoreAspect);
 
 real N(real x){return 7+22/x;}
 real M(real x){return max(14,44/x);}
@@ -18,17 +18,19 @@ real M(real x){return max(14,44/x);}
 	//dot((i/100,N(i/100)),blue);
 	//}
 	
-draw(graph(N,0.05,5),blue);
-draw(graph(M,0.07,5),heavygreen);
+draw(graph(N,0.05,5),blue+linewidth(1));
+draw(graph(M,0.07,5),heavygreen+linewidth(1));
 
 clip(box((0,0),(5,130)));
 
-label("$\displaystyle N_1=7+\frac{22}{\epsilon}$",(2.5,100),blue);
-label("$\displaystyle N_2=\max\left\{14,\frac{44}{\epsilon}\right\}$",(2.5,65),heavygreen);
+label("$N_1=7+\frac{22}{\epsilon}$",(3,100),blue);
+label("$N_2=\max\left(14,\frac{44}{\epsilon}\right)$",(3,65),heavygreen);
 
 
 
-xaxis(0,5.15,red,RightTicks(new real[]{0,1,2,3,4,5}));
-yaxis("$N$",0,red,LeftTicks(new real[]{0,100,200,300}));
 
-labelx("$\epsilon$",5.15,2S,red);
+xaxis(0,5.35,red,RightTicks(new real[]{0,1,2,3,4,5}));
+yaxis(0,red,LeftTicks(new real[]{0,200,300}));
+
+labelx("$\epsilon$",5.27,S,red);
+labely("$N$",125,2W,red);

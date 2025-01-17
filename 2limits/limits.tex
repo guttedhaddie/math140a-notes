@@ -45,7 +45,7 @@ We are typically most interested in what happens to the terms of a sequence when
 \[
 	\lim\frac{2n^2+3n-1}{3n^2-2}=\frac 23
 \]
-which encapsulates the idea that the expression $s_n=\frac{2n^2+3n-1}{3n^2-2}$ gets close to $\frac 23$ when $n$ is large. We can easily convince ourselves of this with a calculator/computer: to 4 decimal places,
+which encapsulates the idea that the expression $s_n=\frac{2n^2+3n-1}{3n^2-2}$ gets `close to' $\frac 23$ when $n$ is large. We can easily convince ourselves of this with a calculator/computer: to 4 decimal places,
 \[
 	(s_n)=\bigl(4,\,1.3,\,1.04,\,
  	0.9348,\,
@@ -55,7 +55,7 @@ which encapsulates the idea that the expression $s_n=\frac{2n^2+3n-1}{3n^2-2}$ g
  	0.7947,\,\ldots\bigr),\qquad 
  	s_{1000}=0.6677
 \]
-Our primary business is to make this idea logically watertight. In the next section we will do so by developing the formal definition of limit. Before seeing this, we quickly refresh a few simple examples. All these example can be made formal later, but for the present just rely on your intuition and experience: it is essential to have a good idea of the correct answer \emph{before} you try to prove it!
+Our primary business is to make this idea logically watertight, the major issue being what is meant by `close to.' In Section \ref{sec:limitdef} we will do so by developing the formal definition of limit. Before seeing this, we quickly refresh a few simple examples. All these examples can be made formal later, but for the present just rely on your intuition and experience: it is essential to have a good idea of the correct answer \emph{before} you try to prove it!
 
 \goodbreak
 
@@ -83,10 +83,9 @@ Our primary business is to make this idea logically watertight. In the next sect
 
 %	\lim_{n\to\infty}\sqrt{n^2+4}-n=\lim_{n\to\infty}\frac 4{\sqrt{n^2+4}+n}=0
 
-%\vfil
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad Sequence,\quad Use your intuition!}
+	\emph{Key concepts/results:\quad Sequences,\quad Use your intuition!}
 	
 	\begin{enumerate}
 	  \item%[2.]
@@ -136,217 +135,220 @@ Our primary business is to make this idea logically watertight. In the next sect
 
 \clearpage
 
-\iffalse
-
 
 \subsection{The Formal Definition of Limit}\label{sec:limitdef}
 
+While intuition regarding limits is essential, mathematics is about \emph{proving} things rigorously; for this one needs a formal \emph{definition.} The essential difficulty is that `close to' is poorly defined without context; we get round this by considering all possible measures of closeness simultaneously.
 
 \begin{defn}{}{limit}
-A sequence $(s_n)$ \emph{converges to a limit $s\in\R$}, if\footnotemark
-\[\forall\epsilon>0,\ \exists N\ \text{such that}\ n>N\implies \nm{s_n-s}<\epsilon\]
-We write $\lim s_n=s$ or simply $s_n\to s$; both are read ``$s_n$ \emph{approaches} (or \emph{tends to}) $s$."\smallbreak
-A sequence \emph{converges} if it has a limit, and \emph{diverges} otherwise.
+	To say that a sequence $(s_n)$ \emph{converges to a limit $s\in\R$} means,\footnotemark{}
+	\[
+		\textcolor{Magenta}{\forall\epsilon>0},\ \textcolor{Green}{\exists N}\ \text{such that}\ \textcolor{Green}{n>N}\implies \textcolor{Magenta}{\nm{s_n-s}<\epsilon}
+	\]
+	We write $\lim s_n=s$ or simply $s_n\to s$; both are read ``$s_n$ \emph{approaches} (or \emph{tends to}) $s$."\smallbreak
+	A sequence \emph{converges} if it has a limit, and \emph{diverges} otherwise.
 \end{defn}
 
-\footnotetext{$N$ can be quantified as either a real or a natural number, the definitions being equivalent by the Archimedean property: if $N\in\R$ satisfies the definition, then $\exists\widetilde N\in\N$ such that $\widetilde N\ge N$; but then $n>\widetilde N\implies n>N\ldots$ It tends to be easier to use $\R$ for convergence and $\N$ when directly proving \emph{divergence} (see Definition \ref{defn:divergence1}).}
+\footnotetext{%
+	$N$ may be quantified as either a real or a natural number (equivalent by the Archimedean property, Theorem \ref{thm:archprop}). %: if $N\in\R$ satisfies the definition, then $\exists\widetilde N\in\N$ such that $\widetilde N\ge N$; but then $n>\widetilde N\implies n>N\ldots$ 
+	It tends to be easier to use $N\in\R$ for convergence and $N\in\N$ when directly proving \emph{divergence} (see Definition \ref{defn:divergence1}).%
+}
 
-This isn't as hard as it looks! The best way to understand it is to work a \emph{lot} of examples\ldots
-
- %Observe how $\epsilon$ measures how \emph{close} the sequential values $s_n$ are to the limit $s$; no matter how small we make $\epsilon$, there is some \emph{tail} of the sequence (all $s_n$ with $n>N$) whose terms are less than $\epsilon$ from the limit.
-
-
-% Below is a clickable version\footnote{If you want to the picture to move, you'll need to open these notes in a full-function pdf reader such as Acrobat. A lightweight pdf viewer or a web-broswer will likely only show a single still frame.} of the limit definition for the sequence with $n^\text{th}$ term
-% \[s_n=1+\frac 32e^{-n/20}\cos\frac n4\]
-% You should believe without proof that $s=\lim s_n=1$. Try viewing the definition as a game:
-% \begin{quote}
-% Given \textcolor{blue}{$\epsilon>0$}, we \emph{choose} $N$ so that all terms \textcolor{orange}{$s_n$} coming \emph{after} $N$ are closer to $s$ than $\epsilon$.
-% \end{quote}
-
-% \begin{center}
-% \animategraphics[controls]{4}{_limitdefanim}{0}{16}
-% \end{center}
-
-\goodbreak
+Try reading it this way: given any measure of \textcolor{Magenta}{closeness}, \textcolor{Green}{we can make $n$ large enough} so that (by our given measure) \textcolor{Magenta}{$s_n$ is close to $s$}. This isn't as hard as it looks, though a \emph{lot} of examples will likely be necessary for it to sink in\ldots
 
 
 \begin{example}{}{}
-We show that the sequence with $n\th$ term $s_n=2-\frac 1{\sqrt n}$ converges to $s=2$.\smallbreak
-
-If we plot the sequence like a function, we see how $\epsilon$ controls the distance from $s_n$ is to the limit $s$; the definition requires us to show that no matter how small we make $\epsilon$, there is some \textcolor{orange}{tail} of the sequence (all $s_n$ with $n>N$) whose terms are less than a distance $\epsilon$ from the limit.\vspace{-5pt}
-
-\begin{center}
-\includegraphics[scale=0.9]{limitdef-pic}\vspace{-8pt}
-\end{center}
-
-To verify a `for all, there exists' statement requires an argument with a specific structure:
-\begin{itemize}\itemsep0pt
-  \item Suppose $\epsilon>0$ has been provided and describe $N$, dependent on $\epsilon$ (\href{http://www.math.uci.edu/~ndonalds/math140a/limitdefanim.html}{$\epsilon$ smaller means $N$ larger}).
-  \item Verify algebraically that $n>N\implies\nm{s_n-s}<\epsilon$.
-\end{itemize}
-
-\emph{Scratch work.}\quad To find a suitable $N$, start with what you want to be true and let it inspire you.
-\begin{quote}
-We want $\nm{s_n-s}=\nm{\left(2-\frac 1{\sqrt n}\right)-2} =\nm{\frac 1{\sqrt n}}<\epsilon$ (equivalently $n>\frac 1{\epsilon^2}$) whenever $n>N$. Choosing $N=\frac 1{\epsilon^2}$ should be enough to complete the proof!
-\end{quote}
-\textcolor{red}{Warning!}\quad We do not yet have a proof: ``$N=\frac 1{\epsilon^2}$'' is not the correct conclusion! We finish by rearranging our scratch work to make it clear that the definition is satisfied.\medbreak
-
-\emph{Formal argument.}\quad
-Suppose $\epsilon>0$ is given, and let $N=\frac 1{\epsilon^2}$. Then
-\[
-n>N\implies \nm{s_n-s}=\nm{2-\frac 1{\sqrt n}-2} =\frac 1{\sqrt n}<\frac 1{\sqrt N}=\epsilon
-\]
-Thus $s_n\to 2$, as required.
+	We prove that the sequence with\par
+	\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+	\[
+		s_n=2-\frac 1{\sqrt n}
+	\]
+	converges to $s=2$.\medbreak
+	By plotting the sequence, we see how $\epsilon$ controls the distance (\textcolor{Magenta}{closeness}) from $s_n$ to the limit $s=2$; no matter the size of $\epsilon$, we must show that $(s_n)$ has some \textcolor{Green}{tail} whose terms are closer to $s$.
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.49\linewidth}\vspace{-20pt}
+		\flushright\includegraphics[scale=0.95]{limitdef-pic}
+	\end{minipage}\medbreak
+	
+	Proving such `for all, there exists' statements requires a specific argument structure:
+	\begin{itemize}\itemsep0pt
+	  \item Suppose $\epsilon>0$ has been given and describe $N$ as a function of $\epsilon$ (\href{http://www.math.uci.edu/~ndonalds/math140a/limitdefanim.html}{$\epsilon$ smaller means $N$ larger}).
+	  \item Verify algebraically that $n>N\Longrightarrow\nm{s_n-s}<\epsilon$.
+	\end{itemize}
+	
+	\emph{Scratch work.}\quad To find a suitable $N$, start with what you want to be true and let it inspire you.
+	\begin{quote}
+		Whenever $n>N$, we want $\epsilon>\nm{s_n-s}=\nm{\left(2-\frac 1{\sqrt n}\right)-2} =\nm{\frac 1{\sqrt n}}$.\par
+		Choosing $N=\frac 1{\epsilon^2}$ should be enough to complete the proof!
+	\end{quote}
+	\textcolor{red}{Warning!}\quad ``$N=\frac 1{\epsilon^2}$'' is not the correct conclusion! To make it clear that we've satisfied the definition, we rearrange our scratch work: these last three lines are all you \emph{need} to write!\medbreak
+	
+	\emph{Formal argument.}\quad
+	Suppose $\epsilon>0$ is given and let $N=\frac 1{\epsilon^2}$. Then
+	\[
+		n>N\implies \nm{s_n-s}=\nm{2-\frac 1{\sqrt n}-2} =\frac 1{\sqrt n}<\frac 1{\sqrt N}=\epsilon
+	\]
+	Thus $\lim s_n=2$, as required.
 \end{example}
 
-%\footnotetext{A linked  illustrates this.}
 
 \goodbreak
 
 
 
-
-The last three lines are all we need---think of them as the concert performance after much rehearsal! With practice, you might be able to do simple $\epsilon$--$N$ arguments like these without scratch work, though even experts usually require some.\smallbreak
+% 
+% The last three lines are all we need---think of them as the concert performance after much rehearsal! With practice, you might be able to do simple $\epsilon$--$N$ arguments like these without scratch work, though even experts usually require some.\smallbreak
 
 Before seeing more examples, we prove a hopefully intuitive result.
 
 \begin{lemm}{Uniqueness of Limit}{}
-If $(s_n)$ converges, then its limit is unique.
+	If $(s_n)$ converges, then its limit is unique.
 \end{lemm}
 
-The proof structure should be familiar from other uniqueness arguments: assume there are two limits $s\neq t$ and obtain a contradiction. The picture explains the strategy: by choosing $\epsilon=\frac{\nm{s-t}}2$ in the definition we obtain a \emph{tail} of the sequence (all terms $s_n$ coming \emph{after} some $N$) which must be simultaneously close to \emph{both limits.}
+The proof structure should be familiar from other uniqueness arguments: assume there are two limits $s\neq t$ and obtain a contradiction. The picture explains the strategy: by choosing $\epsilon=\frac{\nm{s-t}}2$ in the definition we obtain a \emph{tail} of the sequence which must be simultaneously close to \emph{both limits.}
 \begin{center}
-\includegraphics{limitunique}
+	\includegraphics[scale=0.95]{limitunique}
 \end{center}
 
 \begin{proof}
-Suppose $s\neq t$ are two limits. Take $\epsilon=\frac{\nm{s-t}}2$ and apply Definition \ref{defn:limit} twice: $\exists N_1,N_2$ such that
-\[n>N_1\implies \nm{s_n-s}<\frac{\nm{s-t}}2\quad \text{and}\quad n>N_2\implies \nm{s_n-t}<\frac{\nm{s-t}}2\]
-Define $N:=\max\{N_1,N_2\}$. Then,
-\begin{align*}
-n>N\implies\nm{s-t}=\nm{s-s_n+s_n-t}&\le\nm{s_n-s}+\nm{s_n-t} \tag*{($\triangle$-inequality)}\\
-&<\frac{\nm{s-t}}2+\frac{\nm{s-t}}2 =\nm{s-t}
-\end{align*}
-Contradiction.
+	Suppose $s\neq t$ are two limits. Take $\epsilon=\frac{\nm{s-t}}2$ and apply Definition \ref{defn:limit} twice: $\exists N_1,N_2$ such that
+	\[
+		n>N_1\implies \nm{s_n-s}<\frac{\nm{s-t}}2
+		\qquad \text{and}\qquad 
+		n>N_2\implies \nm{s_n-t}<\frac{\nm{s-t}}2
+	\]
+	Define $N:=\max(N_1,N_2)$. Taking any $n>N$ quickly yields a contradiction:
+	\begin{align*}
+		n>N\implies\nm{s-t}=\nm{s-s_n+s_n-t}
+		&\le\nm{s_n-s}+\nm{s_n-t} \tag{$\triangle$-inequality}\\
+		&<\frac{\nm{s-t}}2+\frac{\nm{s-t}}2 =\nm{s-t} \tag*{\qedhere}
+	\end{align*}
 \end{proof}
 
 
 \begin{examples}{}{moreeasylimits}
-	We give several more examples of using the limit definition. Remember that only the formal arguments needs to be presented; some scratch work is included to show the thought process.
+	In what follows, only the formal arguments are required; some scratch work is included to show the thought process.
 	
 	\begin{enumerate}
-		\item\label{ex:stdzero} For any $k\in\R^+$, we prove that $\lim\frac 1{n^k}=0$.
-		\smallbreak
+		\item\label{ex:stdzero} For any $k\in\R^+$, we prove that $\lim\frac 1{n^k}=0$.		
+		\begin{description}
+			\item[\normalfont\emph{Scratch work.}] Given $\epsilon>0$, we want to choose $N$ so that $n>N\Longrightarrow \frac 1{n^k}<\epsilon$.	That is, $n>\frac 1{\epsilon^{1/k}}$. It should be enough to choose $N=\frac 1{\epsilon^{1/k}}$.
+			
+			\item[\normalfont\emph{Formal argument.}] Suppose $\epsilon>0$ is given and let $N=\frac 1{\epsilon^{1/k}}$. Then
+			\[
+				n>N \implies \nm{\frac 1{n^k}-0}=\frac 1{n^k}<\frac 1{N^k}=\epsilon
+			\]
+			We conclude that $\lim\frac 1{n^k}=0$.
+		\end{description}
 		
-		\emph{Scratch work.}\quad Given $\epsilon>0$, we want to choose $N$ such that
-		\[n>N\implies \frac 1{n^k}<\epsilon\]
-		This amounts to having $n>\frac 1{\epsilon^{1/k}}$, so it is enough to choose $N$ to be the right hand side.
-		\smallbreak
-		
-		\emph{Formal argument.}\quad Let $\epsilon>0$ be given, and let $N=\frac 1{\epsilon^{1/k}}$. Then
-		\[
-		n>N \implies \nm{\frac 1{n^k}-0}=\frac 1{n^k}<\frac 1{N^k}=\epsilon
-		\]
-		We conclude that $\frac 1{n^k}\to 0$, as required.
 	
-		\goodbreak
-		
 		
 		\item We prove that $\lim \bigl(\sqrt{n+4}-\sqrt n\bigr) =0$.
-		\smallbreak
+		\begin{description}
+			\item[\normalfont\emph{Scratch work.}] We use a (hopefully) familiar trick for manipulating surd expressions:
+			\[
+				\sqrt{n+4}-\sqrt n=\frac 4{\sqrt{n+4}+\sqrt n} 
+				<\frac 4{2\sqrt n}=\frac 2{\sqrt n}
+			\]
 		
-		\emph{Scratch work.}\quad Everything follows from a (hopefully) familiar algebraic trick for manipulating surd expressions:
-		\[\sqrt{n+4}-\sqrt n=\frac 4{\sqrt{n+4}+\sqrt n} <\frac 4{2\sqrt n}=\frac 2{\sqrt n}\]
+			\item[\normalfont\emph{Formal argument.}] Suppose $\epsilon>0$ is given and let $N=\frac 4{\epsilon^2}$. Then
+			\[
+				n>N\implies \nm{\sqrt{n+4}-\sqrt n}=\frac 4{\sqrt{n+4}+\sqrt n} 
+				<\frac 4{2\sqrt n}=\frac 2{\sqrt n}
+				<\frac 2{\sqrt N}=\epsilon
+			\]
+			Thus $\lim\bigl(\sqrt{n+4}-\sqrt n\bigr) =0$.
+		\end{description}
 		
-		\emph{Formal argument.}\quad Let $\epsilon>0$ be given, and let $N=\frac 4{\epsilon^2}$. Then
-		\[n>N\implies \nm{\sqrt{n+4}-\sqrt n}=\frac 4{\sqrt{n+4}+\sqrt n} <\frac 4{2\sqrt n}=\frac 2{\sqrt n}<\frac 2{\sqrt N}=\epsilon\]
-		Thus $\lim\bigl(\sqrt{n+4}-\sqrt n\bigr) =0$, as required.
-
-	\item\label{ex:ep2} We prove that $\lim\frac{3n+1}{n-7}=3$.
-		\smallbreak
-	
-		\emph{Scratch work.}\quad Given $\epsilon>0$, we want to choose $N$ such that
-		\[n>N\implies \nm{\frac{3n+1}{n-7}-3}=\nm{\frac{(3n+1)-3(n-7)}{n-7}}=\nm{\frac{22}{n-7}}<\epsilon \tag{$\ast$}\]
-		For large $n$ ($n>7$) everything is positive, so it is sufficient for us to have
-		\[n-7>\frac{22}\epsilon\quad\text{or equivalently}\quad n>7+\frac{22}{\epsilon}\]
-		\smallbreak
 		
-		\emph{Formal argument 1.}\quad Let $\epsilon>0$ be given, and let $N=7+\frac{22}{\epsilon}$. Then
-		\[n>N\implies \nm{\frac{3n+1}{n-7}-3} =\frac{22}{n-7} <\frac{22}{N-7}=\epsilon\]
-		The absolute values are dropped since $n>7$. We conclude that $\lim\frac{3n+1}{n-7}=3$.
-		\medbreak
-		
-		\emph{Scratch work (cont).}\quad An alternative approach is available if we play with ($\ast$) a little. By insisting that $n\ge 14$, we may simplify the denominator
-		\[n-7\ge \frac 12n\implies \frac{22}{n-7}\le \frac{22}{\frac 12n}=\frac{44}n\]
-		\smallbreak
-		
-		\emph{Formal argument 2.}\quad Let $\epsilon>0$ be given, and let $N=\max\bigl\{14,\frac{44}{\epsilon}\bigr\}$. Then
-		\begin{align*}
-		n>N\implies \nm{\frac{3n+1}{n-7}-3}&=\nm{\frac{22}{n-7}}\le\frac{22}{\frac 12n} =\frac{44}n \tag{since $n\ge 14$}\\
-		&<\frac{44}N \le\epsilon\tag*{(since $N\ge \frac{44}\epsilon$)}
-		\end{align*}
-		We again conclude that $\lim\frac{3n+1}{n-7}=3$.
-		\bigbreak
-
-		The plot illustrates the two choices of $N$ as functions of $\epsilon$. Observe how the second is always larger than the first: if $N=N_1(\epsilon)$ works in a proof, then any larger choice $N_2(\epsilon)$ will also,
-		\[n>N_2\ge N_1\implies n>N\implies \nm{s_n-s}<\epsilon\]
-		Use this to your advantage to produce simpler arguments.
-
-		\begin{center}
-			\includegraphics{epsilonNex}
-		\end{center}
-
 		\goodbreak
 		
+
+		\item\label{ex:ep2} We prove that $\lim\frac{3n+1}{n-7}=3$.
+		\begin{description}
+			\item[\normalfont\emph{Scratch work.}] Given $\epsilon>0$, we want to choose $N$ such that
+			\[
+				n>N\implies \nm{\frac{3n+1}{n-7}-3}
+				=\nm{\frac{(3n+1)-3(n-7)}{n-7}}
+				=\nm{\frac{22}{n-7}}<\epsilon \tag{$\ast$}
+			\]
+			For large $n$ ($n>7$) everything is positive, so it is sufficient to have $n-7>\frac{22}\epsilon$\ldots
+			
+			\item[\normalfont\emph{Formal argument 1.}] Suppose $\epsilon>0$ is given and let $N=7+\frac{22}{\epsilon}$. Then
+			\[
+				n>N\implies \nm{\frac{3n+1}{n-7}-3} =\frac{22}{n-7} <\frac{22}{N-7}=\epsilon
+			\]
+			The absolute values are dropped since $n>7$. We conclude that $\lim\frac{3n+1}{n-7}=3$.
 		
+			\item[\normalfont\emph{Scratch work 2.}] An alternative approach is available if we play with ($\ast$) a little. By insisting that $n\ge 14$, we can simplify the denominator $n-7\ge \frac 12n\Longrightarrow \frac{22}{n-7}\le \frac{44}n$.
 		
-
-		\item\label{ex:conv3} Given $s_n=\frac{2n^4-3n+1}{3n^4+n^2+4}$, we prove that $\lim s_n=\frac 23$.\smallbreak
+			\item[\normalfont\emph{Formal argument 2.}] Suppose $\epsilon>0$ is given and let $N=\max\bigl(14,\frac{44}{\epsilon}\bigr)$. Then
+			\begin{align*}
+				n>N\implies \nm{\frac{3n+1}{n-7}-3}&=\nm{\frac{22}{n-7}}\le\frac{22}{\frac 12n} =\frac{44}n \tag{since $n\ge 14$}\\
+				&<\frac{44}N \le\epsilon\tag*{(since $N\ge \frac{44}\epsilon$)}
+			\end{align*}
+			We again conclude that $\lim\frac{3n+1}{n-7}=3$.
+		\end{description}
 		
-		\emph{Scratch work.}\quad We want to conclude that
-		\[n>N\implies \nm{\frac{2n^4-3n+1}{3n^4+n^2+4}-\frac 23}=\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}}<\epsilon\]
-		Attempting to solve for $n$ (as in the first method previously) is crazy! Instead we simplify the fraction by observing that since $n\ge 1$, we have
-		\begin{align*}
-			\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}} &\le\frac{16n^2}{3(3n^4+n^2+4)} \tag{$1\le n\le n^2$ and the $\triangle$-inequality}\\
-			&<\frac{16n^2}{9n^4}<\frac 2{n^2} \tag{$n^2+4>0\implies 3n^4+n^2+4>3n^4$}
-		\end{align*}
-		The final simplification is merely for additional tidying.
+		\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}
+			The plot illustrates the two choices of $N$ as functions of $\epsilon$. The second is always larger than the first: if $N=N_1(\epsilon)$ works in a proof, then any larger choice $N_2(\epsilon)$ will work also; use this to your advantage to produce simpler arguments!
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.39\linewidth}\vspace{-30pt}
+			\flushright\includegraphics[scale=0.95]{epsilonNex}
+		\end{minipage}
 
 
-		\emph{Formal argument.}\quad Let $\epsilon>0$ be given, and let $N=\sqrt{\frac 2\epsilon}$. Then
-		\begin{align*}
-			n>N\implies \nm{s_n-\frac 23}&=\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}} <\frac{16n^2}{9n^4} \tag{since $n\ge 1$}\\
-			&< \frac 2{n^2}<\frac 2{N^2}=\epsilon
-		\end{align*}
-
-		Other choices of $N$ are feasible (see e.g.{} Exercise \ref{exs:conv23again}); everything depends on how you want to simplify things in your scratch work.
+		\item\label{ex:conv3} Given $s_n=\frac{2n^4-3n+1}{3n^4+n^2+4}$, we prove that $\lim s_n=\frac 23$.
+		\begin{description}
+			\item[\normalfont\emph{Scratch work.}] We want to conclude that
+			$\nm{\frac{2n^4-3n+1}{3n^4+n^2+4}-\frac 23}=\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}}<\epsilon$. Attempting to solve for $n$ is crazy! Instead we simplify the fraction using  $n\ge 1$ and the $\triangle$-inequality:
+			\[
+				\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}} \overset\triangle\le\frac{16n^2}{3(3n^4+n^2+4)} <\frac{16n^2}{9n^4}<\frac 2{n^2} \tag{$1\le n\le n^2$ and $n^2+4>0$}
+			\]
+			The final simplification is merely for additional cleanliness.
+	
+			\item[\normalfont\emph{Formal argument.}] Suppose $\epsilon>0$ is given and let $N=\sqrt{\frac 2\epsilon}$. Then,
+			\begin{align*}
+				n>N\implies\nm{\frac{2n^4-3n+1}{3n^4+n^2+4}-\frac 23}
+				&=\nm{\frac{-2n^2-9n-5}{3(3n^4+n^2+4)}} 
+				\overset\triangle\le\frac{16n^2}{3(3n^4+n^2+4)} \tag{$n\ge 1$}\\
+				&<\frac{16n^2}{9n^4}<\frac 2{n^2}
+				<\frac 2{N^2}=\epsilon
+			\end{align*}
+		\end{description}
+		
+		Other choices of $N$ are feasible (e.g., Exercise \ref{exs:conv23again}); everything depends on how you want to simplify things in your scratch work.
 		
 	\end{enumerate}
 \end{examples}
 
-\vfil
 
 \goodbreak
 
+
 \boldsubsubsection{Divergent sequences}
 
-By negating Definition \ref{defn:limit}, we obtain a new definition.
+By negating Definition \ref{defn:limit}, we obtain explicit criteria for divergence.
 
 \begin{defn}{}{divergence1}
-A sequence $(s_n)$ \emph{does not converge to $s\in\R$} if,
-\[\exists \epsilon>0\ \text{such that}\ \forall N,\ \exists n>N\ \text{with}\ \nm{s_n-s}\ge\epsilon\]
-A sequence is \emph{divergent} if it does not converge to \emph{any} limit $s\in\R$. Otherwise said,
-\[\forall s\in\R,\ \exists \epsilon>0\ \text{such that}\ \forall N,\ \exists n>N\ \text{with}\ \nm{s_n-s}\ge\epsilon\]
+	A sequence $(s_n)$ \emph{does not converge to $s\in\R$} if,
+	\[
+		\exists \epsilon>0\ \text{such that}\ \forall N,\ \exists n>N\ \text{with}\ \nm{s_n-s}\ge\epsilon
+	\]
+	A sequence is \emph{divergent} if it does not converge to \emph{any} limit $s\in\R$. Otherwise said,
+	\[
+		\forall s\in\R,\ \exists \epsilon>0\ \text{such that}\ \forall N,\ \exists n>N\ \text{with}\ \nm{s_n-s}\ge\epsilon
+	\]
 \end{defn}
-
-% We made one tiny change when negating Definition \ref{defn:limit}: $N$ is now a \textcolor{red}{natural number}.\footnote{Thanks to the Archimedean principle, replacing $N\in\R$ with $N\in\N$ results in an \emph{equivalent definition} of limit: if $N\in\R$ satisfies the definition, then $\exists\tilde N\in\N$ such that $\tilde N\ge N$. Certainly $n>\tilde N\implies n>N$\ldots} The advantage of this approach will become clear momentarily.
-
 
 
 \begin{examples}{}{divergenceeasy}
 	\exstart We prove that the sequence with $s_n=\frac 7n$ does not converge to $s=2$.
 	\begin{enumerate}\setcounter{enumi}{1}
-	  \item[]\emph{Visualization.}\quad We intuitively know that $s_n\to 0$. If $\epsilon$ is anything smaller than 2, then the terms $s_n$ will eventually be further than this from $s=2$.
+	  \item[]\begin{description}
+	  	\item[\normalfont\emph{Visualization.}] We intuitively understand that $s_n\to 0$. If we choose $\epsilon$ to be anything smaller than 2, then the terms $s_n$ will eventually be further than this from $s=2$.
 	  \begin{center}
   		\includegraphics[scale=0.9]{divergent}
   	\end{center}
@@ -360,7 +362,7 @@ A sequence is \emph{divergent} if it does not converge to \emph{any} limit $s\in
   	\emph{Contradiction argument.}\quad For an alternative approach, we suppose $s_n\to 2$ and let $\epsilon=1$ in Definition \ref{defn:limit}. Then $\exists N$ such that
   	\[n>N\implies \nm{\frac 7n-2}<1 \implies 1<\frac 7n<3\implies \frac 73<n<7\]
   	Regardless of the value of $N$, this cannot hold \emph{for all} $n>N$: in particular $n:=\max\{7,N+1\}$. Contradiction.
-  	\smallbreak
+	  \end{description}
   	
   	The two arguments are very similar, though consider that a significant advantage of the contradiction approach is that you only have to remember \emph{one definition}!
 	\end{enumerate}
@@ -569,6 +571,7 @@ The expression \emph{for all but finitely many $n$} can be added to many abstrac
 \clearpage
 
 
+\iffalse
 
 
 \subsection{Limit Theorems for Sequences}
