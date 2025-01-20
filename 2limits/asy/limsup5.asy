@@ -7,13 +7,13 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(210,180,IgnoreAspect);
+size(190,160,IgnoreAspect);
 
 dotfactor=6;
 
 real f(real n){return 4+sin(n/2)+4*exp(-n/20)*cos(n/2);}
 
-int Max=39;
+int Max=37;
 
 dot((1,f(1)),red);
 	
@@ -35,4 +35,4 @@ draw((0,3)--(Max,3),deepgreen+linewidth(0.3));
 
 xaxis(0,Max,red,RightTicks(new real[]{0}));
 yaxis("$s_n$",0,red,LeftTicks(new real[]{0}));
-labelx("$n/N$",Max-3,red);
+labelx("$n$",Max-3,red);

@@ -7,7 +7,7 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(200,160,IgnoreAspect);
+size(180,140,IgnoreAspect);
 
 dotfactor=5;
 

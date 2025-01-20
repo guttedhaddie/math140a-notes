@@ -85,7 +85,7 @@ Our primary business is to make this idea logically watertight, the major issue 
 
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad Sequences,\quad Use your intuition!}
+	\emph{Key concepts:\quad Sequences,\quad Use your intuition!}
 	
 	\begin{enumerate}
 	  \item%[2.]
@@ -150,8 +150,8 @@ While intuition regarding limits is essential, mathematics is about \emph{provin
 \end{defn}
 
 \footnotetext{%
-	$N$ may be quantified as either a real or a natural number (equivalent by the Archimedean property, Theorem \ref{thm:archprop}). %: if $N\in\R$ satisfies the definition, then $\exists\widetilde N\in\N$ such that $\widetilde N\ge N$; but then $n>\widetilde N\implies n>N\ldots$ 
-	It tends to be easier to use $N\in\R$ for convergence and $N\in\N$ when directly proving \emph{divergence} (see Definition \ref{defn:divergence1}).%
+	$N$ may be a real number or a natural number (equivalent by the Archimedean property, Theorem \ref{thm:archprop}). %: if $N\in\R$ satisfies the definition, then $\exists\widetilde N\in\N$ such that $\widetilde N\ge N$; but then $n>\widetilde N\implies n>N\ldots$ 
+	It tends to be easier to use $N\in\R$ for convergence and $N\in\N$ when directly proving \emph{divergence} (see Definition \ref{defn:divergence1} and Examples \ref{ex:divergenceeasy}).%
 }
 
 Try reading it this way: given any measure of \textcolor{Magenta}{closeness}, \textcolor{Green}{we can make $n$ large enough} so that (by our given measure) \textcolor{Magenta}{$s_n$ is close to $s$}. This isn't as hard as it looks, though a \emph{lot} of examples will likely be necessary for it to sink in\ldots
@@ -200,7 +200,7 @@ Try reading it this way: given any measure of \textcolor{Magenta}{closeness}, \t
 % 
 % The last three lines are all we need---think of them as the concert performance after much rehearsal! With practice, you might be able to do simple $\epsilon$--$N$ arguments like these without scratch work, though even experts usually require some.\smallbreak
 
-Before seeing more examples, we prove a hopefully intuitive result.
+%Before seeing more examples, we prove a hopefully intuitive result.
 
 \begin{lemm}{Uniqueness of Limit}{}
 	If $(s_n)$ converges, then its limit is unique.
@@ -227,25 +227,29 @@ The proof structure should be familiar from other uniqueness arguments: assume t
 \end{proof}
 
 
-\begin{examples}{}{moreeasylimits}
-	In what follows, only the formal arguments are required; some scratch work is included to show the thought process.
-	
-	\begin{enumerate}
-		\item\label{ex:stdzero} For any $k\in\R^+$, we prove that $\lim\frac 1{n^k}=0$.		
-		\begin{description}
-			\item[\normalfont\emph{Scratch work.}] Given $\epsilon>0$, we want to choose $N$ so that $n>N\Longrightarrow \frac 1{n^k}<\epsilon$.	That is, $n>\frac 1{\epsilon^{1/k}}$. It should be enough to choose $N=\frac 1{\epsilon^{1/k}}$.
+\begin{thm}{}{oneonnlimit}
+	If $k>0$ is constant, then $\lim\frac 1{n^k}=0$.		
+\end{thm}
+
+
+\begin{proof}
+	In this, and the examples that follow, only the formal arguments are required; scratch work is included to show the thought process.
+	\begin{description}
+			\item[\normalfont\emph{Scratch work.}] We want $n>N\Longrightarrow \frac 1{n^k}<\epsilon$.	That is, $n>\frac 1{\epsilon^{1/k}}$. It should be enough to choose $N=\frac 1{\epsilon^{1/k}}$.
 			
 			\item[\normalfont\emph{Formal argument.}] Suppose $\epsilon>0$ is given and let $N=\frac 1{\epsilon^{1/k}}$. Then
 			\[
-				n>N \implies \nm{\frac 1{n^k}-0}=\frac 1{n^k}<\frac 1{N^k}=\epsilon
+				n>N \implies \nm{\frac 1{n^k}-0}=\frac 1{n^k}<\frac 1{N^k}=\epsilon \tag*{\qedhere}
 			\]
-			We conclude that $\lim\frac 1{n^k}=0$.
+			We conclude that $\lim\frac 1{n^k}=0$. \qedhere
 		\end{description}
-		
-	
-		
-		\item We prove that $\lim \bigl(\sqrt{n+4}-\sqrt n\bigr) =0$.
-		\begin{description}
+\end{proof}
+
+
+\begin{examples}{}{moreeasylimits}
+	\exstart We prove that $\lim \bigl(\sqrt{n+4}-\sqrt n\bigr) =0$.
+	\begin{enumerate}\setcounter{enumi}{1}
+		\item[]\begin{description}
 			\item[\normalfont\emph{Scratch work.}] We use a (hopefully) familiar trick for manipulating surd expressions:
 			\[
 				\sqrt{n+4}-\sqrt n=\frac 4{\sqrt{n+4}+\sqrt n} 
@@ -347,396 +351,406 @@ By negating Definition \ref{defn:limit}, we obtain explicit criteria for diverge
 \begin{examples}{}{divergenceeasy}
 	\exstart We prove that the sequence with $s_n=\frac 7n$ does not converge to $s=2$.
 	\begin{enumerate}\setcounter{enumi}{1}
-	  \item[]\begin{description}
-	  	\item[\normalfont\emph{Visualization.}] We intuitively understand that $s_n\to 0$. If we choose $\epsilon$ to be anything smaller than 2, then the terms $s_n$ will eventually be further than this from $s=2$.
-	  \begin{center}
-  		\includegraphics[scale=0.9]{divergent}
-  	\end{center}
-  	\vspace{-5pt}
-	  
-  	\emph{Direct argument.}\quad Let $\epsilon=1$. Since we are only concerned with \emph{large} values of $n$, we see that
-  	\[\nm{s_n-s}=\nm{\frac 7n-2}=2-\frac 7n\ge \epsilon= 1\iff \frac 7n\le 1\iff n\ge 7\]
-  	Given $N\in\N$, let\footnotemark{} $n=\max\{7,N+1\}$. But then $\nm{s_n-s}=\nm{\frac 7n-2}\ge\epsilon$, from which we conclude that $s_n\nrightarrow 2$.
-  	\smallbreak
-  	
-  	\emph{Contradiction argument.}\quad For an alternative approach, we suppose $s_n\to 2$ and let $\epsilon=1$ in Definition \ref{defn:limit}. Then $\exists N$ such that
-  	\[n>N\implies \nm{\frac 7n-2}<1 \implies 1<\frac 7n<3\implies \frac 73<n<7\]
-  	Regardless of the value of $N$, this cannot hold \emph{for all} $n>N$: in particular $n:=\max\{7,N+1\}$. Contradiction.
-	  \end{description}
-  	
-  	The two arguments are very similar, though consider that a significant advantage of the contradiction approach is that you only have to remember \emph{one definition}!
-	\end{enumerate}
+	  \begin{minipage}[t]{0.5\linewidth}\vspace{-5pt}
+		  \item[]\begin{description}
+		  	\item[\normalfont\emph{Scratch work.}] Of course the limit is really $0$.\par
+		  	If $\epsilon$ is anything smaller than 2, then $\textcolor{Green}{s_n}$ will eventually be further than $\epsilon$ from $s=2$.\par
+		  	Choosing $\epsilon=1$ should be enough. Indeed, since we only care about large $n$,
+				\[
+			  	\makebox[0cm][l]{$\displaystyle\nm{s_n-2}=\nm{\frac 7n-2}=2-\frac 7n\ge 1\iff n\ge 7$}
+				\]
+		  \end{description}
+	  \end{minipage}
+	  \hfill
+	  \begin{minipage}[t]{0.46\linewidth}\vspace{-8pt}
+	  	\flushright\includegraphics[scale=0.95]{divergent}
+	  \end{minipage}
+	  	
+	  \begin{description}			
+	  	\item[\normalfont\emph{Direct proof.}] Let $\epsilon=1$. Given $N\in\N$, let $n=\max(7,N+1)$. Then $n>N$ and 
+	  	\[
+	  		\nm{s_n-2}=\nm{\frac 7n-2}=2-\frac 7n\ge 1=\epsilon
+	  	\]
+	  	%from which we conclude that $s_n\nrightarrow 2$.
 
-% 	\exstart We prove that the sequence with $s_n=\frac 7n$ does not converge to $s=1$.
-% 	\begin{enumerate}\setcounter{enumi}{1}
-% 	  \item[]\emph{Visualization.}\quad We intuitively know that $s_n\to 0$. If $\epsilon$ is smaller than 1 (say $\frac 12$), then the terms $s_n$ will eventually be further than this from $s=1$.
-% 	  \begin{center}
-%   		\includegraphics[scale=0.9]{divergent}
-%   	\end{center}
-%   	\vspace{-5pt}
-% 	  
-%   	\emph{Direct argument.}\quad Let $\epsilon=\frac 12$. Since we are only concerned with \emph{large} values of $n$, we see that
-%   	\[\nm{s_n-s}=\nm{\frac 7n-1}=1-\frac 7n\ge\frac 12\iff 1-\frac 7n\ge\frac 12\iff \frac 7n\le\frac 12\iff n\ge 14\]
-%   	Given $N\in\N$, let\footnotemark{} $n=\max\{14,N+1\}$. But then $\nm{s_n-s}=\nm{\frac 7n-1}\ge\epsilon$, from which we conclude that $s_n\nrightarrow 1$.
-%   	\smallbreak
-%   	
-%   	\emph{Contradiction argument.}\quad For an alternative approach, we suppose $s_n\to 1$ and let $\epsilon=\frac 12$ in Definition \ref{defn:limit}. Then $\exists N$ such that
-%   	\[n>N\implies \nm{\frac 7n-1}<\frac 12 \implies \frac 12<\frac 7n<\frac 32\implies \frac{14}3<n<14\]
-%   	Regardless of the value of $N$, this cannot hold \emph{for all} $n>N$: in particular $n=\max\{14,N+1\}$. Contradiction.
-%   	\smallbreak
-%   	
-%   	The two arguments are very similar, though consider that a significant advantage of the contradiction approach is that you only have to remember \emph{one definition}!
-% 	\end{enumerate}
+  	
+  		\item[\normalfont\emph{Contradiction proof.}] For an alternative approach, suppose $\lim s_n=2$ and let $\epsilon=1$ in Definition \ref{defn:limit}. Then $\exists N$ such that
+  		\[
+  			n>N\implies \nm{\frac 7n-2}<1 \implies 1<\frac 7n<3\implies \frac 73<n<7
+  		\]
+  		This last is false for large $n$, in particular for $n:=\max(7,N+1)$. Contradiction.
+	  \end{description}
+  	While the two arguments are similar, the contradiction approach has the advantage in that you need only remember \emph{one definition}!
+
+
+	%The clean $N+1$ expression is is why we prefer to let $N$ be a natural number when proving divergence! %If $N\in\R$, then we'd have to use the ceiling function ($n=\max\{14,\lceil N\rceil+1\}$), or resort to the Archimedean property on which it depends ($\exists n>\max\{14,N\}$).% Either way is ugly and potentially confusing, so better avoided.
+
+
+		\item\label{ex:divergenceeasy2} We prove (just by contradiction this time) that $s_n=(-1)^n$ defines a divergent sequence.\par
+		\begin{minipage}[t]{0.56\linewidth}\vspace{-5pt}
+			Suppose that $\lim s_n=s$ and let $\epsilon=1$ in the definition of limit. Then $\exists N\in\N$ such that
+			\begin{align*}
+				n>N&\implies \nm{(-1)^n-s}<1\\
+				&\implies (-1)^n-1<s<1+(-1)^n
+			\end{align*}
+			Choosing any even $n>N$ forces $0<s$; any odd $n>N$ forces $s<0$: contradiction.
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.42\linewidth}\vspace{-10pt}
+			\flushright\includegraphics[scale=0.95]{divergent2}
+		\end{minipage}\smallbreak
+		The choice of $\epsilon=1$ was suggested by the picture: if $\epsilon=1$, then, regardless of \textcolor{Green}{$N$}, there exist $\textcolor{Green}{n>N}$ with $\nm{s_n-s}>1$. 
+		
+		\goodbreak
+
+  	\item\label{ex:divergence3} We prove directly that the sequence defined by $s_n=\ln n$ is divergent.\vspace{-5pt}
+  	\begin{description}\itemsep0pt
+  		\item[\normalfont\emph{Scratch work.}] Since logarithms increase unboundedly,\footnotemark{} for large $n$ we should have $\ln n\ge s+\textcolor{red}1$, for any purported limit $s\in\R$.
+			\item[\normalfont\emph{Proof.}]	Suppose $s\in\R$ is given and let $\textcolor{red}{\epsilon=1}$. Given $N\in\N$, define $n=\max(N+1,e^{s+1})$. Then
+			\begin{align*}
+				n>N \quad
+				&\text{and}\quad
+				\ln n\ge \ln(e^{s+1})=s+1 
+				\tag{$\ln$ is \emph{increasing}}\\
+				&\implies \nm{s_n-s}=\ln n-s\ge 1=\epsilon
+			\end{align*}
+			We conclude that $(s_n)$ is divergent.
+  	\end{description}
+	\end{enumerate}
 \end{examples}
 
-\footnotetext{This is why we prefer to let $N$ be a natural number when proving divergence. If $N\in\R$, then we'd have to use the ceiling function ($n=\max\{14,\lceil N\rceil+1\}$), or resort to the Archimedean property on which it depends ($\exists n>\max\{14,N\}$). Either way is ugly and potentially confusing, so better avoided.} 
-
-\goodbreak
-
-
-\begin{tcolorbox}[exstyle]{}
-	\begin{enumerate}\setcounter{enumi}{1}
-		\item\label{ex:divergenceeasy2} We prove that the sequence defined by $s_n=(-1)^n$ is divergent.\smallbreak
-
-		Suppose, for contradiction, that $s_n\to s$. The picture shows the case $s\ge 0$ and strongly suggests that $\epsilon=1$ will lead to a contradiction (why?).
-		\begin{center}
-   		\includegraphics[scale=0.9]{divergent2}
-  	\end{center}
-   	Let $\epsilon=1$ in the definition of limit. Then $\exists N\in\N$ such that
-		\[n>N\implies \nm{(-1)^n-s}<1\]
-		One each of the values $\{\textcolor{magenta}{n_e},\textcolor{Green}{n_o}\}=\{N,N+1\}$ is \textcolor{magenta}{even} and the other \textcolor{Green}{odd}. There are two cases:
-		\begin{itemize}
-		  \item If $s\ge 0$ then $\nm{(-1)^{n_o}-s}=\nm{-1-s}=s+1\ge 1=\epsilon$.
-		  \item If $s<0$ then $\nm{(-1)^{n_e}-s}=\nm{1-s}=1-s\ge 1=\epsilon$.
-		\end{itemize}
-		Either way we have a contradiction. We conclude that $(s_n)$ is divergent.
-
-  
-  	\item\label{ex:divergence3} We show that the sequence defined by $s_n=\ln n$ is divergent.\footnotemark\smallbreak
-  		
-		Our intuition from calculus is that logarithms increase unboundedly. For any $s\in\R$, letting $\epsilon=1$ should be enough, for eventually $\ln n\ge s+1$. This time we prove directly using the definition of divergence (\ref{defn:divergence1}).\smallbreak
-		
-		Suppose $s\in\R$, let $\epsilon=1$, and suppose that $N\in\N$ is given. Define $n=\max\{N+1,e^{s+1}\}$ and observe that. Then
-		\[n>N\text{ and }\ln n\ge \ln(e^{s+1})=s+1 \tag{$\ln$ is \emph{increasing}, and so respects inequalities!}\]
-		In particular,
-		\[\nm{s_n-s}=\ln n-s\ge 1=\epsilon\]
-		We conclude that $(s_n)$ is divergent.
-	\end{enumerate}
-\end{tcolorbox}
-
-\footnotetext{In the next section we'll have a definition of what it means for a sequence to \emph{diverge to $\infty$}: this is what's happening for $s_n=\ln n$, but it's not (yet) what we're trying to demonstrate.}
-
-\vfil
-\goodbreak
+\footnotetext{%
+	Definition \ref{defn:diverge} will state what it means for a sequence to \emph{diverge to $\infty$}: this isn't (yet) what we're trying to demonstrate.%
+}
 
 
-\boldsubsubsection{A Little Abstraction}
 
-Working explicitly with the limit definition is tedious. In the next section we'll develop and summarize the \emph{limit laws} so we can combine limits of sequences without providing new $\epsilon$-$N$ proofs. To start working towards this, here are three general results.
+\boldsubsubsection{Bounded Sequences}
 
-\begin{lemm}{}{ssquared}
-If $\lim s_n=s$, then  $\lim s_n^2=s^2$.
-\end{lemm}
+As a first taste using the limit definition abstractly, we consider several related results regarding the boundedness of sequences.
 
-The challenge is that we want to bound $\nm{s_n^2-s^2}=\nm{s_n-s}\nm{s_n+s}$, which means we need some control over $\nm{s_n+s}$. One way uses the triangle-inequality,
-\[\nm{s_n+s}=\nm{s_n-s+2s}\le\nm{s_n-s}+2\nm s\]
-Assuming $\nm{s_n-s}\le 1$ gives us a fixed bound $\nm{s+s_n}\le 1+2\nm s$. We may now begin a proof.
-
-\begin{proof}
-Suppose $s_n\to s$. Let $\epsilon>0$ be given, and let $\delta=\min\{1,\frac\epsilon{1+2\nm s}\}$. Since $s_n\to s$, $\exists N$ such that
-\[n>N\implies \nm{s_n-s}<\delta\]
-But then
-\begin{align*}
-n>N\implies \nm{s_n^2-s^2}&=\nm{s_n-s}\nm{s_n+s}\\
- %\overset{\triangle}{\le}
-&\le\nm{s_n-s}\left(\nm{s_n-s}+2\nm s\right) \tag*{($\triangle$-inequality)}\\
-&<\delta(1+2\nm s)\tag*{(since $\nm{s_n-s}<\delta\le 1$)}\\
-&\le\epsilon\tag*{\qedhere}
-\end{align*} 
-\end{proof}
-
-
-% \begin{proof}
-% Observe that $\nm{s_n^2-s^2}=\nm{s_n-s}\nm{s_n+s}$. To bound this by $\epsilon$, we need to control the term $\nm{s_n+s}$. Return to the definition of limit with $\epsilon=1$: since $s_n\to s$ we know that $\exists M$ such that
-% \begin{align*}
-% n>M&\implies \nm{s_n-s}<1\implies -1+2s<s_n+s<1+2s\\
-% &\implies \nm{s_n+s}<\max\{\nm{1+2s},\nm{-1+2s}\}
-% \end{align*}
-% Label the RHS of this last inequality $A$: we can now finish the argument.\\
-% Let $\epsilon>0$ be given. Then $\exists P$ s.t. $n>P\implies \nm{s_n-s}<\frac\epsilon A$. Now let $N=\max\{M,P\}$. Then
-% \[n>N\implies \nm{s_n^2-s^2}=\nm{s_n-s}\nm{s_n+s}<\frac\epsilon A\cdot A=\epsilon\tag*{\qedhere}\]
-% \end{proof}
 
 \begin{thm}{}{limitgreatk}
-	Suppose $\lim s_n=s$.
-	\begin{enumerate}
-	  \item If $s_n\ge m$ for all except finitely many $n$, then $s\ge m$.
-	  \item If $s_n\le M$ for all except finitely many $n$, then $s\le M$.
-	\end{enumerate} 
+	Suppose $(s_n)$ is convergent: $\lim s_n=s$.
+ 	\begin{enumerate}\itemsep0pt
+ 	  \item If $s_n\ge m$ for all large\footnotemark{} $n$, then $\lim s_n\ge m$.
+ 	  \item If $s_n\le M$ for all large $n$, then $\lim s_n\le M$.
+ 	  \item $(s_n)$ is bounded \ ($\exists M$ such that $\forall n, \nm{s_n}\le M$).
+ 	\end{enumerate} 
 \end{thm}
 
+
 \begin{proof}
-	We prove part 1 by contradiction---part 2 is similar.\smallbreak
-	Suppose $s_n\to s<m$ and let $\epsilon=\frac{m-s}2>0$. Then $\exists N$ such that
-	\begin{align*}
-	n>N&\implies \nm{s_n-s}<\frac{m-s}2\implies s_n-s<\frac{m-s}2\\
-	&\implies s_n-m<\frac{s-m}2<0\tag*{(add $s-m$ to both sides)}
-	\end{align*}
-	By assumption, $s_n<m$ holds for \emph{at most finitely many} $n$. Contradiction.
+	\begin{enumerate}
+	  \item We prove the contrapositive. Suppose $s<m$ and let $\epsilon=\frac{m-s}2>0$. Then $\exists N$ such that
+		\begin{align*}
+			n>N&\implies \nm{s_n-s}<\frac{m-s}2\implies s_n-s<\frac{m-s}2\\
+			&\implies s_n-m<\frac{s-m}2<0 \implies s_n<m
+		\end{align*}
+		
+		\item This is almost identical to part 1.
+	
+	  \begin{minipage}[t]{0.6\linewidth}\vspace{-5pt}
+			\item The picture shows the strategy: taking $\epsilon=1$ in the limit definition bounds an \textcolor{orange}{infinite tail} of the sequence; the \textcolor{Green}{finitely many terms} that come before are a non-issue.\smallbreak
+			Let $\epsilon=1$ in the definition of	limit. Then $\exists N$ such that
+			\begin{align*}
+				n>N&\implies \nm{\textcolor{orange}{s_n}-\textcolor{red}{s}}<1 \implies \textcolor{blue}{s-1}<\textcolor{orange}{s_n}<\textcolor{blue}{s+1}\\
+				&\implies \nm{\textcolor{orange}{s_n}}<\max\{\textcolor{blue}{\nm{s-1}},\textcolor{blue}{\nm{s+1}}\}
+			\end{align*}
+			It follows that every term of the sequence is bounded by
+			\[
+				M:=\max\bigl(\textcolor{blue}{\nm{s-1}},\textcolor{blue}{\nm{s+1}}, \textcolor{Green}{\nm{s_n}:n\le N}\bigr)
+			\]
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.39\linewidth}\vspace{-5pt}
+			\flushright\includegraphics[scale=0.95]{convbdd}
+		\end{minipage} 
+	\end{enumerate}
 \end{proof}
 
-The expression \emph{for all but finitely many $n$} can be added to many abstract limit theorems; other common variants are \emph{for all large $n$,} and \emph{for some tail of the sequence.} To avoid cumbersome language, the expression is often omitted. Remember that convergence/divergence is concerned with what happens when $n$ is \emph{large}: we can change or delete the first million terms of $(s_n)$ without altering it's convergence status!
+%\vspace{-5pt}
 
-\vfil\vfil
+\footnotetext{%
+	Equivalently $s_n\ge m$ for all but finitely many $n$. In the language of the proof, for all $n$ expect perhaps when $n\le N$. Since we typically care only about large $n$, this caveat is sometimes left unstated: e.g., $s_n\ge m\Longrightarrow \lim s_n\ge m$.
+}
+
 \goodbreak
 
 
 \begin{thm}{Squeeze Theorem}{squeeze}
-	Suppose three sequences satisfy $a_n\le s_n\le b_n$ (for all large $n$) and that $(a_n)$ and $(b_n)$ both converge to $s$. Then $\lim s_n=s$.
+	Suppose sequences satisfy $a_n\le s_n\le b_n$ (for all large $n$), where the two outer sequences converge to $s$. Then $\lim s_n=s$.
 \end{thm}
 
 \begin{proof}
-	By subtracting $s$ from our assumed inequality, we see that
-	\[a_n-s\le s_n-s\le b_n-s\implies\nm{s_n-s}\le\max\{\nm{a_n-s},\nm{b_n-s}\}\]
-	It remains to bound the right hand side by $\epsilon$. Let $\epsilon>0$ be given, then there exist $N_a,N_b$ such that
-	\[n>N_a\implies \nm{a_n-s}<\epsilon\quad\text{and}\quad n>N_b\implies \nm{b_n-s}<\epsilon\]
-	Finally let $N=\max\{N_a,N_b\}$ to see that
-	\[n>N\implies \nm{s_n-s}\le\max\{\nm{a_n-s},\nm{b_n-s}\}<\epsilon\tag*{\qedhere}\]
+	Subtract $s$ from the assumed inequality to obtain
+	\[
+		a_n-s\le s_n-s\le b_n-s
+		\implies\nm{s_n-s}\le\max\bigl(\nm{a_n-s},\nm{b_n-s}\bigr)
+	\]
+	Suppose $\epsilon>0$ is given. Since $\lim a_n=s=\lim b_n$, there exist $N_a,N_b$ such that
+	\[
+		n>N_a\implies \nm{a_n-s}<\epsilon
+		\qquad\text{and}\qquad 
+		n>N_b\implies \nm{b_n-s}<\epsilon
+	\]
+	Now let $N=\max(N_a,N_b)$ to see that
+	\[
+		n>N\implies \nm{s_n-s}\le\max\bigl(\nm{a_n-s},\nm{b_n-s}\bigr)<\epsilon \tag*{\qedhere}
+	\]
 \end{proof}
 
 
 \begin{example}{}{}
-	If $s_n=\frac{1+\sin n}n$, then $0\le s_n\le \frac 2n$. The squeeze theorem quickly forces $\lim s_n=0$.
+	Since $0\le \frac{1+\sin n}n\le \frac 2n$ for all $n$, the squeeze theorem forces $\lim \frac{1+\sin n}n=0$.
 \end{example}
 
-\vfil
+
+\medskip
+
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad ????}
+	\emph{Key concepts:\quad $\epsilon$--$N$ definition,\qquad divergence,\qquad boundedness,\qquad squeeze theorem}
 
 	\begin{enumerate}
 	  \item For each sequence, determine the limit and prove your claim.
 	  \begin{enumerate}
-	    \item\makebox[120pt][l]{$a_n=\frac{n}{n^2+1}$\hfill (b)} \ \makebox[120pt][l]{$b_n=\frac{7n-19}{3n+7}$\hfill (c)} \ $c_n=\frac{4n+3}{7n-5}$
+	    \item\makebox[120pt][l]{$a_n=\frac{n}{n^2+1}$\hfill (b)} \ 
+	    \makebox[120pt][l]{$b_n=\frac{7n-19}{3n+7}$\hfill (c)} \ 
+	    $c_n=\frac{4n+3}{7n-5}$
 	    \setcounter{enumii}{3}
-	    \item\makebox[120pt][l]{$d_n=\frac{2n+4}{5n+2}$\hfill (e)} \ \makebox[120pt][l]{$e_n=\frac 1n\sin n$\hfill (f)} \ $f_n=\frac{n^2+n-1}{3n^2-10}$
+	    \item\makebox[120pt][l]{$d_n=\frac{2n+4}{5n+2}$\hfill (e)} \ 
+	    \makebox[120pt][l]{$e_n=\frac 1n\sin n$\hfill (f)} \ 
+	    $f_n=\frac{n^2+n-1}{3n^2-10}$
 	  \end{enumerate}
 	
-	
-	  \item\label{exs:tbddproduct}%[4.]
-	  Let $(t_n)$ be a bounded sequence (there exists $M$ such that $\nm{t_n}\le M$ for all $n$), and let $(s_n)$ be a sequence such that $\lim s_n=0$. Prove that $\lim(s_nt_n)=0$.\par
-	  (\emph{Hint: given $\epsilon$, note that $\frac\epsilon{\nm M}$ is also a small number\ldots})
-	 
 	 
 	  \item%[8.]
-	  Prove the following
+	  Prove:
 	  \begin{enumerate}
-		  \item $\lim[\sqrt{n^2+1}-n]=0$ \hspace{30pt} (b) \ $\lim[\sqrt{n^2+n}-n]=\frac 12$\hspace{30pt} (c) \ $\lim[\sqrt{4n^2+n}-2n]=\frac 14$
+		  \item $\lim[\sqrt{n^2+1}-n]=0$ \qquad
+		  (b) \ $\lim[\sqrt{n^2+n}-n]=\frac 12$\qquad 
+		  (c) \ $\lim[\sqrt{4n^2+n}-2n]=\frac 14$
 	  \end{enumerate}
-	  
-	
-	  \item\label{exs:convlowerbound}%[10.]
-	  Let $(s_n)$ be a convergent sequence, and suppose $\lim s_n>a$. Prove that there exists $N$ such that $n>N\implies s_n>a$.
 	  
 	    
 	  \item\label{exs:conv23again}
 	  \begin{enumerate}
 	    \item Show that $n\ge 2\implies 2n^2+9n+5\le 9n^2$.
-	    \item (Example \ref*{ex:moreeasylimits}.\ref{ex:conv3})\quad Give another proof that $\lim \frac{2n^4-3n+1}{3n^4+n^2+4}=\frac 23$ by choosing $N=\max\{2,\frac 1{\sqrt\epsilon}\}$.
+	    \item (Example \ref*{ex:moreeasylimits}.\ref{ex:conv3})\lstsp Give another proof that $\lim \frac{2n^4-3n+1}{3n^4+n^2+4}=\frac 23$ by choosing $N=\max\bigl(2,\frac 1{\sqrt\epsilon}\bigr)$.
 	 	\end{enumerate}
-	 	
+		 	
 	 	
 	  \item\begin{enumerate}
 	   	\item Prove that the sequence with $n\th$ term $s_n=\frac 2{n^2}$ does not converge to $-1$.
 			\item Prove that $(s_n)$ does not converge to 1.
 		\end{enumerate}
 	    
+	    
 	  \item Prove that the sequence defined by $t_n=n^2$ diverges.
 	  
 	 	
-	 	\item Provide a contradiction argument to justify Example \ref*{ex:divergenceeasy}.\ref{ex:divergence3}: $(\ln n)$ diverges.
+	 	\item (Example \ref*{ex:divergenceeasy}.\ref{ex:divergence3})\lstsp Prove by contradiction that $(\ln n)$ diverges.
+	 	
+	 	
+	 	\item True or false: if $(s_n)$ is bounded, then it is convergent. Explain.
+	 	
+
+	  \item\label{exs:tbddproduct}%[4.]
+	  Let $(t_n)$ be bounded, and let $(s_n)$ satisfy $\lim s_n=0$. Prove that $\lim(s_nt_n)=0$.%\par
+	  %(\emph{Hint: let $M>0$, and given $\epsilon$, note that $\frac\epsilon{\nm M}$ is also a small number})
+		
 	
-			
-		\item (Recall Theorem \ref{thm:limitgreatk})\quad Suppose $\lim s_n=s$ where every $s_n>m$. Can we conclude that $s>m$? Explain your answer.
+	  \item\label{exs:convlowerbound}%[10.]
+	  We extend Theorem \ref{thm:limitgreatk}.
+	  \begin{enumerate}
+	    \item Suppose $\lim s_n=s$ where every $s_n>m$. Can we conclude that $s>m$? Explain.
+	    \item%[10.]
+	  	Let $(s_n)$ be convergent and suppose $\lim s_n>a$. Prove that $\exists N$ such that $n>N\Longrightarrow s_n>a$.
+		\end{enumerate}
 		
 		
-		\item\begin{enumerate}
-			\item If $\nm{s_n-s}<1$, explain why $\nm{s_n^2+ss_n+s^2}< 1+3\nm s+3\nm s^2$
-			\item Suppose $s_n\to s$. Prove that $s_n^3\to s^3$.  
+		\item Suppose $s\in\R$. Prove:
+		\begin{enumerate}
+		  \item $\lim s_n=s\iff \lim(s_n-s)=0$
+			\item $\lim s_n=s\implies \lim\nm{s_n}=\nm s$
 		\end{enumerate}
 		
 	\end{enumerate}
 \end{exercises}
 
+
 \clearpage
 
 
-\iffalse
+\subsection{Limit Theorems for Sequences}\label{sec:limitthms}
 
+We'd like to develop rules for limits so that we don't have to resort to $\epsilon$--$N$ proofs every time. The rough idea of these results is that limits respect the basic rules of algebra. Rather than dive straight into abstract proofs, we start with two special cases that illustrate commonly encountered tricks.
 
-\subsection{Limit Theorems for Sequences}
-
-We'd like to develop some rules for working with limits so that we don't have to resort to an $\epsilon$--$N$ proof every time. The rough idea is that limits respect the basic rules of algebra. For instance\ldots
-
-\begin{example}{}{}
-If $\lim s_n=s$, it seems natural that a new sequence $(5s_n)$ obtained by multiplying the original terms by 5 should have limit $\lim 5s_n=5s$. Consider what we have to prove to confirm this:
-\[\forall\epsilon>0, \exists N\text{ such that }n>N\implies \nm{5s_n-5s}<\epsilon\]
-This last amounts to observing that $\nm{s_n-s}<\frac\epsilon 5$. The challenge here is to see that we're essentially done: this is just the statement $\lim s_n=s$ in disguise! Here is a more formal argument.\smallbreak
-Let $\epsilon>0$ be given. Since $\lim s_n=s$, we know that
-\[\exists N\text{ such that }n>N\implies \nm{s_n-s}<\frac\epsilon 5\implies \nm{5s_n-5s}<\epsilon\]
-%We conclude that $\lim 5s_n=5s$.
-\end{example}
-
-The trick in the example will be used repeatedly in the proofs that follow. What's critical is that you read the limit definition correctly: given any small number ($\epsilon,\frac\epsilon 5$, etc.) there is some tail of the sequence which remains closer to the limit than this.
-
-\begin{thm}{Limit laws}{limitbasic}
-Limit calculations respect algebraic operations: $\pm, \times,\div$ and roots.\smallbreak
-More specifically, if $(s_n)$ converges to $s$ and $(t_n)$ to $t$, then,
-\begin{enumerate}
-	%\item If $k\in\R$ is constant, then $\lim ks_n=ks$
-	\item $\lim (s_n\pm t_n)=s\pm t$
-	\item $\lim(s_nt_n)=st$; \ as a special case, if $k$ is constant, then $\lim ks_n=ks$
-	\item If $t\neq 0$, then $\lim \frac{s_n}{t_n}=\frac st$
-	\item If $k\in\N$, then $\lim \sqrt[k]{s_n}=\sqrt[k]{s}$, provided the roots exist ($s_n,s\ge 0$ if $k$ even)
-\end{enumerate}
-\end{thm}
-
-Our first example was the special case of part 2 with $k=5$. Note also how parts 2 and 4 extend Lemma \ref{lemm:ssquared}: by induction we now have $s_n^q\to s^q$ for any $q\in\Q$.\smallbreak
-
-Proving the limit laws takes a little work, including a small lemma. To advertise their benefit, we repeated apply them to a limit calculation as you might have seen it in elementary calculus.
-
-\begin{examples}{}{methodmeanex}
-\exstart We evaluate $\lim\frac{3n^2+2\sqrt n-1}{5n^2-2}$ using the limit laws.
-\begin{align*}
-\lim\frac{3n^2+2\sqrt n-1}{5n^2-2}&=\lim\frac{3+\frac 2{n^{3/2}}-\frac 1{n^2}}{5-\frac 2{n^2}} =\frac{\lim\left(3+\frac 2{n^{3/2}}-\frac 1{n^2}\right)}{\lim\left(5-\frac 2{n^2}\right)}\tag{part 3}\\
-&=\frac{\lim 3+\lim\frac 2{n^{3/2}}-\lim\frac 1{n^2}}{\lim 5-\lim\frac 2{n^2}}\tag{part 1}\\
-&=\frac{3+0-0}{5-0}=\frac 35\tag*{(parts 2, 4 and $\lim\frac 1n=0$ (Example \ref*{ex:moreeasylimits}.\ref{ex:stdzero}))}
-\end{align*}
-This calculation involves some generally accepted sleight of hand; formally we're working from the bottom up since $\lim\frac{3n^2+2\sqrt n-1}{5n^2-2}$ shouldn't really be written until you know it exists!
-
-\goodbreak
-
-\begin{enumerate}\setcounter{enumi}{1}
-  \item\label{ex:methodmeanex2} Suppose $(s_n)$ is defined inductively via $s_1=2$ and $s_{n+1}=\frac 12(s_n+\frac 2{s_n})$:
-\[(s_n)=\bigl(2,\tfrac 32,\tfrac{17}{12},\tfrac{577}{408},\ldots\bigr)\]
-This sequence in fact converges, though we'll need to wait until the next section to see why. Given this fact, the limit laws allow us to compute the limit $s$:
-\[s=\lim s_{n+1}=\frac 12\left(\lim s_n+\frac 2{\lim s_n}\right) =\frac 12\left(s+\frac 2s\right) \implies \frac 12s=\frac 1s\implies s^2=2\]
-Since $s_n$ is plainly always positive, we conclude that $\lim s_n=\sqrt 2$.
-\end{enumerate}
+\begin{examples}{}{basiclimitlaws}
+	Suppose that $(s_n)$ converges to $s$. We prove that $\lim 5s_n=5s$ and that $\lim s_n^2=s^2$.
+	\begin{enumerate}
+	  \item\label{ex:basiclimitlaws1} The sequence $(5s_n)$ is obtained by multiplying the original terms by 5. To prove $\lim 5s_n=5s$ we must show:
+		\[
+			\forall\epsilon>0, \exists N\text{ such that }n>N\implies \nm{5s_n-5s}<\epsilon\tag{$\ast$}
+		\]
+		This last amounts to observing that $\nm{s_n-s}<\frac\epsilon 5$. Since $\frac\epsilon 5$ is simply another small number, ($\ast$) is just the statement $\lim s_n=s$ in disguise! Here is a formal argument.\par
+		Let $\epsilon>0$ be given. Since $\lim s_n=s$, we know that\footnotemark
+		\[
+			\exists N\text{ such that }n>N\implies \nm{s_n-s}<\smash{\frac\epsilon 5}\implies \nm{5s_n-5s}<\epsilon 
+		\]
+		\item\label{ex:basiclimitlaws2} The challenge is to make $\nm{s_n^2-s^2}=\nm{s_n-s}\nm{s_n+s}$ small. The first term can be made arbitrarily small by the hypothesis $\lim s_n=s$. To control the second, we use the triangle-inequality:
+		\[
+			\nm{s_n+s}=\nm{s_n-s+2s}\le\nm{s_n-s}+2\nm s
+		\]
+		Assuming $\nm{s_n-s}\le 1$ gives a bound $\nm{s+s_n}\le 1+2\nm s$. We now  have enough for a proof.\par
+		Suppose $\lim s_n=s$, that $\epsilon>0$ is given and let $\delta=\min(1,\frac\epsilon{1+2\nm s})$. Then $\exists N$ such that,
+		\begin{align*}
+			n>N\implies &\nm{s_n-s}<\delta\le 1\\
+			\implies &\nm{s_n^2-s^2}=\nm{s_n-s}\nm{s_n+s} \overset{\triangle}{\le}
+			\nm{s_n-s}\left(\nm{s_n-s}+2\nm s\right)\\
+			&\phantom{\nm{s_n^2-s^2}\,}<\delta(1+2\nm s)\le\epsilon
+		\end{align*}
+	\end{enumerate}
 \end{examples}
 
-\medskip
+ \footnotetext{%
+ 	It is non-standard, but if this approach makes you squeamish, you can introduce a second $\tilde\epsilon$:
+		\begin{quote}
+			Given $\epsilon>0$, let $\tilde\epsilon=\frac\epsilon 5$, then $\exists N$ such that $n>N\Longrightarrow \nm{s_n-s}<\tilde\epsilon \Longrightarrow \nm{5s_n-5s}<\epsilon$.
+		\end{quote}%
+ }
 
-We now commence our assault on the limit laws. The strategy for the first is simple: control both sequences so that both $\nm{s_n-s},\nm{t_n-t}<\frac\epsilon 2$, then add. The only challenge is writing it formally.
 
-\begin{proof}[Proof of Theorem \ref{thm:limitbasic}, part 1]
-	Let $\epsilon>0$ be given. Since $s_n\to s$ and $t_n\to t$, we see that $\exists N_1,N_2$ such that
-		\begin{gather*}
-			\exists N_1\text{ such that }n>N_1\implies \nm{s_n-s}<\frac\epsilon 2
-			\quad\text{and},\\
-			\exists N_2\text{ such that }n>N_2\implies \nm{t_n-t}<\frac\epsilon 2
-		\end{gather*}
-		Let $N=\max\{N_1,N_2\}$, then
+\begin{thm}{Limit laws}{limitbasic}
+	Limits respect algebraic operations: $\pm, \times,\div$ and rational roots.\par
+	More specifically, if $(s_n)$ converges to $s$ and $(t_n)$ to $t$, then,
+	\begin{enumerate}\itemsep2pt
+		\item $\lim (s_n\pm t_n)=s\pm t$
+		\item $\lim(s_nt_n)=st$; \ in particular, if $k$ is constant, then $\lim ks_n=ks$
+		\item If $t\neq 0$, then $\lim \frac{s_n}{t_n}=\frac st$
+		\item If $k\in\N$, then $\lim \sqrt[k]{s_n}=\sqrt[k]{s}$, provided the roots exist ($s_n,s\ge 0$ if $k$ even)
+	\end{enumerate}
+	By part 4 and induction on part 2, $\lim s_n^q=s^q$ for any $q\in\Q$.
+\end{thm}
+
+Examples \ref{ex:basiclimitlaws} are special cases of part 2 ($k=5$ and then $t_n=s_n$). 
+\goodbreak
+
+Rigorously proving the limit laws takes some work. Before engaging in some of this, we advertise their benefit by performing some calculations as you might have seen in elementary calculus.
+
+\begin{examples}{}{methodmeanex}
+	\exstart We evaluate $\lim\frac{3n^2+2\sqrt n-1}{5n^2-2}$ using the limit laws.
+	\begin{align*}
+		\lim\frac{3n^2+2\sqrt n-1}{5n^2-2}&=\lim\frac{3+\frac 2{n^{3/2}}-\frac 1{n^2}}{5-\frac 2{n^2}} \tag{$n>0$}\\
+		&=\frac{\lim\left(3+\frac 2{n^{3/2}}-\frac 1{n^2}\right)}{\lim\left(5-\frac 2{n^2}\right)}\tag{part 3}\\
+		&=\frac{\lim 3+\lim\frac 2{n^{3/2}}-\lim\frac 1{n^2}}{\lim 5-\lim\frac 2{n^2}}\tag{part 1}\\
+		&=\frac{3+0-0}{5-0}=\frac 35\tag*{(parts 2, 4 and Theorem \ref{thm:oneonnlimit}))}
+	\end{align*}
+	The calculation involves some generally accepted sleight of hand: none of the limits should really be written until one knows they exist. To be completely logical would require us to rewrite the argument upside down, though to sacrifice readability in this manner would be ill-advised.
+
+
+	\begin{enumerate}\setcounter{enumi}{1}
+	  \item\label{ex:methodmeanex2} Suppose $(s_n)$ is defined inductively via $s_1=2$ and $s_{n+1}=\frac 12(s_n+\frac 2{s_n})$:
+		\[
+			(s_n)=\left(2,\frac 32,\frac{17}{12},\frac{577}{408},\ldots\right)
+		\]
+		This sequence in fact converges, though a proof requires ideas from Section \ref{sec:monocauchy}. Given this fact, the limit laws allow us to compute the limit $s$:
+		\[
+			s=\lim s_{n+1}=\frac 12\left(\lim s_n+\frac 2{\lim s_n}\right) 
+			=\frac 12\left(s+\frac 2s\right) 
+			\implies \frac 12s=\frac 1s\implies s^2=2
+		\]
+		Since $s_n$ is plainly always positive, we conclude that $\lim s_n=\sqrt 2$.
+	\end{enumerate}
+\end{examples}
+
+\bigskip
+
+We now commence our assault on the limit laws. 
+
+\begin{proof}
+	\begin{enumerate}
+	  \item We use a trick similar to that in Example \ref*{ex:basiclimitlaws}.\ref{ex:basiclimitlaws1}: control both sequences so that both $\nm{s_n-s},\nm{t_n-t}<\frac\epsilon 2$, then sum.\smallbreak
+	  Suppose $\epsilon>0$ is given. Since $\lim s_n=s$ and $\lim t_n=t$, we see that $\exists N_1,N_2$ such that
+		\[
+			n>N_1\implies \nm{s_n-s}<\frac\epsilon 2
+			\qquad\text{and}\qquad
+			n>N_2\implies \nm{t_n-t}<\frac\epsilon 2
+		\]
+		Let $N=\max(N_1,N_2)$, then
 		\[
 			n>N\implies \nm{s_n+t_n-(s+t)}\overset{\smash{\triangle}}{\le}\nm{s_n-s}+\nm{t_n-t}<\smash[t]{\frac\epsilon 2+\frac\epsilon 2}=\epsilon
 		\]
 		The argument for $s_n-t_n$ is almost identical.
+		
+		\goodbreak
+		
+		\item Exercise \ref*{sec:limitdef}.\ref{exs:tbddproduct} deals with (and extends) the case when $s=0$. We therefore suppose $s\neq 0$. The approach is similar to part 1, we just need to be a bit cleverer to break up $\nm{s_nt_n-st}$.\smallbreak
+		Suppose $\epsilon>0$ is given. By Theorem \ref{thm:limitgreatk}, $(t_n)$ is bounded:
+		\[
+			\exists M\text{ such that }\forall n,\ \nm{t_n}\le M
+		\]
+		We make assume, WLOG, that $M>0$. Since $\lim s_n=s$ and $\lim t_n=t$, $\exists N_1,N_2$ such that
+	 	\begin{gather*}
+		 	n>N_1\implies \nm{s_n-s}<\frac\epsilon{2M}
+		 	\qquad\text{and}\qquad
+			n>N_2\implies \nm{t_n-t}<\frac\epsilon{2\nm{s}}
+	 	\end{gather*}
+	 	Let $N=\max(N_1,N_2)$, then
+		\[
+			\nm{s_nt_n-st}=\nm{s_nt_n-st_n+st_n-st} 
+			\overset{\smash{\triangle}}{\le}\nm{s_n-s}\nm{t_n}+\nm s\nm{t_n-t} 
+			<\frac\epsilon{2M}M+\nm s\frac\epsilon{2\nm s} =\epsilon
+		\]
+		
+		\item[3]\!\& 4.: See Exercise \ref{exs:limitlawsfinish}.\qedhere
+	\end{enumerate}
 \end{proof}
 
-\vfil
+\medskip
 
-The multiplicative limit law requires a preparatory result.
-
-\begin{lemm}{}{bddconv}
-	$(s_n)$ convergent $\implies$ $(s_n)$ bounded \ ($\exists M$ such that $\forall n, \nm{s_n}\le M$).
-\end{lemm}
-
-\begin{minipage}[t]{0.6\linewidth}\vspace{-5pt}
-	The converse to this statement is \emph{false}: why?\smallbreak
-	The picture shows the strategy: taking $\epsilon=1$ in the limit definition bounds an \textcolor{orange}{infinite tail} of the sequence; the \textcolor{Green}{finitely many terms} that come before are a non-issue.
-	
-	\begin{proof}
-		Suppose $\lim s_n=s$ and let $\epsilon=1$ in the definition of
-		limit. Then $\exists N$ such that
-		\begin{align*}
-		n>N&\implies \nm{\textcolor{orange}{s_n}-\textcolor{red}{s}}<1 \implies \textcolor{blue}{s-1}<\textcolor{orange}{s_n}<\textcolor{blue}{s+1}\\
-		&\implies \nm{\textcolor{orange}{s_n}}<\max\{\textcolor{blue}{\nm{s-1}},\textcolor{blue}{\nm{s+1}}\}
-		\end{align*}
-		It follows that every term of the sequence is bounded by
-		\[M:=\max\bigl\{\textcolor{blue}{\nm{s-1}},\textcolor{blue}{\nm{s+1}},\textcolor{Green}{\nm{s_n}:n\le N}\bigr\}\tag*{\phantom\qedhere}\]
-	\end{proof}
-\end{minipage}\hfill\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
-	\flushright\includegraphics[scale=0.92]{convbdd}\par
-	%\vspace{37.5pt}
-	\vspace{12pt}
-	\hfill\qedsymbol
-\end{minipage}
-\bigbreak
-
-\goodbreak
-
-The approach to part 2 is similar to part 1, we just need to be a bit cleverer to break up $\nm{s_nt_n-st}$.
-
-\begin{proof}[Proof of Theorem \ref{thm:limitbasic}, part 2]
-	Exercise \ref*{sec:limitdef}.\ref{exs:tbddproduct} deals with (and extends) the case when $s=0$. Instead suppose $s\neq 0$, and let $\epsilon>0$ be given. Since $s_n\to s$ and $t_n\to t$,
- 	\begin{gather*}
- 	(t_n)\text{ is bounded (Lemma)}:\exists M\text{ such that }\forall n, \nm{t_n}\le M\\
- 	\exists N_1,N_2\text{ such that }n>N_1\implies \nm{s_n-s}<\frac\epsilon{2M}
- 	\quad\text{and}\quad
-	n>N_2\implies \nm{t_n-t}<\frac\epsilon{2\nm{s}}
- 	\end{gather*}
- 	Again let $N=\max\{N_1,N_2\}$, then
-	\[
-		\nm{s_nt_n-st}=\nm{s_nt_n-st_n+st_n-st} \overset{\smash{\triangle}}{\le}\nm{s_n-s}\nm{t_n}+\nm s\nm{t_n-t} < \frac\epsilon{2M}M+\nm s\frac\epsilon{2\nm s} =\epsilon\tag*{\qedhere}
-	\]
-\end{proof}
-
-The proofs of parts 3 and 4 are in Exercise \ref{exs:limitlawsfinish}.
-
-
-
-\boldinline{More basic examples}
-
-
-With a few simple general examples, the limit laws allow us to rapidly compute the limits of a great variety of sequences.
+With a few general examples, the limit laws allow us to rapidly compute a great variety of limits.
 
 \begin{thm}{}{limlaw2}
-\exstart If $k>0$ then $\lim\frac 1{n^k}=0$
-\begin{enumerate}\setcounter{enumi}{1}\itemsep0pt
-	\item If $\nm a<1$ then $\lim a^n=0$
-	\item If $a>0$ then $\lim a^{1/n}=1$
-	\item $\lim n^{1/n}=1$
-\end{enumerate}
+	\exstart If $\nm a<1$ then $\lim a^n=0$%\vspace{-5pt}
+	\begin{enumerate}\setcounter{enumi}{1}%\itemsep0pt
+		\item If $a>0$ then $\lim a^{1/n}=1$
+		\item $\lim n^{1/n}=1$
+	\end{enumerate}
 \end{thm}
 
 
 \begin{examples}{}{}
-	\exstart $\displaystyle\lim (3n)^{2/n}=(\lim 3^{1/n})^2(\lim n^{1/n})^2=1$.
+	\exstart $\lim (3n)^{2/n}=(\lim 3^{1/n})^2(\lim n^{1/n})^2=1$.
 	\begin{enumerate}\setcounter{enumi}{1}
-		\item $\displaystyle\lim\frac{n^{2/n}+\left(3-n^{-1}\sin n\right)^{1/5}}{4n^{-3/2}+7} =\frac{(\lim n^{1/n})^2 -\bigl(3-\lim\frac{\sin n}n\bigr)^{1/5}}{4\lim \frac 1{n^{3/2}}+7} =\frac{1-\sqrt[5]{3}}7$\par
-		Note that $\lim\frac{\sin n}n=0$ follows from the squeeze theorem: $\nm{\frac{\sin n}n}\le \frac 1n\to 0$.
+		\item Observe from the squeeze theorem (\ref{thm:squeeze}) that $\nm{\frac{\sin n}n}\le \frac 1n\to 0$. We conclude:
+		\[
+			\lim\frac{n^{2/n}+\bigl(3-n^{-1}\sin n\bigr)^{1/5}}{4n^{-3/2}+7} =\frac{(\lim n^{1/n})^2 -\bigl(3-\lim\frac{\sin n}n\bigr)^{1/5}}{4\lim \frac 1{n^{3/2}}+7} =\frac{1-\sqrt[5]{3}}7
+		\]
 	\end{enumerate}
 \end{examples}
 
-%We give only a sketch proof: you should try to formalize these arguments as much as you can.
 
 \begin{proof}
-\begin{enumerate}
-	\item This is Example \ref*{ex:moreeasylimits}.\ref{ex:stdzero}.
-	\item The $a=0$ case is trivial. Otherwise, given $\epsilon>0$, let $N=\log_{\nm a}\epsilon$ and observe that
-	\[n>N\implies \nm{a^n}<\nm{a^N}=\nm a^N=\epsilon\]
-	\item Suppose $a\ge 1$, and let $s_n:=a^{1/n}-1$. Since $s_n>0$, the binomial theorem\footnotemark{} shows that
-	\[a=(1+s_n)^n\ge 1+ns_n\implies 0<s_n\le\frac{a-1}n\]
-	The squeeze theorem (\ref{thm:squeeze}) shows that $s_n\to 0$, whence $\lim a^{1/n}=1$.\par
-	We leave the $a<1$ case and part 4 to Exercise \ref{exs:nrootlimit}. \hfill\qedhere
-\end{enumerate}
+	\begin{enumerate}
+		\item The $a=0$ case is trivial. Otherwise, given $\epsilon>0$, let $N=\log_{\nm a}\epsilon$, then
+		\[
+			n>N\implies \nm{a^n}<\nm{a^N}=\nm a^N=\epsilon
+		\]
+		\item Suppose $a\ge 1$ and let $s_n=a^{1/n}-1$. Since $s_n>0$, the binomial theorem\footnotemark{} shows that
+		\[
+			a=(1+s_n)^n\ge 1+ns_n\implies 0<s_n\le\frac{a-1}n
+		\]
+		The squeeze theorem shows that $\lim s_n=0$, whence $\lim a^{1/n}=1$.\par
+		The $a<1$ case and part 3 are in Exercise \ref{exs:nrootlimit}.\qedhere
+	\end{enumerate}
 \end{proof}
 
-\vspace{-10pt}
 
-\footnotetext{$(1+x)^n=\sum\limits_{k=0}^n\binom nk x^k=1+nx+\frac{n(n-1)}2x^2 + \frac{n(n-1)(n-2)}{2\cdot 3}x^3+\cdots +x^n$.}
-
-
+\footnotetext{%
+	$(1+x)^n=\sum\limits_{k=0}^n\binom nk x^k=1+nx+\frac{n(n-1)}2x^2 + \frac{n(n-1)(n-2)}{2\cdot 3}x^3+\cdots +x^n$.%
+}
 
 
 \goodbreak
@@ -745,45 +759,61 @@ With a few simple general examples, the limit laws allow us to rapidly compute t
 
 \boldsubsubsection{Divergence to $\pm\infty$ and the `divergence laws'}
 
-We now consider unbounded sequences and provide a positive definition of a type of divergence.
+We consider unbounded sequences and provide a positive definition of a type of divergence.
 
 \begin{defn}{}{diverge}
 	We say that $(s_n)$ \emph{diverges to $\infty$} if,
-	\[\forall M>0,\ \exists N\text{ such that }n>N\implies s_n>M\]
-	We write $s_n\to\infty$ or $\lim s_n=\infty$. The definition for $s_n\to-\infty$ is similar.\smallbreak
-	If $(s_n)$ neither converges nor diverges to $\pm\infty$, we say that it \emph{diverges by oscillation}.\footnotemark
+	\[
+		\forall M>0,\ \exists N\text{ such that }n>N\implies s_n>M
+	\]
+	We write $\lim s_n=\infty$, or $s_n\to\infty$, and say that $s_n$ `tends to' $\infty$. The definition for $s_n\to-\infty$ is similar.\smallbreak
+	If $(s_n)$ neither converges nor diverges to $\pm\infty$, we say that it \emph{diverges by oscillation}: you likely wrote $\lim s_n=\text{DNE}$ (``does not exist'') in elementary calculus.
 \end{defn}
 
-\footnotetext{In such cases $\lim s_n$ is meaningless; you likely wrote $\lim s_n=\text{DNE}$ (``does not exist'') in elementary calculus.}
 
-Consider how $M$ is trying to describe ``closeness'' to infinity similarly to how $\epsilon$ measures closeness to $s$ in the original definition of limit (\ref{defn:limit}). 
+Consider how $M$ describes ``closeness'' to infinity analogously to how $\epsilon$ measures closeness to $s$ in the original definition of limit (\ref{defn:limit}). 
 
 \begin{examples}{}{}
-	As with convergence proofs, it is a good idea to try some scratch work first!
+	As with convergence arguments, some scratch work might be helpful.
 	\begin{enumerate}
 	  \item We show that $\lim (n^2+4n)=\infty$.\par
 	  Let $M>0$ be given, and let $N=\sqrt M$. Then
-		\[n>N\implies n^2+4n>n^2>N^2=M\]
+		\[
+			n>N\implies n^2+4n>n^2>N^2=M
+		\]
 	
-		\item Prove that $s_n=n^5\textcolor{red}{-n^4-2n}+1\to\infty$.\par
+		\item We prove that $s_n=n^5\textcolor{red}{-n^4-2n}+1$ diverges to $\infty$.\par
 		The \textcolor{red}{negative terms} cause some trouble, though our solution should be familiar from previous calculations:  
-		\[s_n>\frac 12n^5\iff n^5>2(n^4+2n-1)\iff n>2+\frac 4{n^3}-\frac 1{n^4}\]
+		\[
+			s_n>\frac 12n^5\iff n^5>2(n^4+2n-1)\iff n>2+\frac 4{n^3}-\frac 1{n^4}
+		\]
 		Certainly this holds if $n>6$. We can now complete the proof.\par
-		Let $M>0$ be given, and let $N=\max\{6,\sqrt[5]{2M}\}$. Then
-		\[n>N\implies s_n>\frac 12n^5 >\frac 12(2M)=M\]
+		Let $M>0$ be given, and let $N=\max(6,\sqrt[5]{2M})$. Then
+		\[
+			n>N\implies s_n>\frac 12n^5 >\frac 12(2M)=M
+		\]
 		
-		\item Prove that the sequence defined by $s_n=n^2-n^3$ diverges to $-\infty$.\par
+		\item We prove that $s_n=n^2-n^3$ diverges to $-\infty$.\par
 		First observe that
-		\[s_n=n^2(1-n)<-\frac 12n^3\iff 1-n<-\frac 12n\iff n\ge 2\]
-		Now let $M>0$ be given,\footnotemark{} and define $N=\max\{2,\sqrt[3]{2M}\}$. Then
-		\[n>N\implies n>2\implies s_n<-\frac 12n^3<-\frac 12N^3\le -M\]
+		\[
+			s_n=n^2(1-n)<-\frac 12n^3\iff 1-n<-\frac 12n\iff n\ge 2
+		\]
+		Now let $M>0$ be given,\footnotemark{} and define $N=\max(2,\sqrt[3]{2M})$. Then
+		\[
+			n>N\implies n>2\implies s_n<-\frac 12n^3<-\frac 12N^3\le -M
+		\]
 	\end{enumerate}
 \end{examples}
 
-\vspace{-13pt}
 
-\footnotetext{The notion that $s_n\to-\infty$ can be phrased in multiple ways: some prefer
-		\[\forall m<0,\ \exists N\text{ such that }n>N\implies s_n<m \tag{in our argument $M=-m$}\]
+\vspace{-15pt}
+
+\footnotetext{%
+	You may prefer to phrase $\lim s_n=-\infty$ instead as
+	\[
+		\forall m<0,\ \exists N\text{ such that }n>N\implies s_n<m \tag{in our argument $M=-m$}
+	\]%
+	%\vspace{-25pt}
 }
 
 \goodbreak
@@ -797,51 +827,62 @@ Several of the limit laws can be adapted to sequences which diverge to $\pm\inft
 		\item\label{thm:divlaws1} If $t_n\ge s_n$ for all (large) $n$, then $\lim t_n=\infty$
 		\item If $\lim t_n$ exists and is \emph{finite}, then $\lim s_n+t_n=\infty$.
 		\item If $\lim t_n>0$ then $\lim s_nt_n=\infty$.
-		\item $\smash[b]{\lim\dfrac 1{s_n}=0}$
-		\item If $\lim t_n=0$ and $t_n>0$ for all (large) $n$, then $\lim\dfrac 1{t_n}=\infty$
+		\item $\lim\frac 1{s_n}=0$
+		\item If $\lim t_n=0$ and $t_n>0$ for all (large) $n$, then $\lim\frac 1{t_n}=\infty$
 	\end{enumerate}
-	Similar statements when $s_n\to-\infty$ should be clear.
+	Similar statements when $\lim s_n=-\infty$ should be clear.
 \end{thm}
 
 \begin{proof}
-	We prove two of the results: try the rest yourself.
+	We prove two parts; try the rest yourself.
 	\begin{enumerate}
 		\item[2.] Since $(t_n)$ converges, it is bounded (below): $\exists m$ such that $\forall n,\ t_n\ge m$. Let $M$ be given. Since $\lim s_n=\infty$, $\exists N$ such that
-		\begin{align*}
-		n>N&\implies s_n>M-m \implies s_n+t_n>M-m+m=M
-		\end{align*}
+		\[
+			n>N\implies s_n>M-m \implies s_n+t_n>M-m+m=M
+		\]
 		\item[4.] Let $\epsilon>0$ be given, and let $M=\frac 1\epsilon$. Then $\exists N$ such that
-		\[n>N\implies s_n>M=\frac 1\epsilon\implies \frac 1{s_n}<\epsilon\tag*{\qedhere}\]
+		\[
+			n>N\implies s_n>M=\frac 1\epsilon\implies \frac 1{s_n}<\epsilon\tag*{\qedhere}
+		\]
 	\end{enumerate}
 \end{proof}
 
-\boldinline{Rational Sequences}
 
-We can now find the limit of any rational sequence: $\frac{p_n}{q_n}$ where $(p_n)$, $(q_n)$ are polynomials in $n$.
+\boldsubsubsection{Rational Sequences}
+
+We can now describe the limit of any sequence $\frac{p_n}{q_n}$ where $(p_n)$, $(q_n)$ are polynomials in $n$.
 
 \begin{example}{}{}
 	By applying Theorem \ref{thm:divlaws} (part 3) to
-	\[s_n:=3n+4n^{-2}\to\infty\quad \text{and}\quad t_n=\frac 1{2-n^{-2}}\to\frac 12\]
+	\[
+		s_n:=3n+4n^{-2}\to\infty\quad \text{and}\quad t_n=\frac 1{2-n^{-2}}\to\frac 12
+	\]
 	we see that
-	\[\lim\frac{3n^3+4}{2n^2-1}=\lim\frac{3n+4n^{-2}}{2-n^{-2}}=\lim(3n+4n^{-2})\cdot\lim \frac 1{2-n^{-2}} =\infty\]
+	\[
+		\lim\frac{3n^3+4}{2n^2-1}=\lim\frac{3n+4n^{-2}}{2-n^{-2}}=\lim(3n+4n^{-2})\cdot\lim \frac 1{2-n^{-2}} =\infty
+	\]
 \end{example}
 
-Indeed, you should be able to confirm the familiar result from elementary calculus:
+More generally, you should be able to confirm a familiar result from elementary calculus:
 
 \begin{cor}{}{}
 	If $p_n,q_n$ are polynomials in $n$ with leading coefficients $p,q$ respectively then
-	\[\lim\frac{p_n}{q_n}=\begin{cases}
-	0&\text{if $\operatorname{deg}(p_n)<\operatorname{deg}(q_n)$}\\
-	\dfrac pq&\text{if $\operatorname{deg}(p_n)=\operatorname{deg}(q_n)$}\\
-	\sgn(\frac pq)\infty&\text{if $\operatorname{deg}(p_n)>\operatorname{deg}(q_n)$}
-	\end{cases}\]
+	\[
+		\lim\frac{p_n}{q_n}=
+		\begin{cases}
+			0&\text{if $\operatorname{deg}(p_n)<\operatorname{deg}(q_n)$}\\
+			\dfrac pq&\text{if $\operatorname{deg}(p_n)=\operatorname{deg}(q_n)$}\\
+			\sgn(\frac pq)\infty&\text{if $\operatorname{deg}(p_n)>\operatorname{deg}(q_n)$}
+		\end{cases}
+	\]
 \end{cor}
+
 
 \goodbreak
 
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad ????}
+	\emph{Key concepts:\quad Divergence to $\pm\infty$,\qquad Limit/divergence laws,\qquad $\lim a^{1/n}=1=\lim n^{1/n}$}
  
 	\begin{enumerate}
 		\item%[2.]
@@ -850,8 +891,15 @@ Indeed, you should be able to confirm the familiar result from elementary calcul
 	    \item $\lim(x_n+y_n)$\qquad (b) \ $\lim\frac{3y_n-x_n}{y_n^2}$ \qquad (c) \ $\lim \sqrt{x_ny_n+4}$
 	  \end{enumerate}
 	  
+	  		
+		
+ 		\item Suppose $s\in\R$. Prove that $\lim s_n=s\Longrightarrow \lim s_n^3=s^3$ by mimicking Example \ref*{ex:basiclimitlaws}.\ref{ex:basiclimitlaws2}. %FROM PREVOUS SEC\begin{enumerate}
+% 			\item If $\nm{s_n-s}<1$, explain why $\nm{s_n^2+ss_n+s^2}< 1+3\nm s+3\nm s^2$
+% 			\item Suppose $s_n\to s$. Prove that $s_n^3\to s^3$.  
+% 		\end{enumerate}
 	  
-	  \item Consider $s_n=(100n)^{\frac{100}n}$. Describe $s_1$ (1 followed by how many zeros?). Repeat for $s_{10}$. Now compute the limit $\lim s_n$.
+	  
+	  \item Let $s_n=(100n)^{\frac{100}n}$. Describe $s_1$ and $s_{10}$ (1 followed by how many zeros?). Now compute $\lim s_n$.
 	  
 	  
 	  \item%[4.]
@@ -862,7 +910,7 @@ Indeed, you should be able to confirm the familiar result from elementary calcul
 	  \end{enumerate}
 	  
 	  
-	  \item Prove the following:
+	  \item Prove:
 	  \begin{enumerate}
 	    \item $\lim(n^3-98n)=\infty$\qquad\qquad (b) \ $\lim \bigl(\sqrt n-n+\frac 4n\bigr)=-\infty$
 	  \end{enumerate}
@@ -878,40 +926,45 @@ Indeed, you should be able to confirm the familiar result from elementary calcul
 	
 		\item\label{exs:limitlawsfinish} We prove parts 3 and 4 of the limit laws (Theorem \ref{thm:limitbasic}). Assume $\lim s_n= s$ and $\lim t_n=t$.
 		\begin{enumerate}
-		  \item Suppose $t\neq 0$. Explain why $\exists N_1$ such that $n>N_1\implies \nm{t_n}>\frac 12\nm t$.
-		  \item Let $\epsilon>0$ be given. Since $t_n\to t$, $\exists N_2$ such that $n>N_2\implies \nm{t_n-t}<\frac 12\nm t^2\epsilon$. Combine $N_1$ and $N_2$ to provide a proof that $\lim\frac 1{t_n}=\frac 1t$.
+		  \item Suppose $t\neq 0$. Explain why $\exists N_1$ such that $n>N_1\Longrightarrow \nm{t_n}>\frac 12\nm t$.
+		  \item Let $\epsilon>0$ be given. Since $\lim t_n=t$, \ $\exists N_2$ such that $n>N_2\Longrightarrow \nm{t_n-t}<\frac 12\nm t^2\epsilon$. Combine $N_1$ and $N_2$ to prove that $\lim\frac 1{t_n}=\frac 1t$.
 		  \item Explain how to conclude part 3: $\lim\frac{s_n}{t_n}=\frac st$.
-		  \item Use the following inequality (valid when $s_n,s>0$) to help construct a proof for part 4
-			\[\nm{s_n^{1/k}-s^{1/k}}=\frac{\nm{s_n-s}}{{s_n^{\frac{k-1}k}+s_n^{\frac{k-2}k}s^{\frac 1k}+\cdots +s^{\frac{k-1}k}}}\le \frac{\nm{s_n-s}}{s^{\frac{k-1}k}}\]
+		  \item Use the following inequality (valid when $s_n,s>0$) to construct a proof for part 4
+			\[
+				\nm{s_n^{1/k}-s^{1/k}}
+				=\frac{\nm{s_n-s}}{{s_n^{\frac{k-1}k}+s_n^{\frac{k-2}k}s^{\frac 1k}+\cdots +s^{\frac{k-1}k}}}
+				\le \frac{\nm{s_n-s}}{s^{\frac{k-1}k}}
+			\]
 	 	\end{enumerate}
 	
 	
-			\item\label{exs:nrootlimit}
-			We finish the proof of Theorem \ref{thm:limlaw2}.
-			\begin{enumerate}
-			  \item Suppose $0<a<1$. Prove that $\lim a^{1/n}=1$.\par
-				(\emph{Hint: consider $b=\frac 1a$\ldots})
-				\item Let $s_n=n^{1/n}-1$. Apply the binomial theorem to $n=(1+s_n)^n$ to prove that $s_n<\sqrt{\frac 2{n-1}}$.
-				Hence conclude that $\lim n^{1/n}=1$.
-			\end{enumerate}
+		\item\label{exs:nrootlimit}
+		We finish the proof of Theorem \ref{thm:limlaw2}.
+		\begin{enumerate}
+			\item Suppose $0<a<1$. By considering $b=\frac 1a$, prove that $\lim a^{1/n}=1$.
+			\item Let $s_n=n^{1/n}-1$. Apply the binomial theorem to $n=(1+s_n)^n$ to prove that $s_n<\sqrt{\frac 2{n-1}}$.
+			Hence conclude that $\lim n^{1/n}=1$.
+		\end{enumerate}
 			
 			
-			\item Prove the remaining parts of Theorem \ref{thm:divlaws}.
+		\item Prove the remaining parts of Theorem \ref{thm:divlaws}.
 			
 			
-			\item%[12.]
-	  	Assume $s_n\neq 0$ for all $n$, and that the limit $L=\lim\smash[b]{\nm{\frac{s_{n+1}}{s_n}}}$ exists.
-	  	\begin{enumerate}
-		  	\item Show that if $L<1$, then $\lim s_n=0$.\par
-		  	(\emph{Hint: if $L<a<1$, obtain $N$ so that $n>N\implies\nm{s_n}<a^{n-N}\nm{s_N}$})
-		  	\item Show that if $L>1$, then $\lim\nm{s_n}=+\infty$.\par
-		  	(\emph{Hint: apply (a) to the sequence $t_n=\frac 1{\nm{s_n}}$})
-		  	\item%[14]
-		  	Let $p>0$ and $a\in\R$ be given. How does $\lim\limits_{n\to\infty}\frac{a^n}{n^p}$ depend on the value of $a$?
+		\item%[12.]
+	  Assume $s_n\neq 0$ for all $n$ and that the limit $L=\lim\smash[b]{\nm{\frac{s_{n+1}}{s_n}}}$ exists.
+	  \begin{enumerate}
+		  \item Show that if $L<1$, then $\lim s_n=0$.\par
+		  (\emph{Hint: if $L<a<1$, obtain $N$ so that $n>N\implies\nm{s_n}<a^{n-N}\nm{s_N}$})
+		  \item Show that if $L>1$, then $\lim\nm{s_n}=+\infty$.\par
+		  (\emph{Hint: apply (a) to the sequence $t_n=\frac 1{\nm{s_n}}$})
 	  \end{enumerate}
+	  
+		\item%[14]
+		Let $p>0$ and $a\in\R$ be given. How does $\lim\limits_{n\to\infty}\frac{a^n}{n^p}$ depend on the value of $a$?
 
 	\end{enumerate}
 \end{exercises}
+
 
 \clearpage
 
@@ -919,10 +972,13 @@ Indeed, you should be able to confirm the familiar result from elementary calcul
 
 \subsection{Monotone and Cauchy Sequences}\label{sec:monocauchy}
 
-The definition of limit (Definition \ref{defn:limit}) exhibits a major weakness; to demonstrate the convergence of a sequence, we must already know its limit! What we'd like is a method for determining whether a sequence converges \emph{without} first guessing a suitable limit.\footnote{This gets at the typical role of sequences in analysis: to demonstrate the existence of and define a new object (the limit) and, more broadly, to transfer useful properties from the sequence to the limit. For instance, if $(f_n)$ is a sequence of differentiable functions, we'd like to know if $\lim f_n(x)$ exists and is itself differentiable with derivative $\lim f_n'(x)$: discussions of this ilk will dominate Math 140B.} In this section we consider two important classes of sequence for which this can be done.
+The definition of limit (Definition \ref{defn:limit}) has a major weakness: to demonstrate the convergence of a sequence we must already know its limit! What we'd like is a method for determining whether a sequence converges \emph{without} first guessing a suitable limit.\footnote{%
+	This gets at a typical application of sequences: given a sequence whose elements have a useful property, one demonstrates the existence of a new object (the limit) to which (hopefully!) the useful property transfers. For instance, if $(f_n)$ is a sequence of differentiable functions, we'd like to know if $\lim f_n(x)$ exists and is itself differentiable with derivative $\lim f_n'(x)$. Discussions of this ilk dominate Math 140B.%
+}
+In this section we consider two important classes of sequence for which this can be done.
 
 \begin{defn}{}{}
-	A sequence $(s_n)$ is:
+	A sequence $(s_n)$ is said to be:
 	\begin{itemize}
 	  \item \emph{Monotone-up\footnotemark} if $s_{n+1}\ge s_n$ for all $n$.
 		\item \emph{Monotone-down} if $s_{n+1}\le s_n$ for all $n$.
@@ -930,11 +986,15 @@ The definition of limit (Definition \ref{defn:limit}) exhibits a major weakness;
 	\end{itemize}
 \end{defn}
 
-\footnotetext{Some authors describe such as sequence as either \emph{non-decreasing} or \emph{increasing.} We prefer \emph{monotone-up/down} since this directly describes the direction of any potential movement in the sequence and prevents confusion over whether the inequality is strict. A sequence with $s_{n+1}>s_n$ may be described as \emph{strictly increasing} or \emph{strictly monotone-up.}}
+\footnotetext{%
+	Some authors describe a monotone-up sequence as either \emph{non-decreasing} or \emph{increasing.} We prefer \emph{monotone-up} since it directly describes the direction of any possible movement in the sequence and prevents confusion over whether the inequality is strict. If necessary, a sequence with $s_{n+1}>s_n$ may be described as \emph{strictly increasing} or \emph{strictly monotone-up.}%
+}
 
 \begin{examples}{}{}
 	\exstart The sequence with $n\th$ term $s_n=\frac 7n+4$ is (strictly) monotone-down:
-	\[s_{n+1}=\frac 7{n+1}<\frac 7n=s_n\]
+	\[
+		s_{n+1}=\frac 7{n+1}<\frac 7n=s_n
+	\]
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item A constant sequence $(s_n)=(s,s,s,s,\ldots)$ is \emph{both} monotone-up and monotone-down.
 	\end{enumerate}
@@ -948,16 +1008,20 @@ The definition of limit (Definition \ref{defn:limit}) exhibits a major weakness;
 	  \item If $(s_n)$ is bounded below and monotone-down, then $\lim s_n$ exists and equals $\inf\{s_n\}$.
 	\end{itemize}
 	\tcblower
-	\flushright\includegraphics{monotone}
+	\flushright\includegraphics[scale=0.95]{monotone}
 \end{thm}
 
-In fact the conclusion $\lim s_n=\sup\{s_n\}$ holds for all monotone-up sequences: if unbounded above, then the result is $\infty$ (see Exercise \ref{exs:unbddmonotone}). The statement is $\lim s_n=\inf\{s_n\}$ for monotone-down sequences.
+In fact the conclusion $\lim s_n=\sup\{s_n\}$ holds for all monotone-up sequences: if unbounded above, then the result is $\infty$ (Exercise \ref{exs:unbddmonotone}).
 
 
 \begin{proof}
 	If $(s_n)$ is bounded above, then $s:=\sup\{s_n\}$ exists by the completeness axiom ($s$ is finite!).\par
-	Let $\epsilon>0$ be given. By Lemma \ref{lemm:contrasup}, there exists some $s_N>s-\epsilon$. Since $(s_n)$ is monotone-up, we have
-	\[n>N\implies s_n\ge s_N>s-\epsilon\implies 0\le s-s_n<\epsilon\implies \nm{s-s_n}<\epsilon\]
+	Let $\epsilon>0$ be given. By Lemma \ref{lemm:contrasup}, there exists some $s_N>s-\epsilon$. Since $(s_n)$ is monotone-up,
+	\[
+		n>N\implies s_n\ge s_N>s-\epsilon
+		\implies 0\le s-s_n<\epsilon
+		\implies \nm{s-s_n}<\epsilon
+	\]
 	The monotone-down case is similar.
 \end{proof}
 
@@ -965,41 +1029,56 @@ In fact the conclusion $\lim s_n=\sup\{s_n\}$ holds for all monotone-up sequence
 
 \begin{examples}{}{}
 	\exstart Define $(s_n)$ via $s_n=1$ and $s_{n+1}=\frac 15(s_n+8)$:
-	\[(s_n)=\bigl(1,1.8,1.96,1.992,1.9984,1.99968,\ldots\bigr)\]
-	The sequence certainly appears to be monotone-up and converging to 2. We prove this: 
+	\[
+		(s_n)=\bigl(1,1.8,1.96,1.992,1.9984,1.99968,\ldots\bigr)
+	\]
+	This sequence certainly appears to be monotone-up and converging to 2. Here is a proof: 
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item[]\begin{description}
     	\item[\normalfont\emph{Bounded above}:] $s_n<2\implies s_{n+1}<\frac 15\left[2+8\right]=2$. By induction, $(s_n)$ is bounded above by 2.
     	\item[\normalfont\emph{Monotone-up}:] $s_{n+1}-s_n=\frac 45\left[2-s_n\right]>0$ since $s_n<2$.  
     	\item[\normalfont\emph{Convergence}:] By monotone convergence, $s=\lim s_n$ exists. Now use the limit laws to find $s$:
-  \[s=\lim s_{n+1}=\frac 15\left(\lim s_n+8\right)=\frac 15(s+8)\implies s=2\] 
+  		\[
+  			s=\lim s_{n+1}=\frac 15\left(\lim s_n+8\right)=\frac 15(s+8)\implies s=2
+  		\] 
   	\end{description}
   
   	\item (Example \ref*{ex:methodmeanex}.\ref{ex:methodmeanex2}, cont.)\lstsp Let $s_1=2$ and $s_{n+1}=\frac 12\bigl(s_n+\frac 2{s_n}\bigr)$.
   	\begin{description}
 	    \item[\normalfont\emph{Bounded below}:] The sequence is plainly always positive and thus bounded below by zero.
 	    \item[\normalfont\emph{Monotone-down}:] We first obtain an improved lower bound:
-	    \[s_{n+1}^2=\frac 14\left(s_n+\frac 2{s_n}\right)^2=2+\frac 14\left(s_n-\frac 2{s_n}\right)^2\ge 2\]
+	    \[
+	    	s_{n+1}^2=\frac 14\left(s_n+\frac 2{s_n}\right)^2=2+\frac 14\left(s_n-\frac 2{s_n}\right)^2\ge 2
+	    \]
 	    shows\footnotemark{} that $s_n^2\ge 2$ for all $n$. It follows that
-	    \[\frac{s_{n+1}}{s_n}=\frac 12\left(1+\frac 2{s_n^2}\right)\le 1\implies s_{n+1}\le s_n\]
+	    \[
+	    	\frac{s_{n+1}}{s_n}=\frac 12\left(1+\frac 2{s_n^2}\right)\le 1\implies s_{n+1}\le s_n
+	    \]
 	    \item[\normalfont\emph{Convergence}:] By monotone convergence, $s=\lim s_n$ exists. Example \ref*{ex:methodmeanex}.\ref{ex:methodmeanex2} provides the limit:
-	  	\[s=\frac 12\left(s+\frac 2s\right)\implies s=\sqrt 2\] 
+	  	\[
+	  		s=\frac 12\left(s+\frac 2s\right)\implies s=\sqrt 2
+	  	\] 
   	\end{description}
   	This shows the necessity of completeness: $(s_n)$ is a monotone, bounded sequence of \emph{rational} numbers, but its limit is \emph{irrational.}
   	
-  	\item A \emph{decimal} $0.d_1d_2d_3\ldots$ may be viewed as the limit of a monotone-up sequence of \emph{rational numbers}:
-  	\[0.d_1d_2d_3\ldots =\lim_{n\to\infty}\sum_{k=0}^n \frac{d_k}{10^k}\]
-  	This is bounded above by 1 and so converges. Compare this with Example \ref{ex:qsqqrt2nomax}.
+  	\item A \emph{decimal number} $d_0.d_1d_2d_3\ldots$ is the limit of a monotone-up sequence of \emph{rational numbers}:
+  	\[
+  		d_0.d_1d_2d_3\ldots =d_0+\lim_{n\to\infty}\sum_{k=1}^n \frac{d_k}{10^k}
+  	\]
+  	This is bounded above (by $d_0+1\in\Z$) and so converges.
   
     \item The sequence with $s_n=\left(1+\frac 1n\right)^n$ is particularly famous. In Exercise \ref{exs:edefn} we show that $(s_n)$ is monotone-up and bounded above. The limit provides, arguably, the oldest definition of $e$:
-  	\[e:=\lim\left(1+\frac 1n\right)^n\]
-  	%[(n,((1+1/n)^n).n()) for n in range(1,100)]} in Sage
+  	\[
+  		e:=\lim\left(1+\frac 1n\right)^n
+  	\]
 	\end{enumerate}
 \end{examples}
 
 \vspace{-8pt}
 
-\footnotetext{In case you've seen it before, this is the famous AM--GM inequality $\frac{x+y}2\ge \sqrt{xy}$ with $x=s_n$ and $y=\frac 2{s_n}$.}
+\footnotetext{%
+	This is the famous AM--GM inequality $\frac{x+y}2\ge \sqrt{xy}$ with $x=s_n$ and $y=\frac 2{s_n}$.
+}
 
 \goodbreak
 
@@ -1007,38 +1086,48 @@ In fact the conclusion $\lim s_n=\sup\{s_n\}$ holds for all monotone-up sequence
 
 \boldsubsubsection{Limits Superior and Inferior}
 
-One interpretation of $\lim s_n$ is that it approximately describes $s_n$ for large $n$. Even when a sequence does not have a limit, it remains useful to be able to describe its long-term behavior.
-
+One interpretation of $\lim s_n$ is that it approximately describes $s_n$ for large $n$. Even when a sequence does not have a limit, it is useful to be able to describe its long-term behavior.
 
 \begin{defn}{}{}
 	Let $(s_n)$ be a sequence and define two related sequences $(v_N)$ and $(u_N)$:\par
-	\begin{minipage}[t]{0.6\linewidth}\vspace{-12pt}
-	\[\textcolor{blue}{v_N:=\sup\{s_n:n>N\}},\qquad \textcolor{Green}{u_N:=\inf\{s_n:n>N\}}\]
-	\begin{enumerate}
-	  \item The \emph{limit superior} of $(s_n)$ is
-	  \[\limsup s_n=\begin{cases}
-	  \lim\limits_{N\to\infty}\!v_N\!\!&\text{if $(s_n)$ bounded above}\\
-	  \infty&\text{if $(s_n)$ unbounded above}
-	  \end{cases}\]
-	  \item The \emph{limit inferior} of $(s_n)$ is
-	  \[\liminf s_n=\begin{cases}
-	  \lim\limits_{N\to\infty}\!u_N\!\!&\text{if $(s_n)$ bounded below}\\
-	  -\infty&\text{if $(s_n)$ unbounded below}
-	  \end{cases}\]
-	\end{enumerate}
+	\begin{minipage}[t]{0.6\linewidth}\vspace{-14pt}
+		\[
+			\textcolor{blue}{v_N:=\sup\{s_n:n>N\}},\qquad \textcolor{Green}{u_N:=\inf\{s_n:n>N\}}
+		\]
+		\begin{enumerate}\itemsep0pt
+		  \item The \emph{limit superior} of $(s_n)$ is
+		  \[
+		  	\limsup s_n=
+		  	\begin{cases}
+		  		\lim\limits_{N\to\infty}\!v_N\!\!&\text{if $(s_n)$ bounded above}\\
+		  		\infty&\text{if $(s_n)$ unbounded above}
+		  	\end{cases}
+		  \]
+		  \item The \emph{limit inferior} of $(s_n)$ is
+		  \[
+		  	\liminf s_n=
+		  	\begin{cases}
+		  		\lim\limits_{N\to\infty}\!u_N\!\!&\text{if $(s_n)$ bounded below}\\
+		  		-\infty&\text{if $(s_n)$ unbounded below}
+		  	\end{cases}
+		  \]
+		\end{enumerate}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[t]{0.39\linewidth}\vspace{-3pt}
-		\hfill\includegraphics[scale=0.89]{limsup5}
+	\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
+		\hfill\includegraphics[scale=0.95]{limsup5}
 	\end{minipage}
 \end{defn}
 
-The original sequence $\textcolor{red}{(s_n)}$ is \emph{almost} wedged between\footnote{A minor redefinition would remove the `almost,' but at the cost of making some subsequent arguments a little messier. It is still reasonable to think of $(u_N)$ and $(v_N)$ as providing a long-term envelope for the original sequence.} $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a situation reminiscent of the squeeze theorem (except $\limsup$ and $\liminf$ need not be equal). The next result summarizes the situation more formally; we omit the proof since these claims should be clear from the definition and previous results, particularly the monotone convergence theorem.
+The original sequence $\textcolor{red}{(s_n)}$ is \emph{almost} wedged between\footnote{%
+	A minor redefinition could remove the `almost' at the cost of making some subsequent arguments a little messier. It is still reasonable to think of $(u_N)$ and $(v_N)$ as providing a long-term envelope for the original sequence.%
+}
+$\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent of the squeeze theorem (though $\limsup$ and $\liminf$ need not be equal). The next result summarizes the situation more formally; we omit the proof since these claims should be clear from the definition and previous results, particularly the monotone convergence theorem.
 
 
 \begin{lemm}{}{limsupinf}
 	\exstart $(v_N)$ is monotone-down, $(u_N)$ is monotone-up, and $u_N\le s_{N+1}\le v_N$.
-	\begin{enumerate}\setcounter{enumi}{1}
+	\begin{enumerate}\itemsep2pt\setcounter{enumi}{1}
 	  \item\label{lemm:limsupinf1} $\limsup s_n$ and $\liminf s_n$ exist for any sequence (they might be infinite).
 	  \item $\liminf s_n\le\limsup s_n$.
 	\end{enumerate}
@@ -1062,12 +1151,17 @@ The original sequence $\textcolor{red}{(s_n)}$ is \emph{almost} wedged between\f
 % \end{enumerate}
 % \end{proof}
 
+
 \begin{examples}{}{limsupexs}
-	\exstart The picture shows sequences $\textcolor{red}{(s_n)}$, $\textcolor{Green}{(u_N)}$ and $\textcolor{blue}{(v_N)}$ when $s_n=6+(-1)^n\left(1+\frac 5n\right)$
+	\exstart If $s_n=\frac 1n$, then $v_N=s_{N+1}$ and $u_N=0$, whence $\limsup s_n=\liminf s_n=0$.
+	
 	\begin{enumerate}\setcounter{enumi}{1}
+	  \item The picture shows sequences $\textcolor{red}{(s_n)}$, $\textcolor{Green}{(u_N)}$ and $\textcolor{blue}{(v_N)}$ when $s_n=6+(-1)^n\left(1+\frac 5n\right)$\par
 		\begin{minipage}[t]{0.52\linewidth}\vspace{-8pt}
-			\item[]We won't compute everything precisely, but the picture suggests $\textcolor{red}{(s_n)}$ has two ``sub"sequences: the odd terms increase while the even terms decrease towards, respectively
-			\[\textcolor{Green}{\liminf s_n=5},\qquad \textcolor{blue}{\limsup s_n=7}\]
+			We won't compute everything precisely, but the picture suggests $\textcolor{red}{(s_n)}$ has two ``sub"-sequences: the odd terms increase while the even terms decrease towards, respectively
+			\[
+				\textcolor{Green}{\liminf s_n=5},\qquad \textcolor{blue}{\limsup s_n=7}
+			\]
 			Here is one value from each derived sequence:
 			\begin{gather*}
 				\textcolor{Green}{u_3}=\inf\{s_n:n>3\}=\textcolor{red}{s_5}=4\\
@@ -1076,38 +1170,43 @@ The original sequence $\textcolor{red}{(s_n)}$ is \emph{almost} wedged between\f
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.47\linewidth}\vspace{-8pt}
-			\flushright\includegraphics[scale=0.9]{limsup4}
+			\flushright\includegraphics[scale=0.95]{limsup4}
 		\end{minipage}
+
 	
-		
-		\item If $s_n=\frac 1n$, then $v_N=s_{N+1}$ and $u_N=0$ for all $N$, whence $\limsup s_n=\liminf s_n=0$.
-	
-		\item Let $s_n=(-1)^n$. This time the calculation is easy:
-		\[u_N=\inf\{s_n:n>N\}=-1\quad\text{and}\quad v_N=\sup\{s_n:n>N\}=1\]
+		\item Let $s_n=(-1)^n$. This time the calculation is easy: for any $N$,
+		\[
+			u_N=\inf\{s_n:n>N\}=-1\quad\text{and}\quad v_N=\sup\{s_n:n>N\}=1
+		\]
 		Therefore $\limsup s_n=1$ and $\liminf s_n=-1$.
 	\end{enumerate}
-	
 \end{examples}
 
 
-\begin{lemm}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.48\linewidth]{}{limbig}
+\begin{thm}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.48\linewidth]{}{limbig}
 	For any sequence $(s_n)$,
-	\[\liminf s_n=\limsup s_n \implies\lim s_n\text{ exists}\]
-	(the limit can be infinite!).\smallbreak
-	In such a case all three values are equal.
+	\[
+		\liminf s_n=\limsup s_n \iff\lim s_n\text{ exists}
+	\]
+	In such a case all three values are equal.\smallbreak
+	Note that the limits can be $\pm\infty$.
 	\tcblower
 	\hfill\includegraphics[scale=0.8]{limsup1}
-\end{lemm}
+\end{thm}
 
-In fact the converse to this is also true: we could prove it now, but it will come for free a little later\ldots
+
 
 
 \begin{proof}
-		\begin{description}
-			\item[\normalfont($s$ finite)\lstsp] Since $u_{n-1}\le s_n\le v_{n-1}$ for all $n$, the squeeze theorem tells us that $\lim s_n=s$.
-			\item[\normalfont($s=\infty$)\lstsp] Since $u_{n-1}\le s_n$ for all $n$ and $\lim u_{n-1}=\infty$, it follows (Theorem \ref*{thm:divlaws}.\ref{thm:divlaws1}) that $\lim s_n=\infty$.
-			\item[\normalfont($s=-\infty$)\lstsp] This time $s_n\le v_{n-1}\to-\infty\implies\lim s_n=-\infty$.\qedhere
-		\end{description}
+	\begin{description}
+		\item[$(\Rightarrow)$] Everything follows by applying the squeeze theorem and its divergent analogues (Theorem \ref*{thm:divlaws}.\ref{thm:divlaws1}) to the inequalities
+		\[
+			u_{n-1}\le s_n\le v_{n-1}
+		\]
+		\item[$(\Leftarrow)$] We could prove this now, but it will come almost for free a little later\ldots\qedhere
+	\end{description}
+
+		
 
 % 	\begin{itemize}
 % 	  \item[$(\Rightarrow)$] Suppose $\limsup s_n=\liminf s_n=s$. There are three cases.
@@ -1144,34 +1243,38 @@ In fact the converse to this is also true: we could prove it now, but it will co
 % 	\end{itemize}
 \end{proof}
 
-\goodbreak
-
 
 
 \boldsubsubsection{Cauchy Sequences}
 
-We now come to a class of sequences whose analogues will dominate your study of analysis.
+We now come to perhaps the most important class of sequences, whose analogues will dominate your future studies.
 
 \begin{defn}{}{cauchy}
-A sequence $(s_n)$ is \emph{Cauchy\footnotemark} if
-\[\forall\epsilon>0,\ \exists N\ \text{such that}\  m,n>N\implies\nm{s_n-s_m}<\epsilon\]
+	A sequence $(s_n)$ is \emph{Cauchy\footnotemark} if
+	\[
+		\forall\epsilon>0,\ \exists N\ \text{such that}\  m,n>N\implies\nm{s_n-s_m}<\epsilon
+	\]
 \end{defn}
 
-\footnotetext{Augustin-Louis Cauchy (1789--1857) was a French mathematician, responsible (in part) for the $\epsilon$-$N$ definition of limit.}
+\footnotetext{%
+	Augustin-Louis Cauchy (1789--1857) was a French mathematician, responsible (in part) for the $\epsilon$-$N$ definition of limit.%
+}
 
 A sequence is Cauchy when terms in the tails of the sequence are constrained to stay close to one another. As we'll see shortly, this will provide an alternative way to detect and describe \emph{convergence.}
 
 
 \begin{examples}{}{cauchy}
 	\exstart Let $s_n=\frac 1n$. Let $\epsilon>0$ be given and let $N=\frac 1\epsilon$. Then\footnotemark
-	\[m>n>N\implies \nm{s_m-s_n}=\frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon\]
+	\[
+		m>n>N\implies \nm{s_m-s_n}=\frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon
+	\]
 	Thus $(s_n)$ is Cauchy. A similar argument works for any $s_n=\frac 1{n^k}$ for positive $k$.
 	  
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item\label{ex:cauchy3} Suppose $s_1=5$ and $s_{n+1}=s_n+\frac{1}{n(n+1)}$. As before, let $\epsilon>0$ be given and let $N=\frac 1\epsilon$. Then,
 	  \begin{align*}
-	  &\nm{s_{n+1}-s_n}=\frac 1{n(n+1)}=\frac 1n-\frac 1{n+1}\\
-	  \implies &\nm{s_m-s_n}\overset{\triangle}{\le} \nm{s_{n+1}-s_n}+\cdots+\nm{s_m-s_{m-1}} = \frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon
+		  &\nm{s_{n+1}-s_n}=\frac 1{n(n+1)}=\frac 1n-\frac 1{n+1}\\
+		  \implies &\nm{s_m-s_n}\overset{\triangle}{\le} \nm{s_{n+1}-s_n}+\cdots+\nm{s_m-s_{m-1}} = \frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon
 	  \end{align*}
 	  Again we have a Cauchy sequence.
 	  
@@ -1196,8 +1299,11 @@ A sequence is Cauchy when terms in the tails of the sequence are constrained to 
 	  	\hfill\includegraphics{cauchyex}
 	  \end{minipage}\par\vspace{-8pt}
   	\begin{align*}
-  		m>n\implies \nm{s_m-s_n}&\overset{\smash{\triangle}}{\le} \nm{s_{n+1}-s_n}+\cdots+\nm{s_m-s_{m-1}} =\sum_{k=n}^{m-1}\nm{s_{k+1}-s_k}\\
-  		&\le \sum_{k=n}^{m-1}2^{-k} =\frac{2^{-n}-2^{-m}}{1-2^{-1}}<2^{1-n}
+  		m>n\implies \nm{s_m-s_n}
+  		&\overset{\smash{\triangle}}{\le} \nm{s_{n+1}-s_n}+\cdots+\nm{s_m-s_{m-1}} 
+  		=\sum_{k=n}^{m-1}\nm{s_{k+1}-s_k}\\
+  		&\le \sum_{k=n}^{m-1}2^{-k} 
+  		=\frac{2^{-n}-2^{-m}}{1-2^{-1}}<2^{1-n}
   	\end{align*}
   	where we used the familiar geometric sum formula from calculus: $\smash{\sum\limits_{k=a}^{b-1} r^k=\frac{r^a-r^{b}}{1-r}}$.\par
   	Suppose $\epsilon>0$ is given, and let $N=1-\log_2\epsilon =\log_2\frac 2\epsilon$. Then
@@ -1208,14 +1314,14 @@ A sequence is Cauchy when terms in the tails of the sequence are constrained to 
 	\end{enumerate}
 \end{examples}
 
-\footnotetext{Since $m,n$ are arbitrary, WLOG we may assume $m>n$; equality is never interesting in these situations. This assumption is very common and we'll use it repeatedly without comment.}
+\footnotetext{%
+	Since $m,n$ are arbitrary, WLOG we may assume $m>n$; equality is never interesting in these situations. This assumption is very common and we'll use it repeatedly without comment.%
+}
 
-The picture in the last example illustrates the essential point regarding Cauchy sequences: $(s_n)$ appears very much to converge\ldots
+The last picture illustrates the essential point of Cauchy sequences: $(s_n)$ appears to converge\ldots
 
 
 %Another example: $s_{n+1}=s_n+\frac{\sin n}{n(n+1)}$ has $\nm{s_{n+1}-s_n}=\frac 1n-\frac 1{n+1}\implies \nm{s_m-s_n}\le \frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon$
-
-\goodbreak
 
 
 
@@ -1225,92 +1331,91 @@ The picture in the last example illustrates the essential point regarding Cauchy
 
 \begin{proof}
 	\begin{description}
-		\item[$(\Rightarrow)$] Suppose $\lim s_n=s$ (finite). Given $\epsilon>0$ we may choose $N$ such that
+		\item[$(\Rightarrow)$] Suppose $\lim s_n=s$ (is finite). Given $\epsilon>0$, we may choose $N$ such that
 		\begin{align*}
-			m,n>N&\implies \nm{s_n-s}<\frac\epsilon 2\quad\text{and}\quad\nm{s_m-s}<\frac\epsilon 2\\
-			&\implies\nm{s_n-s_m}=\nm{s_n-s+s-s_m}\overset{\smash{\triangle}}{\le}\nm{s_n-s}+\nm{s-s_m}<\epsilon
+			m,n>N&\implies \nm{s_n-s}<\frac\epsilon 2
+			\quad\text{and}\quad
+			\nm{s_m-s}<\frac\epsilon 2\\
+			&\implies\nm{s_n-s_m}=\nm{s_n-s+s-s_m}
+			\overset{\smash{\triangle}}{\le}
+			\nm{s_n-s}+\nm{s-s_m}<\epsilon
 		\end{align*}
-		whence $(s_n)$ is Cauchy.
+		Otherwise said, $(s_n)$ is Cauchy.
 		
-		\item[$(\Leftarrow)$] To discuss the convergence of $(s_n)$ we first need a potential limit! In view of Lemma \ref{lemm:limbig}, the obvious candidates are $\limsup s_n$ and $\liminf s_n$. We have two goals: show that $(s_n)$ is bounded whence the limits superior and inferior are \emph{finite}; then show that these are \emph{equal.}
+		\item[$(\Leftarrow)$] To discuss the convergence of $(s_n)$ we need a potential limit. In view of Theorem \ref{thm:limbig}, the obvious candidates are $\limsup s_n$ and $\liminf s_n$. We have two goals: show that $(s_n)$ is bounded whence the limits superior and inferior are \emph{finite}; then show that these are \emph{equal.}
 		\begin{description}
 			\item[\normalfont(Boundedness of $(s_n)$)] Take $\epsilon=1$ in Definition \ref{defn:cauchy}:
-			\[\exists N\text{ such that }m,n>N\implies\nm{s_n-s_m}<1\]
+			\[
+				\exists N\text{ such that }m,n>N\implies\nm{s_n-s_m}<1
+			\]
 			It follows that
-			\[n>N\implies\nm{s_n-s_{N+1}}<1\implies s_{N+1}-1<s_n<s_{N+1}+1\]
-			whence $(s_n)$ is bounded; it follows that $\limsup s_n$ and $\liminf s_n$ are \emph{finite.}
+			\[
+				n>N\implies\nm{s_n-s_{N+1}}<1\implies s_{N+1}-1<s_n<s_{N+1}+1
+			\]
+			whence $(s_n)$ is bounded. It follows that $\limsup s_n$ and $\liminf s_n$ are both \emph{finite.}
 			
 			\goodbreak
 			
 			\item[\normalfont($\limsup s_n=\liminf s_n$)] Since $(s_n)$ is Cauchy, given $\epsilon>0$,
-			\[\exists N\text{ such that }m,n>N\implies \nm{s_n-s_m}<\epsilon\implies s_n<s_m+\epsilon\]
+			\[
+				\exists N\text{ such that }m,n>N\implies \nm{s_n-s_m}<\epsilon\implies s_n<s_m+\epsilon
+			\]
 			Taking $v_N=\sup\{s_n:n>N\}$, we see that
-			\begin{align*}
-				m>N&\implies v_N\le s_m+\epsilon %\tag{since $v_N=\sup\{s_n:n>N\}$}%\\
-				%&\implies v_N\le u_N+\epsilon \tag{since $u_N=\inf\{s_m:m>N\}$}
-			\end{align*}
-			Taking the infimum of the right hand side yields
-			\begin{align*}
-				%m>N&\implies v_N\le s_m+\epsilon \tag{since $v_N=\sup\{s_n:n>N\}$}\\
-				&v_N\le u_N+\epsilon \tag{since $u_N=\inf\{s_m:m>N\}$}
-			\end{align*}
+			\[
+				m>N\implies v_N\le s_m+\epsilon
+			\]
+			Now take the infimum of the right hand, to obtain
+			\[
+				v_N\le u_N+\epsilon \tag{since $u_N=\inf\{s_m:m>N\}$}
+			\]
 			Since $(v_N)$ is monotone-down and $(u_N)$ monotone-up, we see that
-			\[\limsup s_n\le v_N\le u_N+\epsilon\le\liminf s_n+\epsilon \implies \limsup s_n\le \liminf s_n+\epsilon \]
+			\[
+				\limsup s_n\le v_N\le u_N+\epsilon\le\liminf s_n+\epsilon \implies \limsup s_n\le \liminf s_n+\epsilon 
+			\]
 			This last holds for all $\epsilon>0$, whence $\limsup s_n\le \liminf s_n$. By Lemma \ref{lemm:limsupinf} we have equality.
 		\end{description}
 
-	By Lemma \ref{lemm:limbig}, we conclude that $(s_n)$ converges to $\limsup s_n=\liminf s_n$.\hfill\qedhere
-\end{description}
+		By Theorem \ref{thm:limbig}, we conclude that $(s_n)$ converges to $\limsup s_n=\liminf s_n$.\qedhere
+	\end{description}
 \end{proof}
 
 
-In view of the Theorem, the previous examples converge. All three limits can be found precisely (for instance, see Exercise \ref{exs:cauchygeomeval}). With a small modification to the second example, however, we obtain something genuinely new:
+By the Theorem, Examples \ref{ex:cauchy} all converge. All three limits can be found precisely (for instance, see Exercise \ref{exs:cauchygeomeval}). With a small modification to the second example, however, we obtain something genuinely new:
 
 \begin{example*}{\ref*{ex:cauchy}.\ref{ex:cauchy3} cont}{}
-Let $s_1=5$ and , for each $n$, define $s_{n+1}=s_n+\frac{\sin n}{n(n+1)}$. Since $\nm{\sin n}\le 1$, the computation proceeds almost the same as before:
-\[\nm{s_{n+1}-s_n}=\frac{\nm{\sin n}}{n(n+1)}\le \frac 1{n(n+1)}=\cdots\]
-The new sequence is Cauchy and therefore convergent; good luck explicitly finding its limit though!
+	Let $s_1=5$ and , for each $n$, define $s_{n+1}=s_n+\frac{\sin n}{n(n+1)}$. Since $\nm{\sin n}\le 1$, the computation proceeds almost the same as before:
+	\[
+		\nm{s_{n+1}-s_n}=\frac{\nm{\sin n}}{n(n+1)}\le \frac 1{n(n+1)}=\cdots
+	\]
+	The new sequence is Cauchy and thus convergent, though good luck explicitly finding its limit!
 \end{example*}
 
-The main point is easy to miss: Cauchy Completeness provides a powerful tool for determining whether a sequence converges \emph{without first guessing a limit.} While the result depends on monotone convergence (via limit superior/inferior), it is more powerful in that it applies even to non-monotone sequences. We finish with an application of this idea.
+The main point is easy to miss: the Cauchy condition is a powerful tool for determining whether a sequence converges \emph{without first guessing a limit.} While the proof depends on monotone convergence (via limit superior/inferior), Cauchy completeness is more powerful in that it applies even to non-monotone sequences.
 
 
 
 \boldinline{An Alternative Definition of $\R$}
 
 Cauchy sequences suggest a \emph{definition} of the real numbers which does not rely on Dedekind cuts (Section \ref{sec:dedekind}).\smallbreak
-Define an equivalence relation $\sim$ on the collection $\cC$ of all Cauchy sequences of rational numbers:\footnote{We don't need real numbers to define the limit of the \emph{rational} sequence $(s_n-t_n)$: $\forall \epsilon\in\Q^+$ is enough\ldots}
-\[(s_n)\sim(t_n)\iff \lim(s_n-t_n)=0\]
-We then define $\R:=\quotient{\cC}{\sim}$. All this is done without reference to Cauchy Completeness, though it certainly informs our intuition that $(s_n)$ and $(t_n)$ have the same limit. Some work is still required to define $+,\cdot,\le$, etc., and to verify the axioms of a complete ordered field---we won't pursue this.
+Define an equivalence relation $\sim$ on the collection $\cC$ of all Cauchy sequences of rational numbers:\footnote{%
+	We don't need real numbers to define the limit of the \emph{rational} sequence $(s_n-t_n)$: \ $\forall \epsilon\in\Q^+$ is enough\ldots%
+}
+\[
+	(s_n)\sim(t_n)\iff \lim(s_n-t_n)=0
+\]
+Now define $\R:=\quotient{\cC}{\sim}$ to be the set of equivalence classes. All this is done without reference to Cauchy completeness, though it certainly informs our intuition that $(s_n)$ and $(t_n)$ have the same limit (as real numbers). Significant work is still required to properly define $+,\cdot,\le$, etc., and to verify the axioms of a complete ordered field---we won't pursue this.
+
 
 \goodbreak
 
-% 
-% \boldinline{Decimal Numbers}\phantomsection\label{ssec:decimals}
-% 
-% What is a decimal? It is clear what a \emph{terminating} decimal should mean since any such is a rational number; for instance
-% \[12.31452=\frac{1231452}{10000}\]
-% What about a non-terminating decimal? We can view such as the limit of a \emph{sequence of rational numbers}; for example
-% \[3.14159\cdots =\lim s_n\text{ \ where \ } (s_n)=\left(3,\frac{31}{10},\frac{314}{100},\frac{3141}{1000},\ldots\right)\]
-% Of course, we need to show that every such sequence converges!\smallbreak
-% Given integers $d_k\in\{0,1,2,\ldots,9\}$, consider the sequence $(s_n)$ where
-% \[s_n=0.d_1d_2\cdots d_n=\frac{d_1}{10}+\cdots+\frac{d_n}{10^n}=\sum_{k=1}^n\frac{d_k}{10^k}\]
-% Certainly $(s_n)$ is a sequence of rational numbers. We prove that it is Cauchy:\smallbreak
-% Let $\epsilon>0$ be given and choose $N=-\log_{10}\epsilon =\log_{10}\epsilon^{-1}$. Then
-% \begin{align*}
-% 	m>n>N\implies \nm{s_n-s_m} &=\sum_{k=n+1}^m 10^{-k}d_k \tag{$= 0.0\cdots 0d_{n+1}\cdots d_{m}$}\\
-% 	&<10^{-n}<10^{-N}=\epsilon
-% \end{align*}
-% The sequence is Cauchy and thus converges\footnote{Since $s_n$ is plainly monotone-up and bounded above by 1, we could instead conclude this directly using the monotone convergence theorem.} to some \emph{real number} $s$. This limit is precisely what we mean by the decimal
-% \[s=0.d_1d_2d_3\cdots\]
-% The upshot is that every decimal expression represents a real number. We'll return to this example once we consider infinite series.
-
-\goodbreak
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad ????}
+	\emph{Key concepts:\quad Monotone sequences \& Convergence,\quad Cauchy sequences \& completeness,}\vspace{-3pt}
+	\begin{quote}
+		\emph{Limits superior/inferior}
+	\end{quote} 
 
-	\begin{enumerate}
+	\begin{enumerate}\itemsep2pt
 	  \item Use Definition \ref{defn:cauchy} to show that the sequence with $s_n=\frac 1{n^2}$ is Cauchy. Repeat for $t_n=\frac 1{n(n-2)}$.
 	  
 	  \item%[9.]
@@ -1363,8 +1468,12 @@ We then define $\R:=\quotient{\cC}{\sim}$. All this is done without reference to
 	  \item\label{exs:edefn} (Hard!)\lstsp We prove that the sequence defined by $s_n=\left(1+\frac 1n\right)^n$ is convergent.
 	  \begin{enumerate}
 	    \item Show that
-	    \[\frac{1+\frac 1{n+1}}{1+\frac 1n}=1-\frac 1{(n+1)^2}\quad \text{and}\quad \frac{1+\frac 1n}{1+\frac 1{n+1}}=1+\frac 1{n(n+2)}\]
-		  \item Prove \emph{Bernoulli's inequality} by induction.
+	    \[
+	    	\frac{1+\frac 1{n+1}}{1+\frac 1n}=1-\frac 1{(n+1)^2}
+	    	\qquad\text{and}\qquad 
+	    	\frac{1+\frac 1n}{1+\frac 1{n+1}}=1+\frac 1{n(n+2)}
+	    \]
+		  \item Prove \emph{Bernoulli's inequality} by induction:
 		  \begin{quote}
 		  	For all real $x>-1$ and $n\in\N_0$ we have $(1+x)^n\ge 1+nx$.
 		  \end{quote}
@@ -1375,40 +1484,12 @@ We then define $\R:=\quotient{\cC}{\sim}$. All this is done without reference to
 			(\emph{Hint: compute $t_n-s_n$})
 		\end{enumerate}
 	  
-	
-	
-	% \begin{enumerate}
-	%   \item This is a simple induction: the induction step requires
-	%   \begin{align*}
-	%   (1+x)^{n+1}&=(1+x)^n(1+x)\ge(1+nx)(1+x)=1+(n+1)x+nx^2\\
-	%   &\ge 1+(n+1)x
-	%   \end{align*}
-	%   \item Consider the quotient
-	% 	\begin{align*}
-	% 		\frac{l_{n+1}}{l_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+1}}{\left(1+\frac 1n\right)^n} =\left[\frac{n}{n+1}\right]^n\left[\frac{n+2}{n+1}\right]^{n+1} =\left[\frac{n(n+2)}{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
-	% 		&=\left[\frac{(n+1)^2-1}{(n+1)^2}\right]^{n+1}\frac{n+1}n =\left[1-\frac 1{(n+1)^2}\right]^{n+1}\frac{n+1}n\\
-	% 		&\ge \left(1-\frac{n+1}{(n+1)^2}\right)\frac{n+1}n=1\tag*{(by part 1.)}
-	% 	\end{align*}
-	%   \item We again use Bernoulli's inequality:
-	% 	\begin{align*}
-	% 		\frac{u_{n+1}}{u_n}&=\frac{\left(1+\frac 1{n+1}\right)^{n+2}}{\left(1+\frac 1n\right)^{n+1}} =\left[\frac{n}{n+1}\right]^{n+1}\left[\frac{n+2}{n+1}\right]^{n+2} =\left[\frac{(n+1)^2}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n\\
-	% 		&=\left[\frac{n(n+2)+1}{n(n+2)}\right]^{-(n+2)}\frac{n+1}n =\frac 1{\left[1+\frac 1{n(n+2)}\right]^{n+2}}\frac{n+1}n\\
-	% 		&\le \frac 1{1+\frac 1n}\cdot\frac{n+1}n=1\tag*{\qedhere}
-	% 	\end{align*}
-	% \end{enumerate}
-	
-	% Note that $u_n=(1+\frac 1n)l_n>l_n$ and that $(l_n)$ is non-decreasing and $u_n$ non-increasing. Thus $(l_n)$ is bounded above (by $u_1$ say). Similarly $(u_n)$ is bounded below. The monotone convergence theorem says that both sequences converge.\\
-	% Moreover,
-	% \[\nm{u_n-l_n}=\left[\left(1+\frac 1n\right)-1\right]\left(1+\frac 1n\right) =\frac 1nl_n\to 0\]
-	% since $(l_n)$ is convergent, thus both sequences converge to the same limit.
-	% \end{proof}
-	
-	
 	\end{enumerate}
 \end{exercises}
 
 \clearpage
 
+\iffalse
 
 \subsection{Subsequences}\label{sec:subseq}
 
