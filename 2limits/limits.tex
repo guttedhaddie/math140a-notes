@@ -1489,16 +1489,18 @@ Now define $\R:=\quotient{\cC}{\sim}$ to be the set of equivalence classes. All 
 
 \clearpage
 
-\iffalse
+
 
 \subsection{Subsequences}\label{sec:subseq}
 
-The general behavior of a sequence is often hard to ascertain, but if we delete some of its terms we might obtain a \emph{subsequence} with interesting behavior.
+The overall behavior of a sequence is often hard to describe, but if we delete some of its terms we might obtain a \emph{subsequence} with much simpler behavior.
 
 \begin{defn}{}{}
 	Let $(s_n)$ be a sequence. A \emph{subsequence} $(s_{n_k})$ is a subset $(s_{n_k})\subseteq (s_n)$, where 
-	\[n_1<n_2<n_3<\cdots\]
-	A subsequence is simply an infinite subset, with order inherited from the original sequence.
+	\[
+		n_1<n_2<n_3<\cdots
+	\]
+	A subsequence is simply an infinite subset whose order is inherited from the original sequence.
 \end{defn}
 
 \begin{example}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.38\linewidth]{}{}
@@ -1511,18 +1513,21 @@ The general behavior of a sequence is often hard to ascertain, but if we delete 
 	\hfill\includegraphics{divergent3}
 \end{example}
 
-Our main goal in this section is to prove the result illustrated in the example, that every bounded sequence has a convergent subsequence (the famous Bolzano--Weierstraß theorem).
+Our main goal in this section is to prove the famous Bolzano--Weierstraß theorem (illustrated in the example): that every bounded sequence has a convergent subsequence.
 
 
 \begin{lemm}{}{subseqconv}
-	If $\lim\limits_{n\to\infty} s_n=s$, then every subsequence $(s_{n_k})$ also satisfies $\lim\limits_{k\to\infty} s_{n_k}=s$.\vspace{-3pt}
+	If $\lim\limits_{n\to\infty} s_n=s$, then every subsequence $(s_{n_k})$ satisfies $\lim\limits_{k\to\infty} s_{n_k}=s$.
 \end{lemm}
 
 \begin{proof}
-	Suppose $s$ is finite and let $\epsilon>0$ be given. Then $\exists N$ such that $n>N\implies \nm{s_n-s}<\epsilon$. Since $n_k\ge k$ for all $k$, we see that
-	\[k>N\implies n_k>N\implies \nm{s_{n_k}-s}<\epsilon\]
+	Suppose $s$ is finite and suppose $\epsilon>0$ is given. Then $\exists N$ such that $n>N\Longrightarrow \nm{s_n-s}<\epsilon$. Since $n_k\ge k$ for all $k$, we see that
+	\[
+		k>N\implies n_k>N\implies \nm{s_{n_k}-s}<\epsilon
+	\]
 	The case where $s=\pm\infty$ is an exercise.
 \end{proof}
+
 
 \begin{lemm}{}{monosub}
 	Every sequence has a monotonic subsequence.
@@ -1530,16 +1535,15 @@ Our main goal in this section is to prove the result illustrated in the example,
 
 \begin{proof}
 	Given $(s_n)$, we call the term $s_n$ `dominant' if $m>n\implies s_m<s_n$. There are two cases:
-% 	\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}
 \begin{enumerate}\itemsep0pt
-  \item If there are \textcolor{blue}{infinitely many dominant terms}, then the subsequence of such is \textcolor{blue}{monotone-down}. %Moreover if $s_n$ is dominant, then $v_{n-1}=\sup\{s_k:k>n-1\}=s_n$, whence the subsequence of dominant terms tends to $\limsup s_n$ (could be $-\infty!$).
-  \item If there are \textcolor{magenta}{finitely many dominant terms}, choose $s_{n_1}$ after all such. Since $s_{n_1}$ is not dominant, $\exists n_2>n_1$ such that $s_{n_2}\ge s_{n_1}$. Induct to obtain a \textcolor{Green}{monotone-up} subsequence.
+  \item If there are \textcolor{blue}{infinitely many dominant terms}, then the subsequence of such is \textcolor{blue}{monotone-down}.
+  \item If there are \textcolor{magenta}{finitely many dominant terms}, choose $\textcolor{Green}{s_{n_1}}$ after all such. Since $s_{n_1}$ is not dominant, $\exists n_2>n_1$ such that $s_{n_2}\ge s_{n_1}$. Induct to obtain a \textcolor{Green}{monotone-up} subsequence.
   \end{enumerate}
   
 	\begin{center}
 		\begin{tabular}{c@{\qquad}c}
-	  	\includegraphics[scale=1]{dominant1}&
-	  	\includegraphics[scale=1]{dominant2}\\[-3pt]
+	  	\includegraphics[scale=0.95]{dominant1}&
+	  	\includegraphics[scale=0.95]{dominant2}\\[-3pt]
 	  	Case 1: \textcolor{blue}{monotone-down subsequence}&Case 2: \textcolor{Green}{monotone-up subsequence}
 	  \end{tabular}\\[-8pt]
 	  \hfill\qedhere
@@ -1549,10 +1553,13 @@ Our main goal in this section is to prove the result illustrated in the example,
 
 \goodbreak
 
+
 \begin{thm}{}{subseqhard}
 	Given a sequence $(s_n)$, there exist subsequences $(s_{n_k})$ and $(s_{n_l})$ such that
-	\[\lim s_{n_k}=\limsup s_n\quad\text{and}\quad \lim s_{n_l}=\liminf s_n\]
-	Combining with the lemmas, we may assume these subsequences are monotonic.
+	\[
+		\lim s_{n_k}=\limsup s_n\quad\text{and}\quad \lim s_{n_l}=\liminf s_n
+	\]
+	By the lemmas, we may moreover assume that these subsequences are monotonic.
 \end{thm}
 
 
@@ -1567,45 +1574,52 @@ Our main goal in this section is to prove the result illustrated in the example,
 	\]
 	Monotonic subsequences with limits $\textcolor{blue}{\limsup s_n=1}$ and $\textcolor{Green}{\liminf s_n=0}$ are indicated.
 	\tcblower
-	\hfill\includegraphics[scale=1]{exlimsupconv2}
+	\hfill\includegraphics[scale=0.95]{exlimsupconv2}
 \end{example}
 
 \begin{proof}
-	We prove only the $\limsup$ claim since the other is similar. There are three cases to consider; visualizing the third is particularly difficult and may take several readings.
+	We prove only the $\limsup$ claim; the other is similar. There are three cases to consider; visualizing the third is particularly difficult and may take several readings.
 	\begin{description}
 	  \begin{minipage}[t]{0.56\linewidth}\vspace{-10pt}
 		  \item[\normalfont ($\limsup s_n=\infty$)]\lstsp Since $(s_n)$ is unbounded above, for any $k>0$ there exist \emph{infinitely many} terms $s_n>k$. We may therefore inductively choose a subsequence $(\textcolor{blue}{s_{n_k}})$ via
 		  \begin{gather*}
 		  	n_1=\min\{n\in\N:s_{n_1}>1\}\\
-		  	n_k=\min\{n\in\N:n_k>n_{k-1},\ s_{n_k}>k\}
+		  	n_k=\min\{n\in\N:n_k>n_{k-1},\text{ and } s_{n_k}>k\}
 		  \end{gather*}
-		  Choosing the minimum isn't necessary here, but it at least keeps the subsequence explicit. Clearly
-			\[s_{n_k}>k\implies \lim_{k\to\infty} s_{n_k}=\infty=\limsup s_n\]
+		  Choosing the minimum isn't necessary, though it keeps the subsequence explicit. Clearly
+			\[
+				s_{n_k}>k\implies \lim_{k\to\infty} s_{n_k}=\infty=\limsup s_n
+			\]
 	  \end{minipage}
 	 	\hfill
 	 	\begin{minipage}[t]{0.4\linewidth}\vspace{-10pt}
 		  \hfill
 		  \begin{tabular}{c@{}}
-		  	\includegraphics{dominant3}\\
+		  	\includegraphics[scale=0.95]{dominant3}\\
 		  	Example: $\limsup \frac{\sqrt n}2(1+\sin n)=\infty$
 		  \end{tabular}
 	  \end{minipage}
 	  
-		\item[\normalfont ($\limsup s_n=-\infty$)]\lstsp Since $\liminf s_n\le \limsup s_n=-\infty$, Lemma \ref{lemm:limbig} says that $\lim s_n=-\infty$, whence $(s_n)$ itself is a suitable subsequence.
+		\item[\normalfont ($\limsup s_n=-\infty$)]\lstsp Since $\liminf s_n\le \limsup s_n=-\infty$, Lemma \ref{thm:limbig} says that $\lim s_n=-\infty$, whence $(s_n)$ itself is a suitable subsequence.
 		
-	  \item[\normalfont ($\limsup s_n=v$ finite)]\lstsp We follow an inductive construction: let $n_1=1$ and define $s_{n_k}$ for $k\ge 2$ via,
+	  \item[\normalfont ($\limsup s_n=v$ finite)]\lstsp Let $n_1=1$ and define $s_{n_k}$ for $k\ge 2$ inductively:
 		\begin{itemize}
 		  \item Since $(v_N)$ is monotone-down and converges to $v$, take $\epsilon=\frac 1{2k}$ to see that\footnotemark{}
 		  \[\exists N_k\ge n_{k-1}\text{ such that }v\le v_{N_k}<v+\frac 1{2k}\]
 	
 		  \item Since $v_{N_k}=\sup\{s_n:n>N_k\}$, Lemma \ref{lemm:contrasup} says
-		  \[\exists n_k>N_k\text{ such that }s_{n_k}>v_{N_k}-\frac 1{2k}\]
+		  \[
+		  	\exists n_k>N_k\text{ such that }s_{n_k}>v_{N_k}-\frac 1{2k}
+		  \]
 		\end{itemize}
 		But then $\nm{v-s_{n_k}}\overset{\smash{\triangle}}{\le}\nm{v-v_{N_k}}+\nm{v_{N_k}-s_{n_k}}<\frac 1k$. The squeeze theorem says that $\lim\limits_{k\to\infty}s_{n_k}=v$.\hfill\qedhere
 	\end{description}
 \end{proof}
 
-\footnotetext{$(v_N)$ being monotone-down is crucial: if $N$ satisfies $v_N-v<\frac 1{2k}$, so does $N_k:=\max\{N,n_{k-1}\}$.}
+\footnotetext{%
+	$(v_N)$ being monotone-down is crucial: if $N$ satisfies $v_N-v<\frac 1{2k}$, so does $N_k:=\max(N,n_{k-1})$.%
+}
+
 
 \goodbreak
 
@@ -1614,31 +1628,24 @@ Our main goal in this section is to prove the result illustrated in the example,
 	The example shows why the two-step construction is necessary. It may seem that we should simply be able to modify subsequences of $(u_N)$ and $(v_N)$. Indeed,
 	\[(u_N)=\bigl(-1,-1,-1,\textcolor{Green}{-1}, -\tfrac 12,-\tfrac 12,-\tfrac 12,\textcolor{Green}{-\tfrac 12}, -\tfrac 13,-\tfrac 13,-\tfrac 13,\textcolor{Green}{-\tfrac 13},\ldots\bigr)\]
 	contains a monotonic subsequence of $(s_n)$ converging to $\liminf s_n=0$. Unfortunately, the same isn't true for $(v_N)=(2,1,1,1,1\ldots)$, where $v_{N_k}=1$ for all $k\ge 2$; taking $n_k=2k-1$ results in
-	\[\textcolor{blue}{s_{n_k}}=1-\frac 1{2k-1}>1-\frac 1{2k} =v_{N_k}-\frac 1{2k}\]
-	%for all $k\ge 2$.
+	\[
+		\textcolor{blue}{s_{n_k}}=1-\frac 1{2k-1}>1-\frac 1{2k} =v_{N_k}-\frac 1{2k}
+	\]
 \end{example*}
 
 
-The above discussion rapidly provides two results, the first of which is Exercise \ref{exs:liminfsuplim}.
+The above discussion rapidly provides two results, the first being the $(\Leftarrow)$ direction of Theorem \ref{thm:limbig} (see Exercise \ref{exs:liminfsuplim}), fully establishing
+\[
+	\limsup s_n=\liminf s_n \iff \lim s_n\text{ exists} \tag{could be $\pm\infty$}
+\]
 
-\begin{thm}{Lemma \ref{lemm:limbig} with converse}{limbigboth}
-	For any sequence,
-	\[\limsup s_n=\liminf s_n \iff \lim s_n\text{ exists} \]
-	%Moreover, all three values are equal (could be $\pm \infty$).
-\end{thm}
 
-% \begin{proof}
-% 	Let $(s_{n_k})$ and $(s_{n_l})$ be subsequences tending to $\limsup s_n$ and $\liminf s_n$ respectively. By 
-% \end{proof}
-
+The second is the main goal of this section.
 
 \begin{thm}{Bolzano--Weierstraß}{bolzano}
 	Every bounded sequence has a convergent subsequence.
 \end{thm}
 
-%\footnotetext{Roughly \emph{Bol-tsah-no} (Italian) \emph{Vy-uh-shtrass} (German)}
-
-%We give three proofs! The first two are corollaries, while the third is the classic argument depending only on Cauchy completeness.
 
 \begin{proof}[Proof 1]
 	Lemma \ref{lemm:monosub} says there exists a monotone subsequence. This is bounded and thus converges by the monotone convergence theorem.
@@ -1648,46 +1655,47 @@ The above discussion rapidly provides two results, the first of which is Exercis
 	By Theorem \ref{thm:subseqhard}, there exists a subsequence converging to the \emph{finite} value $\limsup s_n$.
 \end{proof}
 
-For a third proof(!) we present the classic `shrinking-interval' argument which has the benefit of generalizing to higher dimensions (rather than intervals, take boxes\ldots).
+For a third proof(!) we present the classic `shrinking-interval' argument which has the benefit of easily generalizing to higher dimensions.
 
 \begin{proof}[Proof 3]
-	Suppose $(s_n)$ is bounded by $M$. One of the intervals $[-M,0]$ or $[0,M]$ must contain infinitely many terms of the sequence (perhaps both!). Call this interval $E_0$ and choose any $n_0\in E_0$.\smallbreak
-	Split $E_0$ into left- and right half-intervals, one of which must contain infinitely many terms of the sequence for which $n>n_0$;\footnotemark{} call this half-interval $E_1$ and choose any $s_{n_1}\in E_1$ for which $n_1>n_0$.\smallbreak
+	Suppose $(s_n)$ is bounded by $M$. One of the intervals $[-M,0]$ or $[0,M]$ must contain infinitely many terms of the sequence (perhaps both do!). Call this interval $E_0$ and choose any $n_0\in E_0$.\smallbreak
+	Split $E_0$ into left- and right half-intervals, one of which must contain infinitely many terms of the sequence for which $n>n_0$;\footnotemark{} call this half-interval $E_1$ and choose any $s_{n_1}\in E_1$ with $n_1>n_0$.\smallbreak
 	Repeat this \emph{ad infinitum} to obtain a subsequence $(s_{n_k})$ and a family of nested intervals
-	\[[-M,M]\supset E_0\supset E_1\supset E_2\supset\cdots\quad\text{of width}\quad\nm{E_k}=\frac{M}{2^k}\quad\text{with}\quad s_{n_k}\in E_k\]
+	\[
+		[-M,M]\supset E_0\supset E_1\supset E_2\supset\cdots\quad\text{of width}\quad\nm{E_k}=\frac{M}{2^k}\quad\text{with}\quad s_{n_k}\in E_k
+	\]
 	It remains only to see that $(s_{n_k})$ converges; we leave this to Exercise \ref{exs:bolzano}.%\smallbreak
 % 	Let $\epsilon>0$ be given, and let $N=\log_2\frac M\epsilon$. Then
 % 	\[l>k>N\implies s_{n_k},s_{n_l}\in E_{k}\implies \nm{s_{n_k}-s_{n_l}}\le \frac{M}{2^k}<\frac M{2^N}=\epsilon\]
 % 	The subsequence $(s_{n_k})$ is Cauchy and thus converges.
 \end{proof}
 
-\footnotetext{Only \emph{finitely many} terms in $(s_n)$ come before $s_{n_0}\ldots$}
+\footnotetext{%
+	Only \emph{finitely many} terms in $(s_n)$ could come before $s_{n_0}\ldots$%
+}
 
-%The advantage of the third proof is that it generalizes to higher dimensions: rather than intervals, one constructs a family of shrinking boxes\ldots
 
 \begin{example}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.35\linewidth]{}{sinn}
 	$(s_n)=(\sin n)$ is bounded and therefore has a convergent subsequence! Its limit $s$ must lie in the interval $[-1,1]$.\smallbreak
 	The picture shows the first 1000 terms---remember that $n$ is measured in \emph{radians.} It is not at all clear from the picture what $s$ or our mystery subsequence should be! There is a reason for this, as we'll see momentarily\ldots
 	\tcblower
-	\hfill\includegraphics[scale=1]{bwsine}
+	\hfill\includegraphics[scale=0.95]{bwsine}
 \end{example}
+
 
 \goodbreak
 
 
 \boldsubsubsection{Subsequential Limits, Divergence by Oscillation \& Closed Sets}
 
-Recall Definition \ref{defn:diverge}, where we stated that a sequence $(s_n)$ \emph{diverges by oscillation} if it neither converges nor diverges to $\pm\infty$. We can now give a positive statement of this idea.
+Recall Definition \ref{defn:diverge}: a sequence $(s_n)$ \emph{diverges by oscillation} if it neither converges nor diverges to $\pm\infty$. We can now give a positive statement of this idea.
 \begin{align*}
-(s_n) \text{ diverges by oscillation}&\overset{\text{Thm \ref{thm:limbigboth}}}{\iff} \liminf s_n\neq \limsup s_n\\
-&\overset{\text{Thm \ref{thm:subseqhard}}}{\iff}(s_n) \text{ has subsequences tending to different limits}
+	(s_n) \text{ diverges by oscillation}
+	&\overset{\text{Thm \ref{thm:limbig}}}{\iff} \liminf s_n\neq \limsup s_n\\
+	&\overset{\text{Thm \ref{thm:subseqhard}}}{\iff}(s_n) \text{ has subsequences tending to different limits}
 \end{align*}
 
 The word \emph{oscillation} comes from the third interpretation: if $s_1\neq s_2$ are limits of two subsequences, then any tail of the sequence $\{s_n:n>N\}$ contains infinitely many terms arbitrarily close to $s_1$ and infinitely many (other) terms arbitrarily close to $s_2$. The original sequence $(s_n)$ therefore \emph{oscillates} between neighborhoods of $s_1$ and $s_2$. Of course there could be many other \emph{subsequential limits}\ldots
-
-
-
-%\boldsubsubsection{Subsequential Limits \& Closed Sets}
 
 
 \begin{defn}{}{}
@@ -1696,45 +1704,45 @@ The word \emph{oscillation} comes from the third interpretation: if $s_1\neq s_2
 
 \begin{examples}{}{subseqlim}
 	\exstart The sequence defined by $s_n=\frac 1n$ has only one subsequential limit, namely zero. Recall Lemma \ref{lemm:subseqconv}: $\lim s_n=0$ implies that every subsequence also converges to 0.
-\begin{enumerate}\setcounter{enumi}{1}
-  \item If $s_n=(-1)^n$, then the subsequential limits are $\pm 1$. %One can prove this similarly to the approach in Example \ref*{ex:divergenceeasy}.\ref{ex:divergenceeasy2}: if $\lim\limits_{k\to \infty}s_{n_k}=s\neq\pm 1$, let $\epsilon=\min\{\nm{s-1},\nm{s+1}\}$ for a contradiction\ldots
-  \item The sequence $s_n=n^2(1+(-1)^n)$ has subsequential limits 0 and $\infty$.
-  \item All positive even integers are subsequential limits of $(s_n)=(2,4,2,4,6,2,4,6,8,2,4,6,8,10,\ldots)$.
-
-%   \item The $A=\{\frac 1n:n\in\N\}$ is not closed since it contains the sequence $s_n=\frac 1n$ whose limit $0$ does not lie in $A$.
-%   \item The set $B=A\cup\{0\}$ is closed. The only possible limits of a sequence lying in $B$ is zero.
-
-	\item\label{ex:subseqlim2} (Hard!)\lstsp Recall the countability of $\Q$ from a previous class: the standard argument enumerates the rationals by constructing a sequence
-	\[(r_n)=\Bigl(\frac 01,\underbrace{\frac 11,-\frac 11}_{\nm p+q=2}, \underbrace{\frac 12,-\frac 12,\frac 21,-\frac 21}_{\nm p+q=3}, \underbrace{\frac 13,-\frac 13,\frac 31,-\frac 31}_{\nm p+q=4}, \underbrace{\frac 14,-\frac 14,\frac 23,-\frac 23,\frac 32,-\frac 32,\frac 41,-\frac 41}_{\nm p+q=5},\ldots\Bigr)\]
-	We claim that the set of subsequential limits of $(r_n)$ is in fact the full set of $\R\cup\{\pm\infty\}$!\smallbreak
-	To see this, let $a\in\R$ be given and choose a subsequence $(r_{n_k})$ inductively:
-	\begin{itemize}
-	  \item By the density of $\Q$ in $\R$ (Corollary \ref{cor:qdense}), the set $S_n=\Q\cap (a-\frac 1n,a+\frac 1n)$ contains infinitely many rational numbers and thus infinitely many terms of the sequence $(r_n)$.
-	  \item Choose any $r_{n_1}\in S_1$ and, for each $k\ge 2$, choose any\footnotemark{}
-	  \[r_{n_k}\in S_k\text{ \ such that \ }n_k>n_{k-1}\]
-	  \item Since $\nm{r_{n_k}-a}<\frac 1k$, we conclude that $\lim\limits_{k\to\infty}r_{n_k}=a$.
-% 	  \item By the density of $\Q$ in $\R$ (Corollary \ref{cor:qdense}), the set $S_n=\Q\cap (a-\frac 1n,a+\frac 1n)$ contains infinitely many rational numbers.
-% 	  \item Define $n_1=\min\{n:r_n\in S_1\}$ and, for each $k\ge 2$,
-% 	  \[n_k:=\min\{n\in\N:n>n_{k-1}\text{ and }\nm{r_n-a}<\tfrac 1k\}\]
-% 	  \item For each $k$, $\nm{r_{n_k}-a}<\frac 1k$, from which $\lim\limits_{k\to\infty}r_{n_k}=a$.
-	\end{itemize}
-	An argument for the subsequential limits $\pm\infty$ is in the Exercises. Somewhat amazingly, the \emph{specific} sequence $(r_n)$ is irrelevant: the conclusion is the same for \emph{any} sequence enumerating $\Q$!
+	\begin{enumerate}\setcounter{enumi}{1}
+	  \item If $s_n=(-1)^n$, then the subsequential limits are $\pm 1$. %One can prove this similarly to the approach in Example \ref*{ex:divergenceeasy}.\ref{ex:divergenceeasy2}: if $\lim\limits_{k\to \infty}s_{n_k}=s\neq\pm 1$, let $\epsilon=\min\{\nm{s-1},\nm{s+1}\}$ for a contradiction\ldots
+	  \item The sequence $s_n=n^2(1+(-1)^n)$ has subsequential limits 0 and $\infty$.
+	  \item All positive even integers are subsequential limits of $(s_n)=(2,4,2,4,6,2,4,6,8,2,4,6,8,10,\ldots)$.
 	
-	\item (Even harder---Example \ref{ex:sinn}, cont.)\lstsp We won't prove it, but the set of subsequential limits of $(s_n)=(\sin n)$ is the \emph{entire interval} $[-1,1]$! Otherwise said, for any $s\in[-1,1]$ there exists a subsequence $(\sin n_k)$ such that $\lim\limits_{k\to\infty}\sin n_k=s$.
+	%   \item The $A=\{\frac 1n:n\in\N\}$ is not closed since it contains the sequence $s_n=\frac 1n$ whose limit $0$ does not lie in $A$.
+	%   \item The set $B=A\cup\{0\}$ is closed. The only possible limits of a sequence lying in $B$ is zero.
 	
-% 
-% Let $S=\R^+\cap\{a+2\pi b:a,b\in\Z\}$. By Diophantine approximation, there exists a sequence in $S$ such that
-% 	\[\frac{a_n}{b_n}\to -2\pi,\qquad a_n+2\pi b_n<\frac 1{b_n} \to 0\]
-% 
-%  	Let $x\in\R^+\setminus S$ and let $t_1=a_1+2\pi b_1\in S$ satisfy $t_1<\min\{1,x\}$: such exists by convergence. Multiply by $m_1\in\N$ to obtain $m_1t_1<x<(m_1+1)t_1$, let $s_1:=t_1m_1$ and observe that $0<x-s_1\le t_1<1$.\par
-% 		Repeat: let $t_2=a_2+2\pi b_2\in S$ satisfy $t_2<\min\{\frac 12,x-t_1m_1\}$. Again multiply by an integer such that $m_2t_2<x-t_1m_1<(m_2+1)t_2$, let $s_2:=s_1+m_2t_2$ and observe that $0<x-s_2<t_2<\frac 12$.\par
-% 		Repeat ad infinitum: the process never ceases since $x\not\in S$. We obtain a sequence $(s_n)\subseteq S$ with $n\th$ term $s_n=\sum_{k=1}^nt_km_k$ and where $0<x-s_n<\frac 1n$. We conclude that $(s_n)$ has limit $x$.\smallbreak
-% 		Now let $s\in [-1,1]$, define $x=\sin^{-1}s$ and write $s_n=p_n+2\pi q_n$. By the continuity of sine, we see that
-% 		\[\sin p_n=\sin s_n\xrightarrow[n\to\infty]{} \sin x=s\]
-\end{enumerate}
+		\item\label{ex:subseqlim2} (Hard!)\lstsp Recall the countability of $\Q$ from a previous class: the standard argument enumerates the rationals by constructing a sequence
+		\[(r_n)=\Bigl(\frac 01,\underbrace{\frac 11,-\frac 11}_{\nm p+q=2}, \underbrace{\frac 12,-\frac 12,\frac 21,-\frac 21}_{\nm p+q=3}, \underbrace{\frac 13,-\frac 13,\frac 31,-\frac 31}_{\nm p+q=4}, \underbrace{\frac 14,-\frac 14,\frac 23,-\frac 23,\frac 32,-\frac 32,\frac 41,-\frac 41}_{\nm p+q=5},\ldots\Bigr)\]
+		We claim that the set of subsequential limits of $(r_n)$ is in fact the set $\R\cup\{\pm\infty\}$!\par
+		To see this, let $a\in\R$ be given and choose a subsequence $(r_{n_k})$ inductively:
+		\begin{itemize}
+		  \item By the density of $\Q$ in $\R$ (Corollary \ref{cor:qdense}), the set $S_n=\Q\cap (a-\frac 1n,a+\frac 1n)$ contains infinitely many rational numbers and thus infinitely many terms of the sequence $(r_n)$.
+		  \item Choose any $r_{n_1}\in S_1$ and, for each $k\ge 2$, choose any%\footnotemark{}
+		  \[
+		  	r_{n_k}\in S_k\text{ \ such that \ }n_k>n_{k-1}
+		  \]
+		  \item Since $\nm{r_{n_k}-a}<\frac 1{n_k}\le \frac 1k$, we conclude that $\lim\limits_{k\to\infty}r_{n_k}=a$.
+		\end{itemize}
+		An argument for the subsequential limits $\pm\infty$ is in the Exercises. Somewhat amazingly, the \emph{specific} sequence $(r_n)$ is irrelevant: the conclusion is the same for \emph{any} sequence enumerating $\Q$!
+		
+		\item (Even harder---Example \ref{ex:sinn}, cont.)\lstsp We won't prove it, but the set of subsequential limits of $(s_n)=(\sin n)$ is the \emph{entire interval} $[-1,1]$! Otherwise said, for any $s\in[-1,1]$ there exists a subsequence $(\sin n_k)$ such that $\lim\limits_{k\to\infty}\sin n_k=s$.
+		
+	% 
+	% Let $S=\R^+\cap\{a+2\pi b:a,b\in\Z\}$. By Diophantine approximation, there exists a sequence in $S$ such that
+	% 	\[\frac{a_n}{b_n}\to -2\pi,\qquad a_n+2\pi b_n<\frac 1{b_n} \to 0\]
+	% 
+	%  	Let $x\in\R^+\setminus S$ and let $t_1=a_1+2\pi b_1\in S$ satisfy $t_1<\min\{1,x\}$: such exists by convergence. Multiply by $m_1\in\N$ to obtain $m_1t_1<x<(m_1+1)t_1$, let $s_1:=t_1m_1$ and observe that $0<x-s_1\le t_1<1$.\par
+	% 		Repeat: let $t_2=a_2+2\pi b_2\in S$ satisfy $t_2<\min\{\frac 12,x-t_1m_1\}$. Again multiply by an integer such that $m_2t_2<x-t_1m_1<(m_2+1)t_2$, let $s_2:=s_1+m_2t_2$ and observe that $0<x-s_2<t_2<\frac 12$.\par
+	% 		Repeat ad infinitum: the process never ceases since $x\not\in S$. We obtain a sequence $(s_n)\subseteq S$ with $n\th$ term $s_n=\sum_{k=1}^nt_km_k$ and where $0<x-s_n<\frac 1n$. We conclude that $(s_n)$ has limit $x$.\smallbreak
+	% 		Now let $s\in [-1,1]$, define $x=\sin^{-1}s$ and write $s_n=p_n+2\pi q_n$. By the continuity of sine, we see that
+	% 		\[\sin p_n=\sin s_n\xrightarrow[n\to\infty]{} \sin x=s\]
+	\end{enumerate}
 \end{examples}
 
-\footnotetext{As in the proof of Theorem \ref{thm:subseqhard}, we could make this more explicit by choosing minimums, but there is no need: if there are infinitely many $r_n$ in $S_k$, then only finitely many of them can come before $r_{n_{k-1}}$.}
+% \footnotetext{%
+% 	As in the proof of Theorem \ref{thm:subseqhard}, we could make this more explicit by choosing minimums, but there is no need: if there are infinitely many $r_n$ in $S_k$, then only finitely many of them can come before $r_{n_{k-1}}$.%
+% }
 
 \goodbreak
 
@@ -2007,4 +2015,3 @@ The next result will be critical when we study infinite series, particularly the
 	\end{enumerate}
 \end{exercises}
 
-\fi
