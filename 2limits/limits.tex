@@ -1092,7 +1092,7 @@ One interpretation of $\lim s_n$ is that it approximately describes $s_n$ for la
 	Let $(s_n)$ be a sequence and define two related sequences $(v_N)$ and $(u_N)$:\par
 	\begin{minipage}[t]{0.6\linewidth}\vspace{-14pt}
 		\[
-			\textcolor{blue}{v_N:=\sup\{s_n:n>N\}},\qquad \textcolor{Green}{u_N:=\inf\{s_n:n>N\}}
+			\textcolor{blue}{v_N:=\sup\{s_n:n\ge N\}},\qquad \textcolor{Green}{u_N:=\inf\{s_n:n\ge N\}}
 		\]
 		\begin{enumerate}\itemsep0pt
 		  \item The \emph{limit superior} of $(s_n)$ is
@@ -1119,16 +1119,16 @@ One interpretation of $\lim s_n$ is that it approximately describes $s_n$ for la
 	\end{minipage}
 \end{defn}
 
-The original sequence $\textcolor{red}{(s_n)}$ is \emph{almost} wedged between\footnote{%
-	A minor redefinition could remove the `almost' at the cost of making some subsequent arguments a little messier. It is still reasonable to think of $(u_N)$ and $(v_N)$ as providing a long-term envelope for the original sequence.%
-}
+The original sequence $\textcolor{red}{(s_n)}$ is wedged between
+% 	A minor redefinition could remove the `almost' at the cost of making some subsequent arguments a little messier. It is still reasonable to think of $(u_N)$ and $(v_N)$ as providing a long-term envelope for the original sequence.%
 $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent of the squeeze theorem (though $\limsup$ and $\liminf$ need not be equal). The next result summarizes the situation more formally; we omit the proof since these claims should be clear from the definition and previous results, particularly the monotone convergence theorem.
 
 
 \begin{lemm}{}{limsupinf}
-	\exstart $(v_N)$ is monotone-down, $(u_N)$ is monotone-up, and $u_N\le s_{N+1}\le v_N$.
-	\begin{enumerate}\itemsep2pt\setcounter{enumi}{1}
+	\exstart $(v_N)$ is monotone-down and $(u_N)$ monotone-up.
+	\begin{enumerate}\setcounter{enumi}{1}
 	  \item\label{lemm:limsupinf1} $\limsup s_n$ and $\liminf s_n$ exist for any sequence (they might be infinite).
+	  \item If $n\ge N$, then $u_N\le s_n\le v_N$.
 	  \item $\liminf s_n\le\limsup s_n$.
 	\end{enumerate}
 \end{lemm}
@@ -1153,10 +1153,10 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 
 
 \begin{examples}{}{limsupexs}
-	\exstart If $s_n=\frac 1n$, then $v_N=s_{N+1}$ and $u_N=0$, whence $\limsup s_n=\liminf s_n=0$.
+	\exstart If $s_n=\frac 1n$, then $v_N=s_{N}$ and $u_N=0$, whence $\limsup s_n=\liminf s_n=0$.
 	
 	\begin{enumerate}\setcounter{enumi}{1}
-	  \item The picture shows sequences $\textcolor{red}{(s_n)}$, $\textcolor{Green}{(u_N)}$ and $\textcolor{blue}{(v_N)}$ when $s_n=6+(-1)^n\left(1+\frac 5n\right)$\par
+	  \item The picture shows the sequences $\textcolor{red}{(s_n)}$, $\textcolor{Green}{(u_N)}$ and $\textcolor{blue}{(v_N)}$ when $s_n=6+(-1)^n\left(1+\frac 5n\right)$\par
 		\begin{minipage}[t]{0.52\linewidth}\vspace{-8pt}
 			We won't compute everything precisely, but the picture suggests $\textcolor{red}{(s_n)}$ has two ``sub"-sequences: the odd terms increase while the even terms decrease towards, respectively
 			\[
@@ -1164,8 +1164,8 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 			\]
 			Here is one value from each derived sequence:
 			\begin{gather*}
-				\textcolor{Green}{u_3}=\inf\{s_n:n>3\}=\textcolor{red}{s_5}=4\\
-				\textcolor{blue}{v_7}=\sup\{s_n:n>7\}=\textcolor{red}{s_8}=7.625
+				\textcolor{Green}{u_3}=\inf\{s_n:n\ge 3\}=\textcolor{red}{s_3}\approx 3.333\\
+				\textcolor{blue}{v_{13}}=\sup\{s_n:n\ge 13\}=\textcolor{red}{s_{14}}\approx 7.357
 			\end{gather*}
 		\end{minipage}
 		\hfill
@@ -1176,7 +1176,7 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 	
 		\item Let $s_n=(-1)^n$. This time the calculation is easy: for any $N$,
 		\[
-			u_N=\inf\{s_n:n>N\}=-1\quad\text{and}\quad v_N=\sup\{s_n:n>N\}=1
+			u_N=\inf\{s_n:n\ge N\}=-1\quad\text{and}\quad v_N=\sup\{s_n:n\ge N\}=1
 		\]
 		Therefore $\limsup s_n=1$ and $\liminf s_n=-1$.
 	\end{enumerate}
@@ -1186,7 +1186,7 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 \begin{thm}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.48\linewidth]{}{limbig}
 	For any sequence $(s_n)$,
 	\[
-		\liminf s_n=\limsup s_n \iff\lim s_n\text{ exists}
+		\limsup s_n=\liminf s_n \iff\lim s_n\text{ exists}
 	\]
 	In such a case all three values are equal.\smallbreak
 	Note that the limits can be $\pm\infty$.
@@ -1199,10 +1199,12 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 
 \begin{proof}
 	\begin{description}
-		\item[$(\Rightarrow)$] Everything follows by applying the squeeze theorem and its divergent analogues (Theorem \ref*{thm:divlaws}.\ref{thm:divlaws1}) to the inequalities
-		\[
-			u_{n-1}\le s_n\le v_{n-1}
-		\]
+		\item[$(\Rightarrow)$] Suppose $s:=\limsup s_n=\liminf s_n$.
+		\begin{itemize}
+		  \item If $s$ is finite, apply the squeeze theorem to $u_n\le s_n\le v_n$ (both extremes converge to $s$).
+		  \item If $s=\infty$, then $u_n\le s_n$ for all $n$. Theorem \ref*{thm:divlaws}.\ref{thm:divlaws1} shows that $\lim s_n=\infty=s$.
+		  \item If $s=-\infty$, instead use $s_n\le v_n$.
+		\end{itemize}
 		\item[$(\Leftarrow)$] We could prove this now, but it will come almost for free a little later\ldots\qedhere
 	\end{description}
 
@@ -1247,12 +1249,12 @@ $\textcolor{blue}{(v_n)}$ and $\textcolor{Green}{(u_n)}$ in a manner reminiscent
 
 \boldsubsubsection{Cauchy Sequences}
 
-We now come to perhaps the most important class of sequences, whose analogues will dominate your future studies.
+We now come to a class of sequences whose analogues will dominate your future studies.
 
 \begin{defn}{}{cauchy}
 	A sequence $(s_n)$ is \emph{Cauchy\footnotemark} if
 	\[
-		\forall\epsilon>0,\ \exists N\ \text{such that}\  m,n>N\implies\nm{s_n-s_m}<\epsilon
+		\forall\epsilon>0,\ \exists N\ \text{ such that }\  m,n>N\implies\nm{s_n-s_m}<\epsilon
 	\]
 \end{defn}
 
@@ -1264,9 +1266,9 @@ A sequence is Cauchy when terms in the tails of the sequence are constrained to 
 
 
 \begin{examples}{}{cauchy}
-	\exstart Let $s_n=\frac 1n$. Let $\epsilon>0$ be given and let $N=\frac 1\epsilon$. Then\footnotemark
+	\exstart Let $s_n=\frac 1n$. Let $\epsilon>0$ be given and let $N=\frac 1\epsilon$. Then
 	\[
-		m>n>N\implies \nm{s_m-s_n}=\frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon
+		m>n>N\implies \nm{s_m-s_n}=\frac 1n-\frac 1m<\frac 1n<\frac 1N=\epsilon \tag{WLOG $m>n$}
 	\]
 	Thus $(s_n)$ is Cauchy. A similar argument works for any $s_n=\frac 1{n^k}$ for positive $k$.
 	  
@@ -1314,9 +1316,7 @@ A sequence is Cauchy when terms in the tails of the sequence are constrained to 
 	\end{enumerate}
 \end{examples}
 
-\footnotetext{%
-	Since $m,n$ are arbitrary, WLOG we may assume $m>n$; equality is never interesting in these situations. This assumption is very common and we'll use it repeatedly without comment.%
-}
+
 
 The last picture illustrates the essential point of Cauchy sequences: $(s_n)$ appears to converge\ldots
 
@@ -1356,23 +1356,23 @@ The last picture illustrates the essential point of Cauchy sequences: $(s_n)$ ap
 			
 			\goodbreak
 			
-			\item[\normalfont($\limsup s_n=\liminf s_n$)] Since $(s_n)$ is Cauchy, given $\epsilon>0$,
+			\item[\normalfont($\limsup s_n=\liminf s_n$)] Suppose $\epsilon>0$ is given. Since $(s_n)$ is Cauchy,
 			\[
-				\exists N\text{ such that }m,n>N\implies \nm{s_n-s_m}<\epsilon\implies s_n<s_m+\epsilon
+				\exists N\in\N\text{ such that }m,n>N\implies \nm{s_n-s_m}<\epsilon\implies s_n<s_m+\epsilon
 			\]
-			Taking $v_N=\sup\{s_n:n>N\}$, we see that
+			Take the supremum over all $n>N$: since $v_{N+1}=\sup\{s_n:n\ge N+1\}$, we see that
 			\[
-				m>N\implies v_N\le s_m+\epsilon
+				m>N\implies v_{N+1}\le s_m+\epsilon
 			\]
-			Now take the infimum of the right hand, to obtain
+			Now take the infimum of the right hand side over all $m>N$ to obtain
 			\[
-				v_N\le u_N+\epsilon \tag{since $u_N=\inf\{s_m:m>N\}$}
+				v_{N+1}\le u_{N+1}+\epsilon \tag{since $u_{N+1}=\inf\{s_m:m\ge N+1\}$}
 			\]
-			Since $(v_N)$ is monotone-down and $(u_N)$ monotone-up, we see that
+			Since $(v_{N+1})$ is monotone-down and $(u_{N+1})$ monotone-up, we see that
 			\[
-				\limsup s_n\le v_N\le u_N+\epsilon\le\liminf s_n+\epsilon \implies \limsup s_n\le \liminf s_n+\epsilon 
+				\limsup s_n\le v_{N+1}\le u_{N+1}+\epsilon\le\liminf s_n+\epsilon \implies \limsup s_n\le \liminf s_n+\epsilon 
 			\]
-			This last holds for all $\epsilon>0$, whence $\limsup s_n\le \liminf s_n$. By Lemma \ref{lemm:limsupinf} we have equality.
+			Since $\epsilon>0$ was arbitrary, we conclude that $\limsup s_n\le \liminf s_n$. By Lemma \ref{lemm:limsupinf} we have equality.
 		\end{description}
 
 		By Theorem \ref{thm:limbig}, we conclude that $(s_n)$ converges to $\limsup s_n=\liminf s_n$.\qedhere
@@ -1383,7 +1383,7 @@ The last picture illustrates the essential point of Cauchy sequences: $(s_n)$ ap
 By the Theorem, Examples \ref{ex:cauchy} all converge. All three limits can be found precisely (for instance, see Exercise \ref{exs:cauchygeomeval}). With a small modification to the second example, however, we obtain something genuinely new:
 
 \begin{example*}{\ref*{ex:cauchy}.\ref{ex:cauchy3} cont}{}
-	Let $s_1=5$ and , for each $n$, define $s_{n+1}=s_n+\frac{\sin n}{n(n+1)}$. Since $\nm{\sin n}\le 1$, the computation proceeds almost the same as before:
+	Let $s_1=5$ and, for each $n$, define $s_{n+1}:=s_n+\frac{\sin n}{n(n+1)}$. Since $\nm{\sin n}\le 1$, the computation proceeds almost the same as before:
 	\[
 		\nm{s_{n+1}-s_n}=\frac{\nm{\sin n}}{n(n+1)}\le \frac 1{n(n+1)}=\cdots
 	\]
@@ -1578,7 +1578,7 @@ Our main goal in this section is to prove the famous Bolzano--Weierstraß theore
 \end{example}
 
 \begin{proof}
-	We prove only the $\limsup$ claim; the other is similar. There are three cases to consider; visualizing the third is particularly difficult and may take several readings.
+	We prove only the $\limsup$ claim, since the other is similar. There are three cases to consider; visualizing the third is particularly difficult and may take several readings.
 	\begin{description}
 	  \begin{minipage}[t]{0.56\linewidth}\vspace{-10pt}
 		  \item[\normalfont ($\limsup s_n=\infty$)]\lstsp Since $(s_n)$ is unbounded above, for any $k>0$ there exist \emph{infinitely many} terms $s_n>k$. We may therefore inductively choose a subsequence $(\textcolor{blue}{s_{n_k}})$ via
@@ -1605,11 +1605,13 @@ Our main goal in this section is to prove the famous Bolzano--Weierstraß theore
 	  \item[\normalfont ($\limsup s_n=v$ finite)]\lstsp Let $n_1=1$ and define $s_{n_k}$ for $k\ge 2$ inductively:
 		\begin{itemize}
 		  \item Since $(v_N)$ is monotone-down and converges to $v$, take $\epsilon=\frac 1{2k}$ to see that\footnotemark{}
-		  \[\exists N_k\ge n_{k-1}\text{ such that }v\le v_{N_k}<v+\frac 1{2k}\]
-	
-		  \item Since $v_{N_k}=\sup\{s_n:n>N_k\}$, Lemma \ref{lemm:contrasup} says
 		  \[
-		  	\exists n_k>N_k\text{ such that }s_{n_k}>v_{N_k}-\frac 1{2k}
+		  	\exists N_k> n_{k-1}\text{ such that }v\le v_{N_k}<v+\frac 1{2k}
+		  \]
+	
+		  \item Since $v_{N_k}=\sup\{s_n:n\ge N_k\}$, Lemma \ref{lemm:contrasup} says
+		  \[
+		  	\exists n_k\ge N_k\text{ such that }s_{n_k}>v_{N_k}-\frac 1{2k}
 		  \]
 		\end{itemize}
 		But then $\nm{v-s_{n_k}}\overset{\smash{\triangle}}{\le}\nm{v-v_{N_k}}+\nm{v_{N_k}-s_{n_k}}<\frac 1k$. The squeeze theorem says that $\lim\limits_{k\to\infty}s_{n_k}=v$.\hfill\qedhere
@@ -1617,7 +1619,7 @@ Our main goal in this section is to prove the famous Bolzano--Weierstraß theore
 \end{proof}
 
 \footnotetext{%
-	$(v_N)$ being monotone-down is crucial: if $N$ satisfies $v_N-v<\frac 1{2k}$, so does $N_k:=\max(N,n_{k-1})$.%
+	$(v_N)$ being monotone-down is crucial: if $N$ satisfies $v_N-v<\frac 1{2k}$, so does $N_k:=\max(N,1+n_{k-1})$.%
 }
 
 
@@ -1625,16 +1627,22 @@ Our main goal in this section is to prove the famous Bolzano--Weierstraß theore
 
 
 \begin{example*}{\ref{ex:subseqconv} cont.}{}
-	The example shows why the two-step construction is necessary. It may seem that we should simply be able to modify subsequences of $(u_N)$ and $(v_N)$. Indeed,
-	\[(u_N)=\bigl(-1,-1,-1,\textcolor{Green}{-1}, -\tfrac 12,-\tfrac 12,-\tfrac 12,\textcolor{Green}{-\tfrac 12}, -\tfrac 13,-\tfrac 13,-\tfrac 13,\textcolor{Green}{-\tfrac 13},\ldots\bigr)\]
-	contains a monotonic subsequence of $(s_n)$ converging to $\liminf s_n=0$. Unfortunately, the same isn't true for $(v_N)=(2,1,1,1,1\ldots)$, where $v_{N_k}=1$ for all $k\ge 2$; taking $n_k=2k-1$ results in
+	The example shows why the two-step construction is necessary. It may seem that we should simply be able to choose subsequences of $(u_N)$ and $(v_N)$. Indeed,
 	\[
-		\textcolor{blue}{s_{n_k}}=1-\frac 1{2k-1}>1-\frac 1{2k} =v_{N_k}-\frac 1{2k}
+		(u_N)=\bigl(
+		\underbrace{-1,-1,-1,\textcolor{Green}{-1}}_{s_4}, 
+		\underbrace{-\tfrac 12,-\tfrac 12,-\tfrac 12,\textcolor{Green}{-\tfrac 12}}_{s_8}, 
+		\underbrace{-\tfrac 13,-\tfrac 13,-\tfrac 13,\textcolor{Green}{-\tfrac 13}}_{s_{12}},
+		\ldots\bigr)
+	\]
+	contains a \textcolor{Green}{subsequence} of $(s_n)$ converging to $\liminf s_n=0$. Unfortunately, $(v_N)=(2,2,1,1,1,\ldots)$ does not contain a subsequence of $(s_n)$. Taking $n_k=2k+1$ ($k\ge 2$) results in the \textcolor{blue}{displayed sequence}:
+	\[
+		\textcolor{blue}{s_{n_k}}=1-\frac 1{2k+1}>1-\frac 1{2k} =v_{N_k}-\frac 1{2k}
 	\]
 \end{example*}
 
 
-The above discussion rapidly provides two results, the first being the $(\Leftarrow)$ direction of Theorem \ref{thm:limbig} (see Exercise \ref{exs:liminfsuplim}), fully establishing
+There are two immediate corollaries. The first (see Exercise \ref{exs:liminfsuplim}) fully establishes Theorem \ref{thm:limbig}
 \[
 	\limsup s_n=\liminf s_n \iff \lim s_n\text{ exists} \tag{could be $\pm\infty$}
 \]
@@ -1759,35 +1767,38 @@ Let $(s_n)$ be a sequence in $\R$ and let $S$ be its set of subsequential limits
 \begin{proof}
 \begin{enumerate}
   \item By Theorem \ref{thm:subseqhard}, $\limsup s_n\in S$.
-  \item By part 1, $\limsup s_n\le \sup S$. For any convergent subsequence $(s_{n_k})$, we have $n_k\ge k$, whence
-	\[\forall N,\ \{s_{n_k}:k>N\}\subseteq\{s_n:n>N\}\implies \lim s_{n_k}=\limsup s_{n_k}\le\limsup s_n\]
-	Since this holds for \emph{every} convergent subsequence, we have $\sup S\le\limsup s_n$, and therefore equality. The result for $\inf S$ is similar.
-  \item Applying Theorem \ref{thm:limbigboth}, we see that $\lim s_n$ exists if and only if
-  \begin{align*}
-		\limsup s_n=\liminf s_n&\iff \sup S=\inf S \iff S\text{ has only one element}\tag*{\qedhere}
-	\end{align*}
+  \item By part 1, $\limsup s_n\le \sup S$. For any convergent subsequence $(s_{n_k})$ we have $n_k\ge k$, whence
+	\[
+		\forall N,\ \{s_{n_k}:k\ge N\}\subseteq\{s_n:n\ge N\}\implies \lim s_{n_k}=\limsup s_{n_k}\le\limsup s_n
+	\]
+	Since this holds for \emph{every} convergent subsequence, we have $\sup S\le\limsup s_n$ and therefore equality. The result for $\inf S$ is similar.
+  \item Applying Theorem \ref{thm:limbig}, we see that $\lim s_n$ exists if and only if
+  \[
+		\limsup s_n=\liminf s_n \iff \sup S=\inf S \iff S\text{ has only one element}\tag*{\qedhere}
+	\]
 \end{enumerate}
 \end{proof}
 
 \boldinline{Closed Sets}
 
-You should be comfortable with the notion of a \emph{closed interval} (e.g.{} $[0,1]$) from elementary calculus. Using sequences, we can make a formal definition. 
+You should be comfortable with the notion of a \emph{closed interval} (e.g.{} $[0,1]$) from elementary calculus. Sequences allow us to make a formal definition. 
 
 \begin{defn}{}{closed}
 	Let $A\subseteq\R$.
 	\begin{itemize}
 	  \item We say that $s\in\R$ is a \emph{limit point} of $A$ if there exists a sequence $(s_n)\subseteq A$ converging to $s$.
-	  \item The \emph{closure} $\cl A$ is the set of limit points of $A$.
+	  \item The \emph{closure} $\cl A$ is the set of limit points of $A$. Plainly $A\subseteq\cl A$ for any set.
 	  \item $A$ is \emph{closed} if it equals its closure: $A=\cl A$.
 	\end{itemize}
 \end{defn}
 
-\begin{examples}{}{}
+\begin{examples}{}{closedex}
 	\exstart The interval $[0,1]$ is closed. If $(s_n)\subseteq [0,1]$ has $\lim s_n=s$, then
   \[0\le s_n\le 1 \smash[t]{\overset{\text{Thm \ref{thm:limitgreatk}}}{\implies}} s\in [0,1]\]
   More generally, every `closed interval' $[a,b]$ is closed, as are \emph{finite} unions of closed intervals, for instance $[1,5]\cup[7,11]$.
 	\begin{enumerate}\setcounter{enumi}{1}
-  	\item The interval $(0,1]$ is not closed since its closure is $\cl{(0,1]}=[0,1]$. In particular, the sequence $s_n=\frac 1n$ lies in the original interval but has limit $0$. Indeed this example shows that an \emph{infinite} union of closed intervals need not be closed.
+  	\item\label{ex:closedex2} The `half-open' interval $(0,1]$ is not closed: its closure is $\cl{(0,1]}=[0,1]$. In particular, the sequence $s_n=\frac 1n$ lies in $(0,1]$, but $\lim s_n=0\not\in(0,1]$.
+  	\item Example \ref*{ex:subseqlim}.\ref{ex:subseqlim2} shows that the closure of the rational numbers is the reals: $\cl\Q=\R$.
 	\end{enumerate}
 \end{examples}
 
@@ -1796,14 +1807,18 @@ You should be comfortable with the notion of a \emph{closed interval} (e.g.{} $[
 If $(s_n)$ is a sequence, then its set of (finite) subsequential limits is closed.
 \end{thm}
 
-We omit the proof since it is hard to read, involving unpleasantly many subscripts (subsequences of subsequences\ldots). %The theorem essentially says that one can make a set closed by throwing in all its sequential limits.
-
+We omit the proof since it involve unpleasantly many subscripts (subsequences of subsequences\ldots).
+ \vfil
 
 \goodbreak
 
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad ????}
+	\emph{Key concepts:\quad Subsequences of a convergent sequence all have the same limit,}\vspace{-5pt}
+	\begin{quote}
+		\emph{Existence of (monotone) subsequences tending to $\limsup s_n/\liminf s_n$,\quad Subsequential Limits,}\par
+		\emph{Bolzano--Weierstraß: boundedness $\Longrightarrow \exists$ convergent subsequence}
+	\end{quote}
 	
 	\begin{enumerate}
 	  \item%[2.]
@@ -1812,10 +1827,8 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 			a_n=(-1)^n\qquad b_n=\frac 1n\qquad c_n=n^2\qquad d_n=\frac{6n+4}{7n-3}
 		\]
 		\begin{enumerate}
-		  \item For each sequence, give an example of a monotone subsequence.
-		  \item For each sequence, state its set of subsequential limits.
-		  \item For each sequence, state its $\limsup$ and $\liminf$.
-		  \item Which of the sequences converge? diverge to $+\infty$? diverge to $-\infty$?
+		  \item For each sequence: give an example of a monotone subsequence, state the set of subsequential limits, and state the limits superior and inferior.
+		  \item Which of the sequences converge? Diverge to $+\infty$? Diverge to $-\infty$?
 		  \item Which of the sequences are bounded?
 	  \end{enumerate}
   
@@ -1826,7 +1839,7 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 % 	  Show that every subsequence of a subsequence of a given sequence is itself a subsequence of the given sequence.
 
 		\item\label{exs:liminfsuplim} Suppose that $\lim s_n=s$ (could be $\pm \infty$). Use Theorem \ref{thm:subseqhard} and Lemma \ref{lemm:subseqconv} to prove that $\limsup s_n=s=\liminf s_n$.\par
-		(\emph{This completes the proof of Theorem \ref{thm:limbigboth}})
+		(\emph{This completes the proof of Theorem \ref{thm:limbig}})
 	
   
 		\item Suppose that $L=\lim s_n^2$ exists and is finite.
@@ -1845,6 +1858,9 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
   		\item Show that the closed interval $[a,b]$ is a closed set in the sense of Definition \ref{defn:closed}.
   		\item Is there a sequence $(s_n)$ such that $(0,1)$ is its set of subsequential limits?
   	\end{enumerate}
+  	
+  	 
+  	\item By considering Example \ref*{ex:closedex}.\ref{ex:closedex2}, or otherwise, show that an \emph{infinite} union of closed intervals need not be closed.
   
   
   	\item%[7.]
@@ -1859,8 +1875,10 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 		  \item Find the set $S$ of subsequential limits of $(s_n)$.
 		  \item Determine $\limsup s_n$ and $\liminf s_n$.
 	  \end{enumerate}
-  	\end{minipage}\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}
-  		\hfill\includegraphics{diag-arg}
+  	\end{minipage}
+  	\hfill
+  	\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}
+  		\flushright\includegraphics[scale=0.95]{diag-arg}
   	\end{minipage}
   
   
@@ -1875,31 +1893,39 @@ We omit the proof since it is hard to read, involving unpleasantly many subscrip
 
 \subsection{Lim sup and Lim inf}
 
-In this section we collect a couple of useful results, mostly for later use. First, we observe that the limit laws do not work as tightly for limits superior and inferior.
+In this short section we collect a couple of useful results, mostly for later use. First we observe that the limit laws do not work as tightly for limits superior and inferior.
 
 \begin{thm}{}{}
-	Let $(s_n),(t_n)$ be bounded sequences.
+	Let $(s_n),(t_n)$ be bounded sequences. Then:
 	\begin{enumerate}
 	  \item $\limsup(s_n+t_n)\le\limsup s_n+\limsup t_n$
 	  \item If, in addition, $(s_n)$ is convergent to $s$, then we have equality
-	\[\limsup(s_n+t_n)=s+\limsup t_n\]
+		\[
+			\limsup(s_n+t_n)=s+\limsup t_n
+		\]
 	\end{enumerate}
 \end{thm}
 
-Modifications can be made infima and products of sequences (Exercise \ref{exs:limsupprod}).
+Natural modifications can be made for infima and products of sequences (see Exercise \ref{exs:limsupprod}).
 
 \begin{example}{}{}
-	To see that equality is unlikely, take $s_n=(-1)^n=-t_n$, then
-	\[\limsup(s_n+t_n)=0<2=\limsup s_n+\limsup t_n\]
+	To convince yourself that equality is unlikely, consider $s_n=(-1)^n=-t_n$. Plainly
+	\[
+		\limsup(s_n+t_n)=0<2=\limsup s_n+\limsup t_n
+	\]
 \end{example}
 
 \begin{proof}
 \begin{enumerate}
-  \item For each $N$, the set $\{s_n+t_n:n>N\}$ is bounded above by
-	\[\sup\{s_n:n>N\}+\sup\{t_n:n>N\}\]
+  \item For each $N$, the set $\{s_n+t_n:n\ge N\}$ is bounded above by
+	\[
+		\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
+	\]
 	from which
-	\[\sup\{s_n+t_n:n>N\}\le\sup\{s_n:n>N\}+\sup\{t_n:n>N\}\]
-	Simply take limits as $N\to\infty$ for the first result.\smallbreak
+	\[
+		\sup\{s_n+t_n:n\ge N\}\le\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
+	\]
+	Take limits as $N\to\infty$ for the first result.\smallbreak
 	
 % 	
 % 	Now let $(t_{n_k})$ be a subsequence converging to $\limsup t_n$ (exists by Theorem \ref{thm:subseqhard}). Then
@@ -1908,12 +1934,14 @@ Modifications can be made infima and products of sequences (Exercise \ref{exs:li
 % 	\[s+\limsup t_n\le \limsup(s_n+t_n)\]
 % 	Combining with ($\ast$) gives the result.
 	
-	\item By part 1, we already know that
-	\[\limsup(s_n+t_n)\le s+\limsup t_n\]
-	For the other direction, let $a_n=s_n+t_n$ and apply part 1 again:
+	\item By part 1, we know that
+	\[
+		\limsup(s_n+t_n)\le s+\limsup t_n
+	\]
+	For the other direction, rearrange and apply part 1 again:
 	\begin{align*}
-	\limsup t_n&=\limsup \bigl((s_n+t_n)-s_n\bigr)\le \limsup (s_n+t_n)+\limsup(-s_n)\\
-	&=\limsup(s_n+t_n)-s\tag*{\qedhere}
+		\limsup t_n&=\limsup \bigl((s_n+t_n)-s_n\bigr)\le \limsup (s_n+t_n)+\limsup(-s_n)\\
+		&=\limsup(s_n+t_n)-s \tag*{\qedhere}
 	\end{align*}
 \end{enumerate}
 \end{proof}
@@ -1923,51 +1951,51 @@ The next result will be critical when we study infinite series, particularly the
 
 \begin{thm}{}{rootratio}
 	Let $(s_n)$ be a non-zero sequence. Then
-	\[\liminf\nm{\frac{s_{n+1}}{s_n}}\le\liminf\nm{s_n}^{1/n}\le\limsup\nm{s_n}^{1/n}\le \limsup\nm{\frac{s_{n+1}}{s_n}}\]
-	In particular, $\displaystyle\lim\nm{\frac{s_{n+1}}{s_n}}=L\implies \lim\nm{s_n}^{1/n}=L$ \hfill$(\dag)$
+	\[
+		\liminf\nm{\frac{s_{n+1}}{s_n}}
+		\le\liminf\nm{s_n}^{1/n}
+		\le\limsup\nm{s_n}^{1/n}
+		\le\limsup\nm{\frac{s_{n+1}}{s_n}}
+	\]
+	In particular, $\lim\nm{\frac{s_{n+1}}{s_n}}=L\Longrightarrow \lim\nm{s_n}^{1/n}=L$. \hfill$(\dag)$
 \end{thm}
 
 
 \begin{examples}{}{}
-	\exstart Here is a quick proof that $\lim n^{1/n}=1$ (recall Theorem \ref{thm:limlaw2}): let $s_n=n$, then
-  \[\lim\nm{\frac{s_{n+1}}{s_n}}=\lim\frac{n+1}n=1\implies \lim n^{1/n}=\lim\nm{s_n}^{1/n}=1\]
+	\exstart Here is a quick proof that $\lim n^{1/n}=1$ (recall Theorem \ref{thm:limlaw2}). Let $s_n=n$, then
+  \[
+  	\lim\nm{\frac{s_{n+1}}{s_n}}=\lim\frac{n+1}n=1\implies \lim n^{1/n}=\lim\nm{s_n}^{1/n}=1
+  \]
 \begin{enumerate}\setcounter{enumi}{1}
-  \item Let $s_n=n!$ and apply the corollary to see that
-  \[\lim(n!)^{1/n}=\lim\nm{\frac{s_{n+1}}{s_n}}=\lim(n+1)=\infty\]
+  \item Apply the corollary to $s_n=n!$ to see that
+  \[
+  	\lim(n!)^{1/n} 
+  	=\lim\nm{\frac{s_{n+1}}{s_n}} 
+  	=\lim(n+1)=\infty
+  \]
 \end{enumerate}
 
 
 \begin{proof}
-% 	Choose any $a$ for which $0<a<\liminf\nm{\frac{s_{n+1}}{s_n}}$ (the first inequality is trivial if the left side is zero). Then
-% 	\[
-% 		\lim_{N\to\infty}\inf\left\{\nm{\frac{s_{n+1}}{s_n}}:n>N\right\}>a\implies\exists 
-% 		N\text{ such that }\inf\left\{\nm{\frac{s_{n+1}}{s_n}}:n>N\right\}>a
-% 	\]
-% 	For any $n>N$, we therefore have
-% 	\begin{align*}
-% 		\nm{\frac{s_{n+1}}{s_n}}>a&\implies \nm{s_n}\ge a^{n-N-1}\nm{s_{N+1}} \implies \nm{s_n}^{1/n}\ge a\left(a^{-N-1}\nm{s_{N+1}}\right)^{1/n}\\
-% 		&\implies \liminf\nm{s_n}^{1/n}\ge a\lim\left(a^{-N-1}\nm{s_{N+1}}\right)^{1/n}=a \tag{$\lim b^{1/n}=1$}
-% 	\end{align*}
-% 	Since $\liminf\nm{s_n}^{1/n}\ge a$ for all $a<\liminf\nm{\frac{s_{n+1}}{s_n}}$, we conclude the first inequality.\smallbreak
-% 	The second inequality is trivial, and the third is similar to the first.
-% 	
-	Assume $\limsup\nm{\frac{s_{n+1}}{s_n}}=L\neq \infty$ (otherwise the third inequality is trivial) and let $\epsilon>0$. Then
+	We prove the third inequality. Assume $\limsup\nm{\frac{s_{n+1}}{s_n}}=L\neq \infty$ (otherwise the inequality is trivial). Suppose $\epsilon>0$ is given, and denote $a=L+\epsilon$. Then
 	\[
-		\lim_{N\to\infty}\sup\left\{\nm{\frac{s_{n+1}}{s_n}}:n>N\right\}<L+\epsilon\implies\exists 
-		N\text{ such that }\sup\left\{\nm{\frac{s_{n+1}}{s_n}}:n>N\right\}<L+\epsilon
+		L=\lim_{N\to\infty} \sup\left\{\nm{\frac{s_{n+1}}{s_n}}:n\ge N\right\}
+		<a\implies
+		\exists N\text{ such that }
+		\sup\left\{\nm{\frac{s_{n+1}}{s_n}}:n\ge N\right\}<a
 	\]
-	For brevity, denote $a=L+\epsilon$ and $b=a^{-N-1}\nm{s_{N+1}}$. For any $n>N$, we therefore have
+	Now let $b=a^{-N}\nm{s_{N}}$. For any $n\ge N$, we therefore have $\nm{\frac{s_{n+1}}{s_n}}<a$, whence
 	\begin{align*}
-		\nm{\frac{s_{n+1}}{s_n}}<a&\implies \nm{s_n}< a^{n-N-1}\nm{s_{N+1}} \implies \nm{s_n}^{1/n}< a\left(a^{-N-1}\nm{s_{N+1}}\right)^{1/n} =ab^{1/n}\\
+		n>N&\implies \nm{s_n}< a^{n-N}\nm{s_{N}} \implies \nm{s_n}^{1/n}< a\left(a^{-N}\nm{s_{N}}\right)^{1/n} =ab^{1/n}\\
 		&\implies \limsup\nm{s_n}^{1/n}\le a\lim b^{1/n}=a=L+\epsilon
 	\end{align*}
-	Since this holds for all $\epsilon>0$, we conclude the third  inequality: $\limsup\nm{s_n}^{1/n}\le L$.\smallbreak
+	Since $\epsilon>0$ was arbitrary, we conclude the third inequality: $\limsup\nm{s_n}^{1/n}\le L$.\smallbreak
 	The second inequality is trivial and the first is similar to the third.
 \end{proof}
 \end{examples}
 
 \begin{exercises}{}{}
-	\emph{Key concepts/results:\quad ????}
+	\emph{Key concepts:\quad ``Limit laws'' for $\limsup$ and $\liminf$,\quad $\lim\nm{\frac{s_{n+1}}{s_n}}=\lim\nm{s_n}^{1/n}$}
 	
 	%\exstart Compute $\lim \frac 1n(n!)^{1/n}$\vspace{-5pt}
 %  and consider $s_n=\frac{n!}{n^n}$. Since
@@ -2005,11 +2033,13 @@ The next result will be critical when we study infinite series, particularly the
 % 		Combining with part (a) gives the result.
 % 	\end{enumerate}
 
-		%\item Give an alternative proof 
 
 		\item Consider the sequence with $s_{2m}=s_{2m+1}=2^{-m}$:
-		\[(s_n)_{n=0}^\infty=\left(1,1,\frac 12,\frac 12,\frac 14,\frac 14,\frac 18,\frac 18,\ldots\right)\]
-		Compute $\nm{s_n}^{1/n}$ and $\nm{\frac{s_{n+1}}{s_n}}$ when $n$ is even and then when it is odd. Thus find all expressions in Theorem \ref{thm:rootratio} and hence conclude that the converse of $(\dag)$ is \emph{false.}
+		\[
+			(s_n)_{n=0}^\infty
+			=\left(1,1,\frac 12,\frac 12,\frac 14,\frac 14,\frac 18,\frac 18,\ldots\right)
+		\]
+		Compute $\nm{s_n}^{1/n}$ and $\nm{\frac{s_{n+1}}{s_n}}$ when $n$ is even and then when it is odd. Thus find all expressions in Theorem \ref{thm:rootratio} and conclude that the converse of $(\dag)$ is \emph{false.}
 
 
 	\end{enumerate}

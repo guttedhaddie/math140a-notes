@@ -17,13 +17,13 @@ int Max=16;
 
 dot((1,f(1)),red);
 	
-for(int j=2; j<=Max+1; ++j){
+for(int j=1; j<=Max+1; ++j){
 	real[] a=sequence(j,Max+20);
 	real M=max(map(f,a));
 	real m=min(map(f,a));
 	dot((j,f(j)),red);
-	dot((j-1,M),blue,NoFill);
-	dot((j-1,m),deepgreen+linewidth(0.6),NoFill);
+	dot((j,M),blue,NoFill);
+	dot((j,m),deepgreen+linewidth(0.6),NoFill);
 	}
 	
 clip(box((0,-10),(Max+0.5,20)));
@@ -39,9 +39,9 @@ yaxis(0,12,red,LeftTicks(new real[]{0}));
 labely("$s_n$",11.5,W,red);
 labely("$u_N$",2.5,W,deepgreen);
 labely("$v_N$",10.5,W,blue);
-labelx("$n/N$",Max-1,S,red);
+labelx("$n,\!N$",Max-0.8,S,red);
 
 xtick(Label("$3$",align=S),3,S,deepgreen);
-xtick(Label("$7$",align=S),7,S,blue);
-draw(reflect((0,0),(1,0))*brace((4,2),(Max,2),0.5),deepgreen);
-label("$u_3=\inf\{s_n:n>3\}$",(4+(Max-4)/2,-3.3),deepgreen);
+xtick(Label("$13$",align=S),13,S,blue);
+draw(Label("$u_3=\inf\{s_n:n\ge 3\}$",align=S),brace((3,-2.5),(Max,-2.5),-0.5),deepgreen);
+

@@ -17,13 +17,13 @@ int Max=40;
 
 dot((1,f(1)),red);
 	
-for(int j=2; j<=Max; ++j){
+for(int j=1; j<=Max; ++j){
 	real[] a=sequence(j,Max+20);
 	real M=max(map(f,a));
 	real m=min(map(f,a));
 	dot((j,f(j)),red);
-	dot((j-1,M),blue,NoFill);
-	dot((j-1,m),darkgreen,NoFill);
+	dot((j,M),blue,NoFill);
+	dot((j,m),darkgreen,NoFill);
 	}
 	
 //label("$\sup\{s_n:n>N\}$",(70,4),blue);
