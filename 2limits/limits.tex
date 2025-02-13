@@ -1912,34 +1912,34 @@ Natural modifications can be made for infima and products of sequences (see Exer
 \end{example}
 
 \begin{proof}
-\begin{enumerate}
-  \item For each $N$, the set $\{s_n+t_n:n\ge N\}$ is bounded above by
-	\[
-		\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
-	\]
-	from which
-	\[
-		\sup\{s_n+t_n:n\ge N\}\le\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
-	\]
-	Take limits as $N\to\infty$ for the first result.\smallbreak
-	
-% 	
-% 	Now let $(t_{n_k})$ be a subsequence converging to $\limsup t_n$ (exists by Theorem \ref{thm:subseqhard}). Then
-% 	\[\lim_{k\to\infty}\bigl(s_{n_k}+t_{n_k}\bigr) =s+\limsup t_n\]
-% 	By Theorem \ref{thm:ssqlimit}, $\limsup(s_n+t_n)$ is the supremum of the set of subsequential limits of	$(s_n+t_n)$, whence
-% 	\[s+\limsup t_n\le \limsup(s_n+t_n)\]
-% 	Combining with ($\ast$) gives the result.
-	
-	\item By part 1, we know that
-	\[
-		\limsup(s_n+t_n)\le s+\limsup t_n
-	\]
-	For the other direction, rearrange and apply part 1 again:
-	\begin{align*}
-		\limsup t_n&=\limsup \bigl((s_n+t_n)-s_n\bigr)\le \limsup (s_n+t_n)+\limsup(-s_n)\\
-		&=\limsup(s_n+t_n)-s \tag*{\qedhere}
-	\end{align*}
-\end{enumerate}
+	\begin{enumerate}
+	  \item For each $N$, the set $\{s_n+t_n:n\ge N\}$ is bounded above by
+		\[
+			\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
+		\]
+		from which
+		\[
+			\sup\{s_n+t_n:n\ge N\}\le\sup\{s_n:n\ge N\}+\sup\{t_n:n\ge N\}
+		\]
+		Take limits as $N\to\infty$ for the first result.\smallbreak
+		
+	% 	
+	% 	Now let $(t_{n_k})$ be a subsequence converging to $\limsup t_n$ (exists by Theorem \ref{thm:subseqhard}). Then
+	% 	\[\lim_{k\to\infty}\bigl(s_{n_k}+t_{n_k}\bigr) =s+\limsup t_n\]
+	% 	By Theorem \ref{thm:ssqlimit}, $\limsup(s_n+t_n)$ is the supremum of the set of subsequential limits of	$(s_n+t_n)$, whence
+	% 	\[s+\limsup t_n\le \limsup(s_n+t_n)\]
+	% 	Combining with ($\ast$) gives the result.
+		
+		\item By part 1, we know that
+		\[
+			\limsup(s_n+t_n)\le s+\limsup t_n
+		\]
+		For the other direction, rearrange and apply part 1 again:
+		\begin{align*}
+			\limsup t_n&=\limsup \bigl((s_n+t_n)-s_n\bigr)\le \limsup (s_n+t_n)+\limsup(-s_n)\\
+			&=\limsup(s_n+t_n)-s \tag*{\qedhere}
+		\end{align*}
+	\end{enumerate}
 \end{proof}
 
 
@@ -1962,14 +1962,15 @@ The next result will be critical when we study infinite series, particularly the
   \[
   	\lim\nm{\frac{s_{n+1}}{s_n}}=\lim\frac{n+1}n=1\implies \lim n^{1/n}=\lim\nm{s_n}^{1/n}=1
   \]
-\begin{enumerate}\setcounter{enumi}{1}
-  \item Apply the corollary to $s_n=n!$ to see that
-  \[
-  	\lim(n!)^{1/n} 
-  	=\lim\nm{\frac{s_{n+1}}{s_n}} 
-  	=\lim(n+1)=\infty
-  \]
-\end{enumerate}
+	\begin{enumerate}\setcounter{enumi}{1}
+	  \item Apply the corollary to $s_n=n!$ to see that
+	  \[
+	  	\lim(n!)^{1/n} 
+	  	=\lim\nm{\frac{s_{n+1}}{s_n}} 
+	  	=\lim(n+1)=\infty
+	  \]
+	\end{enumerate}
+\end{examples}
 
 
 \begin{proof}
@@ -1988,7 +1989,7 @@ The next result will be critical when we study infinite series, particularly the
 	Since $\epsilon>0$ was arbitrary, we conclude the third inequality: $\limsup\nm{s_n}^{1/n}\le L$.\smallbreak
 	The second inequality is trivial and the first is similar to the third.
 \end{proof}
-\end{examples}
+
 
 \begin{exercises}{}{}
 	\emph{Key concepts:\quad ``Limit laws'' for $\limsup$ and $\liminf$,\quad $\lim\nm{\frac{s_{n+1}}{s_n}}=\lim\nm{s_n}^{1/n}$}
