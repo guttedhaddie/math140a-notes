@@ -7,12 +7,16 @@
 
 
 What should be meant by the following expression?
-\[\sum_{n=1}^\infty \frac 1{n^2}=1+\frac 14+\frac 19+\frac 1{16}+\cdots\]
+\[
+	\sum_{n=1}^\infty \frac 1{n^2}=1+\frac 14+\frac 19+\frac 1{16}+\cdots
+\]
 The \emph{$\infty$}-symbol in the summation should lead you to suspect a role for \emph{limits\ldots}
 
 \begin{defn}{}{}
-	Define the \emph{$n\th$ partial sum} $s_n$ of a sequence $(a_n)_{n=m}^\infty$ via
-	\[s_n:=\smash{\sum_{k=m}^n}a_k=a_m+a_{m+1}+\cdots+a_n\]
+	The \emph{$n\th$ partial sum} $s_n$ of a sequence $(a_n)_{n=m}^\infty$ is the \textbf{finite sum}
+	\[
+		s_n:=\smash{\sum_{k=m}^n}a_k=a_m+a_{m+1}+\cdots+a_n
+	\]
 	\begin{itemize}
 	  \item The \emph{(infinite) series}\footnotemark{} $\smash[b]{\sum\limits_{n=m}^\infty a_n}$ is the limit $\lim s_n$ of the sequence $(s_n)$ of partial sums.
 	  \item A series \emph{converges, s to $\pm\infty$} or \emph{diverges by oscillation} as does the sequence $(s_n)$.
@@ -21,7 +25,9 @@ The \emph{$\infty$}-symbol in the summation should lead you to suspect a role fo
 	\end{itemize}
 \end{defn}
 
-\footnotetext{It is common to denote a series $\sum a_n$ if the initial term is understood (typically $a_0$ or $a_1$), or is irrelevant to the situation.}
+\footnotetext{%
+	If the initial term is understood or is irrelevant to the situation, it is common to write $\sum a_n$.%
+}
 
 %A series of non-negative terms can only converge (absolutely) or diverge to $+\infty$. 
 To return to our motivating example,
@@ -43,15 +49,19 @@ We don't (yet) know whether the series converges or diverges to $\infty$\ldots
 \begin{proof}
 	Simply apply the limit/divergence laws to the sequence of partial sums. E.g.{} for 1,
 	\[
-	  \sum ka_n = \lim_{n\to\infty}\sum_{j=m}^nka_j \overset{\text{finite}}{\overset{\text{sum}}{=}} \lim_{n\to\infty}k\sum_{j=m}^na_j \overset{\text{limit}}{\overset{\text{laws}}{=}} k\lim_{n\to\infty}\sum_{j=m}^na_j =k\sum a_n
+	  \sum ka_n = \lim_{n\to\infty}\sum_{j=m}^nka_j \overset{\text{finite}}{\overset{\text{sum}}{=}} 
+	  \lim_{n\to\infty}k\sum_{j=m}^na_j \overset{\text{limit}}{\overset{\text{laws}}{=}}
+	  k\lim_{n\to\infty}\sum_{j=m}^na_j =k\sum a_n
 	\]
 	The others may be proved similarly.
 \end{proof}
 
 
-Note that series do not behave nicely with respect to multiplication (see also Exercise \ref{exs:seriesmult}):
+Series \textbf{do not} behave nicely with respect to multiplication (see also Exercise \ref{exs:seriesmult}):
 \[
-	a_1b_1+a_2b_2+\cdots =\sum a_nb_n\neq \bigl(\sum a_n\bigr)\bigl(\sum b_n\bigr) =\bigl(a_1+a_2+\cdots\bigr)\bigl(b_1+b_2+\cdots\bigr)
+	a_1b_1+a_2b_2+\cdots 
+	=\sum a_nb_n\neq \bigl(\sum a_n\bigr)\bigl(\sum b_n\bigr) 
+	=\bigl(a_1+a_2+\cdots\bigr)\bigl(b_1+b_2+\cdots\bigr)
 \]
 
 \goodbreak
@@ -59,35 +69,50 @@ Note that series do not behave nicely with respect to multiplication (see also E
 
 \boldsubsection{Series which may be evaluated exactly}
 
-Our major goal is to develop techniques for answering the binary question, ``Does $\sum a_n$ converge?'' Even when the answer is \emph{yes,} a precise computation of the limit is usually beyond us. However, our techniques (the upcoming \emph{series tests}) will typically rely on comparing $\sum a_n$ to a `standard' series whose properties are completely understood. You have met two such series in elementary calculus.
+Given a series $\sum a_n$, our primary goal is to answer a simple question: ``Does it converge?'' Even when the answer is \emph{yes,} a precise computation of the limit will usually be beyond us. We instead develop techniques (the upcoming \emph{series tests}) which typically rely on comparing $\sum a_n$ to some `standard' series whose properties are completely understood: in particular\ldots
 
 \begin{defn}{Geometric series}{}
 	A sequence $(a_n)$ is \emph{geometric} if the ratio of successive terms is constant: $a_n=ba^n$ for some constants $a,b$. A \emph{geometric series} is the sum of a geometric sequence. 
 \end{defn}
 
 The computation of the sequence of partial sums should be familiar (for simplicity assume $b=1$)
-\[(1-a)s_n=\bigl(a^m+\textcolor{blue}{a^{m+1}+\cdots+a^n}\bigr)-\bigl(\textcolor{blue}{a^{m+1}+a^{m+2}+\cdots +a^n}+a^{n+1}\bigr) =a^m-a^{n+1}\]
+\[
+	(1-a)s_n
+	=\bigl(a^m+\textcolor{blue}{a^{m+1}+\cdots+a^n}\bigr)
+	-\bigl(\textcolor{blue}{a^{m+1}+a^{m+2}+\cdots +a^n}+a^{n+1}\bigr) 
+	=a^m-a^{n+1}
+\]
 from which we quickly conclude:
 
 \begin{thm}{}{}
-	If $a$ is constant, then
-	\[s_n=\sum_{k=m}^n a^k=\begin{cases}
-	\dfrac{a^m-a^{n+1}}{1-a}&\text{if }a\neq 1\\
-	n+1-m&\text{if }a=1
-	\end{cases}\implies \sum_{n=m}^\infty a^n\begin{cases}
-	\text{converges to }\dfrac{a^m}{1-a}&\text{if }\nm{a}<1\\
-	\text{diverges to $\infty$}&\text{if }a\ge 1\\
-	\text{diverges by oscillation}&\text{if }a\le -1
-	\end{cases}\]
+	Suppose $a$ is constant. Then
+	\[
+		s_n=\sum_{k=m}^n a^k=
+		\begin{cases}
+			\dfrac{a^m-a^{n+1}}{1-a}&\text{if }a\neq 1\\
+			n+1-m&\text{if }a=1
+		\end{cases}
+		\implies \sum_{n=m}^\infty a^n
+		\begin{cases}
+			\text{converges to }\dfrac{a^m}{1-a}&\text{if }\nm{a}<1\\
+			\text{diverges to $\infty$}&\text{if }a\ge 1\\
+			\text{diverges by oscillation}&\text{if }a\le -1
+		\end{cases}
+	\]
 	In particular, $\sum a^n$ converges absolutely if $\nm a<1$ and diverges otherwise. 
 \end{thm}
 
 
 \begin{examples}{}{}
-	\exstart $\displaystyle \sum_{n=-1}^\infty 2\left(-\frac 45\right)^n= 2\frac{\left(-\frac 45\right)^{-1}}{1+\frac 45} =-\frac 52\cdot\frac 59= -\frac{25}{18}$
+	\exstart $\displaystyle \sum_{n=-1}^\infty 2\left(-\frac 45\right)^n
+		=2\frac{\left(-\frac 45\right)^{-1}}{1+\frac 45} 
+		=-\frac 52\cdot\frac 59
+		=-\frac{25}{18}$
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item Consider the series $\sum a_n=\smash[b]{\sum\limits_{n=3}^\infty} \left(\frac 25\right)^n +2^n$. If this were convergent, then
-		\[\sum 2^n=\sum a_n-\sum\left(\frac 25\right)^n\]
+		\[
+			\sum 2^n=\sum a_n-\sum\left(\frac 25\right)^n
+		\]
 		would converge (Theorem \ref{thm:basicserieslaws}); a contradiction.
 	\end{enumerate}
 \end{examples}
@@ -99,55 +124,75 @@ A rarer type of series can be evaluated using the algebra of partial fractions.
 
 \begin{example}{}{}
 	To compute $\sum\limits_{n=1}^\infty\frac 1{n(n+1)}$, first  observe that
-	\[s_n=\sum_{k=1}^n\frac 1{k(k+1)} =\sum_{k=1}^n\frac 1k-\frac 1{k+1} =\frac 11\textcolor{blue}{-\frac 12+\frac 12-\frac 13+\cdots+\frac 1n}-\frac 1{n+1}=1-\frac 1{n+1}\]
+	\[
+		s_n=\sum_{k=1}^n\frac 1{k(k+1)} 
+		=\sum_{k=1}^n\frac 1k-\frac 1{k+1} 
+		=\frac 11\textcolor{blue}{-\frac 12+\frac 12-\frac 13+\cdots+\frac 1n}-\frac 1{n+1}
+		=1-\frac 1{n+1}
+	\]
 	It follows that
-	\[\sum_{n=1}^\infty\frac 1{n(n+1)}=\lim \left(1-\frac 1{n+1}\right)=1\]
+	\[
+		\sum_{n=1}^\infty\frac 1{n(n+1)}
+		=\lim \left(1-\frac 1{n+1}\right)=1
+	\]
 	Similar arguments can be made for other series such as $\sum\frac 1{n(n+2)}$.
 \end{example}
+
 
 \goodbreak
 
 
-\boldsubsubsection{The Cauchy Criterion}
+\boldsubsection{The Cauchy Criterion}
 
-The starting point for general series convergence uses Cauchy completeness.
+The starting point for our general series tests uses Cauchy completeness.
 
 \begin{example}{}{}
-	Consider again the series $\sum\frac 1{n^2}$. We show that the sequence of partial sums $(s_n)$ is Cauchy. Let $\epsilon>0$ be given and let $N=\frac 1\epsilon$. Then,
+	Consider again the series $\sum\frac 1{n^2}$. We show that the sequence of partial sums $(s_n)$ is Cauchy. Suppose $\epsilon>0$ is given and let $N=\frac 1\epsilon$. Then,
 	\begin{align*}
-	m>n>N\implies \nm{s_m-s_n}&=\sum_{k=n+1}^m\frac 1{k^2}<\sum_{k=n+1}^m\frac 1{k(k-1)} =\sum_{k=n+1}^m\frac 1{k-1}-\frac 1k\\
-	&=\frac 1n-\frac 1m<\frac 1N=\epsilon
+		m>n>N\implies \nm{s_m-s_n}
+		&=\sum_{k=n+1}^m\frac 1{k^2}<\sum_{k=n+1}^m\frac 1{k(k-1)} 
+		=\sum_{k=n+1}^m\frac 1{k-1}-\frac 1k\\
+		&=\frac 1n-\frac 1m<\frac 1N =\epsilon
 	\end{align*}
-	where we follow the telescoping series approach to cancel most terms. By Cauchy completeness (Theorem \ref{thm:convcauchy}), $(s_n)$ converges and we conclude
+	where most terms cancel analogous to the telescoping series approach. By Cauchy completeness (Theorem \ref{thm:convcauchy}), $(s_n)$ converges and we conclude
 	\[
-		\tcbhighmath{\text{The series $\displaystyle \sum\frac 1{n^2}$ is convergent}}
+		\tcbhighmath{\sum\frac 1{n^2}\ \text{ converges}}
 	\]
-	Computing the value of this series rigorously is significantly harder, though a sketch argument for why $\sum\frac 1{n^2}=\frac{\pi^2}6$ is in Exercise \ref{exs:eulersum}.
+	Computing the value of this series is significantly harder: a sketch argument for why $\sum_{n=1}^\infty\frac 1{n^2}=\frac{\pi^2}6$ is in Exercise \ref{exs:eulersum}.
 \end{example}
 
 \begin{thm}{Cauchy Criterion for Series}{}
 	A series $\sum a_n$ converges if and only if
 	\[
-		\forall\epsilon>0,\ \exists N\text{ such that }m\ge n>N\implies\nm{s_m-s_{n-1}}=\nm{\sum_{k=n}^ma_k}<\epsilon
+		\forall\epsilon>0,\ \exists N\text{ such that }m\ge n>N
+		\implies\nm{s_m-s_{n}}=\nm{\sum_{k=n+1}^ma_k}<\epsilon
 	\]
 \end{thm}
 
-In the previous example we essentially verified the Cauchy criterion for the series $\sum\frac 1{n^2}$.
+The previous example essentially verified the Cauchy criterion for $\sum\frac 1{n^2}$.
 
 \begin{proof}
 	Let $(s_n)$ be the sequence of partial sums. Then
 	\begin{align*}
-		\sum a_n\text{ converges}&\iff (s_n)\text{ converges} \iff (s_n)\text{ is Cauchy} \tag{Thm \ref{thm:convcauchy}}\\
-		&\iff \Bigl(\forall\epsilon>0,\ \exists N\text{ such that }m>n>N\implies\nm{s_m-s_n}<\epsilon\Bigr)
+		\sum a_n\text{ converges}
+		&\iff (s_n)\text{ converges} 
+		\iff (s_n)\text{ is Cauchy} 
+		\tag{Theorem \ref{thm:convcauchy}}\\
+		&\iff \Bigl(\forall\epsilon>0,\ \exists N\text{ such that }m\ge n>N
+		\Longrightarrow\nm{s_m-s_n}<\epsilon\Bigr)
 	\end{align*}
 	To finish, simply replace $n$ with $n-1$. 
 \end{proof}
 
 \begin{example}{}{harmonic}
 	Assume, for contradiction, that the \emph{harmonic series} $\sum\frac 1n$ converges. Now take $\epsilon=\frac 12$ in the Cauchy criterion:
-	\[\exists N\text{ such that }m\ge n>N\implies \nm{\sum_{k=n}^{m}\frac 1k}<\frac 12\]
+	\[
+		\exists N\text{ such that }m\ge n>N\implies \nm{\sum_{k=n}^{m}\frac 1k}<\frac 12
+	\]
 	However, taking $m=2(n-1)\ge n$ (true since $n>N\ge 1$) results in a contradiction: 
-	\[\frac 12>\nm{\sum_{k=n}^{m}\frac 1k}=\nm{\frac 1n+\cdots+\frac 1m}\ge \frac{m-(n-1)}{m}=1-\frac{n-1}m=\frac 12\]
+	\[
+		\frac 12>\nm{\sum_{k=n}^{m}\frac 1k}=\nm{\frac 1n+\cdots+\frac 1m}\ge \frac{m-(n-1)}{m}=1-\frac{n-1}m=\frac 12
+	\]
 	We conclude that the harmonic series diverges to $\infty$.
 \end{example}
 
