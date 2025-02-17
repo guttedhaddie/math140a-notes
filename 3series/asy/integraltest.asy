@@ -7,9 +7,9 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(200,160,IgnoreAspect);
+size(180,160,IgnoreAspect);
 
-real f(real x){return 1/x;}
+real f(real x){return 1/(x^0.85);}
 
 path p=graph(f,1,11.5);
 

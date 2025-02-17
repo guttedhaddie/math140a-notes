@@ -1,0 +1,156 @@
+\graphicspath{{notes/3series/asy/}}
+
+\pagestyle{empty}
+
+\boldsubsection{Solutions to Decimals Exercises}
+
+\begin{enumerate}
+  \item If $x=\frac{32}{13}$, we obtain
+  \[
+  	\def\arraystretch{1.4}
+  	\begin{array}{l||c|c|c|c|c|c|c|c}
+  		n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \cdots \\\hline
+  		d_n & \left\lfloor\frac{32}{13}\right\rfloor=2 
+  			& \left\lfloor\frac{60}{13}\right\rfloor=4 
+  			& \left\lfloor\frac{80}{13}\right\rfloor=6 
+  			& \left\lfloor\frac{20}{13}\right\rfloor=1 
+  			& \left\lfloor\frac{70}{13}\right\rfloor=5 
+  			& \left\lfloor\frac{50}{13}\right\rfloor=3 
+  			& \left\lfloor\frac{110}{13}\right\rfloor=8 
+  			%& \left\lfloor\frac{60}{13}\right\rfloor=4 
+  			& \cdots\\\hline
+  		R_n & \frac 6{13} & \frac 8{13} & \frac 2{13} & \frac 7{13} 
+  			& \frac 5{13} & \frac{11}{13} & \frac{6}{13} %& \frac 8{13} 
+  			& \cdots
+  	\end{array}
+  \]
+  Since $R_6=R_0$, the process repeats and we obtain $D(\frac{32}{13})=2.461538461538\cdots$
+  
+  \item\begin{enumeratea}
+  	\item Formally this requires induction. Informally, it should be clear that $0\le R_0<1$, whence $d_1=\lfloor 10R_0\rfloor$ is an integer $0\le d_0\le 9$.
+  	
+  	\item $D(x)$ converges trivially by the comparison test: $d_n\, 10^{-n}\le 9\cdot 10^{-n}$. Alternatively, the partial sums form a monotone-up sequence bounded above by $x$.\smallbreak
+  	Following the hint, let $E_n=x-\sum_{k=0}^nd_k\,10^{-k}$. We prove by induction that $R_n=10^nE_n$.\par
+  	The base case is obvious since $R_0=x-d_0=10^0E_0$.\par
+  	For the induction step, fix $n\in\N_0$ and assume $R_n=10^nE_n$. Then
+  	\begin{align*}
+  		R_{n+1}&=10R_n-d_{n+1} =10^{n+1}E_n-d_{n+1}\\
+  		&=10^{n+1}x-\sum\limits_{k=0}^nd_k\,10^{n-k}-d_{n+1}\\
+  		&=10^{n+1}\left(x-\sum\limits_{k=0}^{n+1}d_k\,10^{-k}\right) 
+  			=10^{n+1}E_{n+1}
+  	\end{align*}
+		But now $E_n=\frac 1{10^n}R_n\to 0$, since $0\le R_n<1$ for all $n$.
+		
+  	\item Following the hint, since $\sum\limits_{l=0}^\infty 10^{-rl} =\frac 1{1-10^{-r}} =\frac{10^r}{10^r-1} \in\Q$, we see that
+  	\[d_0.d_1\cdots d_md_{m+1}\cdots d_{m+r}d_{m+1}\cdots d_{m+r}\cdots =\sum_{k=0}^md_k\, 10^{-k}+\left(\sum_{j=1}^rd_{m+j}\,10^{-m-j}\right)\sum_{l=0}^\infty 10^{-rl}\]
+  	is rational.\par
+  	Conversely, suppose $x=\frac pq$ is rational in lowest terms. At each stage of the algorithm, one subtracts an integer after multiplying by 10. The denominator of $R_n$ is therefore always a divisor of $q$, whence
+  	\[
+  		R_n=\frac aq\ \text{ where }\ a\in\{0,1,\ldots,q-1\}
+  	\]
+  	For $n\in\{0,1,\ldots,q\}$ there are only $q$ possible remainders $R_n$: at least one of these must appear twice; $R_i=R_j$ for some $0\le i<j\le q$. Writing $r=j-i$, it follows that
+  	\[
+  		\forall k\ge i,\ d_{k+r}=d_k
+  	\]
+  	whence the decimal is eventually periodic.
+  	
+  	\item That the two series are equal is easy to check via the geometric series formula:
+  	\[9\sum_{n=m+1}^\infty 10^{-n}=\frac{9\cdot 10^{-m-1}}{1-1/10}=10^{-m}\]
+  	Now suppose that two different decimals are equal: that is
+  	\[\sum_{n=0}^\infty d_n\,10^{-n}=\sum_{n=0}^\infty c_n\,10^{-n}\]
+  	Suppose $m\in\N_0$ is minimal such that $c_m\neq d_m$ and assume WLOG that $c_m<d_m$. Then
+  	\begin{align*}
+  		&(d_m-c_m)10^{-m}+\sum_{n=m+1}^\infty d_n\,10^{-n}=\sum_{n=m+1}^\infty c_n\,10^{-n}\\
+  		\implies&(d_m-c_m)+\sum_{n=1}^\infty d_{n+m}\,10^{-n}=\sum_{n=1}^\infty c_{n+m}\,10^{-n}
+  	\end{align*}
+  	Consider the left and right sides of this equation:
+  	\begin{description}
+  		\item[Left Side] Since $d_m>c_m$, this is \emph{greater than or equal to} 1 with equality if and only if  $d_m=c_m+1$ and \emph{all} $d_{n+m}=0$.
+  		\item[Right Side] Since $9\sum_{n=1}^\infty 10^{-n}=1$, the right side is \emph{less than or equal to} 1 with equality if and only if \emph{all} $c_{n+m}=9$.
+  	\end{description}
+		We conclude that $d_m=c_m+1$, and that
+		\[
+			n>m\implies  d_n=0,\ c_n=9
+		\]
+	\end{enumeratea}
+	
+	\item\begin{enumeratea}
+		\item $D(x)$ terminates $\Longrightarrow x=\frac p{2^a5^b}$ is rational in lowest terms. For example, $x=\frac{193}{250} =\frac{193}{2\cdot 5^2}$ has a terminating decimal, namely $0.772$. Here is a general proof.\smallbreak
+		By the Theorem, we know that all possible candidates for a terminating decimal must be rational. Thus assume $x=\frac pq$ is rational in lowest terms. Observe that
+		\[
+			R_0=\frac pq-d_0=\frac{p-d_0q}q
+		\]
+		is a fraction with denominator $q$. Similarly,
+		\[
+			R_1=10R_0-\left\lfloor 10R_0\right\rfloor
+		\]
+		is $10R_0$ \emph{minus an integer}; it is therefore a fraction whose denominator is either $q$, $\frac 12q$, $\frac 15q$ or $\frac 1{10}q$. Iterating this process, we see that $R_n$ is a fraction with denominator
+		\[
+			q_n=\frac 1{2^a5^b}q
+			\quad\text{where}\quad 
+			a,b\in\N_0
+		\]
+		$D(x)$ terminates if and only if some $q_n=1$ (then $R_n=\frac 01=0$), which happens if and only if $x$ has the form described above.
+		
+		\item Think back to the proof. If $x=\frac pq$ is in lowest terms, then in the first $q+1$ remainders, one remainder must appear at least twice. The seemingly largest period is therefore $q$ (if $R_0=R_q$). However, if any remainder were ever zero, then the decimal terminates (with `period' 1). The longest possible period will therefore be $q-1$, which happens if the remainders $R_0,R_1,\ldots,R_{q-2}$ are distinct and non-zero, and $R_{q-1}=R_0$. The example with $\frac 17$ (period 6) shows this. Similarly,
+		\[
+			\frac 1{23}=0.\textcolor{red}{0434782608695652173913}0434782609\cdots
+		\]
+		has period 22.
+	\end{enumeratea}
+	
+	\item\begin{enumeratea}
+		\item $[0.02020202\cdots]_3=\frac 2{3^2}[1.010101\cdots]_3=\frac 29\sum\limits_{n=0}^\infty 3^{-2n}=\frac 2{9(1-\frac 19)}=\frac 14$.\\
+		
+		Following the algorithm,
+		\[
+			\def\arraystretch{1.4}
+			\begin{array}{l||c|c|c|c|c|}
+  			n & 0 & 1 & 2 & 3 & \cdots\\\hline
+  			d_n & \left\lfloor\frac{1}{2}\right\rfloor=0 
+  				& \left\lfloor\frac 32\right\rfloor=1 
+  				& \left\lfloor\frac 32\right\rfloor=1 
+  				& \left\lfloor\frac 32\right\rfloor=1 
+  				& \cdots\\\hline
+  			R_n & \frac 12 & \frac 12 & \frac 12 & \frac 12 & \cdots
+  		\end{array}
+  		\implies \frac 12=[0.11111\cdots]_3
+  	\]
+  	We could also have done this by multiplying the expression for $\frac 14$ by 2.\smallbreak
+  	
+  	Now for $\frac 15$:
+		\[
+			\def\arraystretch{1.4}
+			\begin{array}{l||c|c|c|c|c|c|}
+  			n & 0 & 1 & 2 & 3 & 4 & \cdots\\\hline
+  			d_n & \left\lfloor\frac{1}{5}\right\rfloor=0 
+  				& \left\lfloor\frac 35\right\rfloor=0 
+  				& \left\lfloor\frac 95\right\rfloor=1 
+  				& \left\lfloor\frac{12}5\right\rfloor=2 
+  				& \left\lfloor\frac 65\right\rfloor=1
+  				& \cdots\\\hline
+  			R_n & \frac 15 & \frac 35 & \frac 45 & \frac 25 & \frac 15 & \cdots
+  		\end{array}
+  	\]
+		from which the ternary representation repeats:
+		\[
+			\frac 15=[0.012101210121\cdots]_3
+		\]
+
+		\item The theorem goes through almost unchanged: each $t_n\in\{0,1,2\}$ whenever $n\ge 1$, every ternary expansion converges to $T(x)=x$, rational numbers have eventual periodicity, and terminating ternary expansions have another representation: e.g.
+		\[
+			[1.2012]_3=[1.20112222222\cdots]_3
+		\]
+		where the final non-zero term is reduced by 1 and an infinite string of 2's added.
+		
+		\item Suppose $n=p_1^{\mu_1}\cdots p_k^{\mu_k}$ is the unique prime factorization of $n$. The (positive) real numbers $x$ whose $n$-ary expansion terminates are precisely those rational numbers whose (lowest-term) denominators are divisible by no other primes than $p_1,\ldots,p_n$.\par
+		For instance, in base-$60=2^2\cdot 3\cdot 5$, the expansion of $\frac{1001}{450}$ will terminate, but that of $\frac 17$ will not (it is 3-periodic though!). In case you are curious:
+		\[
+			\frac{1001}{450}=[2;13,28]_{60}=2+\frac{13}{60}+\frac{28}{60^2},\qquad 
+			\frac 17=[0;8,34,17,8,34,17,\ldots]_{60}
+		\]
+	\end{enumeratea}
+\end{enumerate}
+
+  
+
