@@ -70,7 +70,7 @@ To introduce continuity, consider two common naïve notions.
 		\lim x_n=a\implies\lim f(x_n)=f(a)
 	\]
 	$f$ is \emph{continuous (on $U$)} if it is continuous at every point $a\in U$.\smallbreak
-	A \emph{discontinuity} of $f$ is a value $a\in U$ at which $f$ is \emph{discontinuous} (not continuous),
+	We say that $f$ is \emph{discontinuous} at $a\in U$ if,
 	\[
 		\exists (x_n)\subseteq U,\text{ such that }\lim x_n=a\text{ and }\bigl(f(x_n)\bigr)\text{ does not converge to $f(a)$}
 	\]
@@ -84,7 +84,7 @@ To introduce continuity, consider two common naïve notions.
 	\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
 		\centering
 		\includegraphics[scale=0.95]{contdef-pic2}\\
-		Discontinuity at $\textcolor{Green}{a}$: \emph{at least one sequence}\\
+		Discontinuous at $\textcolor{Green}{a}$: \emph{at least one sequence}\\
 		with $\lim\textcolor{red}{x_n}=\textcolor{Green}{a}$ has $\lim\textcolor{magenta}{f(x_n)}\neq \textcolor{Green}{f(a)}$
 	\end{minipage}
 \end{defn}
@@ -260,14 +260,14 @@ To motivate this, consider $f(x)=x^2$ at $a=2$. By continuity, if $(x_n)$ is a s
 
 
 \begin{defn}{$\epsilon$-$\delta$ continuity}{epcont}
-	A real-valued function $f:U\to V$ is continuous at $a$ if\footnotemark{}
+	A real-valued function $f:U\to V$ is continuous at $a\in U$ if\footnotemark{}
 	\[
 		\forall\epsilon>0,\ \exists\delta>0
 		\text{ such that }(\forall x\in U)\ 
 		\nm{x-a}<\delta\implies\nm{f(x)-f(a)}<\epsilon
 		\tag{$\ast$}
 	\]
-	A \emph{discontinuity} of $f$ is a value $a\in U$ for which,
+	We say that $f$ is \emph{discontinuous} at $a\in U$ if,
 	\[
 		\exists\epsilon>0\ \text{such that}\ 
 		\forall\delta>0,\ \exists x\in U\ \text{with }
@@ -284,7 +284,7 @@ To motivate this, consider $f(x)=x^2$ at $a=2$. By continuity, if $(x_n)$ is a s
 	\begin{minipage}[t]{0.49\linewidth}\vspace{-12pt}
 		\centering
 		\includegraphics[scale=0.95]{contdef-pic3}\\
-		Discontinuity at $a$
+		Discontinuous at $a$
 	\end{minipage}
 \end{defn}
 
@@ -603,7 +603,7 @@ Several other arguments are in the exercises. Finally, here is the promised proo
 	  \item Rephrase Example \ref*{ex:basiccont}.\ref{ex:edkdiscont}'s $\epsilon$-$\delta$ argument by directly justifying the discontinuity definition ($\dag$).
 	  	  
 
-		\item Prove that $x=0$ is a discontinuity of each function: use \emph{both} definitions of continuity.
+		\item Prove that each function is discontinuous at $x=0$; use \emph{both} sequential and $\epsilon$-$\delta$ formulations.
 		\begin{enumerate}
 	  	\item $f(x)=1$ for $x<0$ and $f(x)=0$ for $x\ge 0$.
 	  	\item $g(x)=\sin\frac 1x$ for $x\neq 0$ and $g(0)=0$.
@@ -1068,44 +1068,44 @@ For a final corollary, first note a straightforward characterization that helps 
 
 \clearpage
 
-\iffalse
-
-
 
 \subsection{Uniform Continuity}\label{sec:uniformcont}
 
 Suppose $f:U\to V$ is continuous. By the $\epsilon$-$\delta$ definition (\ref{defn:epcont}),
 \[
-	\textcolor{blue}{\forall a\in U},\ \forall \epsilon>0,\ \exists \delta(a,\epsilon)>0\text{ such that }(\textcolor{blue}{\forall x\in U})\ \nm{x-a}<\delta\implies\nm{f(x)-f(a)}<\epsilon\tag{$\ast$}
+	\textcolor{blue}{\forall a\in U},\ \forall \epsilon>0,\ 
+	\exists \delta(a,\epsilon)>0\text{ such that }
+	(\textcolor{blue}{\forall x\in U})\ 
+	\nm{x-a}<\delta\implies\nm{f(x)-f(a)}<\epsilon
+	\tag{$\ast$}
 \]
-We write $\delta(a,\epsilon)$ to stress the fact that $\delta$ can depend both on the \emph{location} $a$ and the \emph{distance} $\epsilon$. The goal of this section is to understand if/when it is possible to choose $\delta$ \emph{independently of the location $a$.}
+We write $\delta(a,\epsilon)$ to stress that $\delta$ can depend both on the \emph{location} $a$ and the \emph{distance} $\epsilon$. The goal of this section is to understand if/when it is possible to choose $\delta$ \emph{independently of the location $a$.} 
 
 \begin{example}{}{unif01}
-	We start by considering how this desire might be impossible to satisfy.\par
-	\begin{minipage}[t]{0.6\linewidth}\vspace{-3pt}
-		Consider $f(x)=x^2$ with domain $U=[0,\infty)$. Given $\epsilon>0$ and $a_1\in U$, we can certainly find some\footnotemark{} $\delta$ such that
+	We start with an example where our desire cannot be satisfied.\par
+	\begin{minipage}[t]{0.64\linewidth}\vspace{-5pt}
+		Consider $f(x)=x^2$ with domain $U=[0,\infty)$. Since $f$ is continuous, given $\epsilon>0$ and $a_1\in U$, there exists
+		$\delta$ such that
 		\[
 			\textcolor{Green}{\nm{x-a_1}<\delta}\implies \textcolor{Magenta}{\nm{f(x)-f(a_1)}=\nm{x^2-a_1^2}<\epsilon}
 		\]
-		Visualize what happens if we try to use the \emph{same} $\delta$ for different $a_i$: imagine sliding the fixed-width \textcolor{Green}{$\delta$-interval} along the $x$-axis while simultaneously sliding the \textcolor{Magenta}{$\epsilon$-interval} vertically. As $a_i$ increases, the \textcolor{Green}{image} of the $\delta$-interval eventually becomes too large for the \textcolor{Magenta}{$\epsilon$-interval} to contain:
-		\[
-			\text{length}\bigl(f(a_i-\delta,a_i+\delta)\bigr) =(a_i+\delta)^2-(a_i-\delta)^2=4a_i\delta
-		\]
-		\emph{increases unboundedly} with $a_i$.
+		On page \pageref{thm:cont} we saw that $\delta=\min(1,\frac\epsilon{1+2a_1})$ was suitable, but this \emph{depends on the location $a_1$}. Of course other expressions for $\delta$ will also work\ldots\par
+		Visualize what happens if we attempt to use the \emph{same \textbf{constant}} $\delta$ for different $a_i$: imagine sliding the fixed-width \textcolor{Green}{$\delta$-interval} along the $x$-axis while simultaneously sliding the \textcolor{Magenta}{$\epsilon$-interval} vertically. As $a_i$ increases, the \textcolor{Green}{image} of the $\delta$-interval eventually becomes too large for the \textcolor{Magenta}{$\epsilon$-interval} to contain: if $\delta$ is constant, then
 	\end{minipage}
 	\hfill
-	\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
-		\flushright\includegraphics{unifcont}
-	\end{minipage}\smallbreak
+	\begin{minipage}[t]{0.34\linewidth}\vspace{0pt}
+		\flushright\includegraphics[scale=0.95]{unifcont}
+	\end{minipage}\par
+	\[
+		\text{length}\bigl(f(a_i-\delta,a_i+\delta)\bigr) =(a_i+\delta)^2-(a_i-\delta)^2=4a_i\delta
+	\]
+	\emph{increases unboundedly} with $a_i$. For fixed $\epsilon$, as $a$ increases, the \emph{increasing gradient} of $f$ means that we need to choose a \emph{smaller} $\delta$.\medbreak
 	
-	For fixed $\epsilon$, as $a$ increases, the increasing \emph{gradient} of $f$ means that we need to choose a \emph{smaller} $\delta$.\medbreak
-	
-	By contrast, if we consider the same formula $f(x)=x^2$ but on a restricted \emph{finite} domain $[0,b]$, then any $\delta$ that suffices to demonstrate continuity at $x=b$ will also do so everywhere else on $[0,b]$. We'll check this explicitly in a moment.
+	By contrast, if $f(x)=x^2$ on a \emph{finite} domain $[0,b]$, then any $\delta$ that demonstrates continuity at $x=b$ will also do so everywhere else on $[0,b]$. We'll check this explicitly in a moment.
 \end{example}
 
-\footnotetext{For instance $\delta =\min(1,\frac\epsilon{1+2a_1})$, as we saw on page \pageref{thm:cont}.}
 
-To formalize things, consider rewriting ($\ast$), where we additionally assume that $\delta$ may be chosen independently of the location $a$; this amounts simply to moving the quantifier $\textcolor{blue}{\forall a\in U}$ after $\delta$.
+To obtain a formal definition, we rewrite ($\ast$) with the extra assumption that $\delta$ may be chosen independently of the location $a$; this amounts to moving the quantifier $\textcolor{blue}{\forall a\in U}$ after $\delta$.
 
 \begin{defn}{}{}
 	A function $f:U\to V\subseteq \R$ is \emph{uniformly continuous} if
@@ -1114,7 +1114,7 @@ To formalize things, consider rewriting ($\ast$), where we additionally assume t
 	\]
 \end{defn}
 
-For reasons of symmetry we use $y$ instead of $a$. Note how $\delta$ now depends only on $\epsilon$ since it is quantified \emph{before} $x$ and $y$; as previously, the quantifiers for $x,y$ are usually hidden. Note also how uniform continuity is only relevant on the entire domain $U$; it makes no sense to speak of uniform continuity at a point $a$.
+We use $y$ instead of $a$ for symmetry. Observe how $\delta$, being quantified \emph{before $x,y$}, now depends only on $\epsilon$. As before, the quantifiers for $x,y$ are usually hidden. Note also how uniform continuity is only relevant on the entire domain $U$; it makes no sense to speak of uniform continuity at a single point.
 \smallbreak
 For the sake of tidiness, we make one more observation before seeing some examples.
 
@@ -1122,53 +1122,69 @@ For the sake of tidiness, we make one more observation before seeing some exampl
 	If $f$ is uniformly continuous on $U$, then it is continuous on $U$.
 \end{lemm}
 
-This should be trivial: $(\dag)$ is the $\epsilon$-$\delta$ continuity of $f$ at $y\in U$, \emph{for all $y$ simultaneously}! The special feature of the definition is that the same $\delta$ works for all $y$.
+This is trivial: $(\dag)$ is the $\epsilon$-$\delta$ continuity of $f$ at $y\in U$, \emph{for all $y$ simultaneously}! The special feature of the definition is that the same $\delta$ works for all $y$.
 
 \goodbreak
 
 
 \begin{examples}{}{unifeasy}
 	\exstart We re-analyze $f(x)=x^2$ in view of the definition. Recall first that
-	\[\nm{f(x)-f(y)}=\nm{x^2-y^2}=\nm{x-y}\nm{x+y}\]
+	\[
+		\nm{f(x)-f(y)}=\nm{x^2-y^2}=\nm{x-y}\nm{x+y}
+	\]
 	where $\nm{x-y}$ is easily controlled by $\delta$. We consider the behavior of $\nm{x+y}$ in two cases.
 	\begin{enumerate}\setcounter{enumi}{1}
-  \item[]\begin{description}
-  	\item[Bounded domain] If $U=\dom f\subseteq [-T,T]$ for some $T>0$, we show that $f$ is uniformly continuous. This follows because $\nm{x+y}\le 2T$ is also easily controlled.\par
-  	Let $\epsilon>0$ be given and define $\delta =\frac\epsilon{2T}$, then
-		\[\nm{x-y}<\delta\implies \nm{f(x)-f(y)}<\delta\cdot 2T=\epsilon\]
-		Compare with Example \ref{ex:unif01}. Our approach works for \emph{this} function because the gradient (and therefore potential discrepancy between $x^2-y^2$ and $x-y$) is greatest at the endpoints of the interval. The same approach may not work for other functions!
-
-		\item[Unbounded domain] We show that $f$ is not uniformly continuous when $\dom f=[0,\infty)$.\par	
-		For contradiction, assume $f$ is uniformly continuous: let $\epsilon=1$ and suppose $\delta>0$ satisfies the definition. Supposing $x-y=\frac\delta 2$, we see that
-		\[\nm{x+y}=2y+\frac\delta 2 \implies	\nm{f(x)-f(y)}=\frac\delta 2\left(2y+\frac\delta 2\right) =\delta\left(y+\frac\delta 4\right)>\delta x\]
-		Letting $y=\frac 1\delta$ \ ($x=\frac 1\delta+\frac\delta 2$) yields the contradiction $\nm{f(x)-f(y)}>1=\epsilon$.
-	\end{description}
+	  \item[]\begin{description}
+	  	\item[Bounded domain] If $U=\dom f\subseteq [-T,T]$ for some $T>0$, we show that $f$ is uniformly continuous. This will follow because $\nm{x+y}\le 2T$ is also easily controlled.\par
+	  	Let $\epsilon>0$ be given and define $\delta =\frac\epsilon{2T}$, then
+			\[
+				\nm{x-y}<\delta\implies \nm{f(x)-f(y)}<\delta\cdot 2T=\epsilon
+			\]
+			Compare with Example \ref{ex:unif01}. Our approach works for \emph{this} function because the gradient (and therefore the discrepancy between $x^2-y^2$ and $x-y$) is greatest at the endpoints of the interval. The same approach may not work for other functions!
 	
-	\item Let $g(x)=\frac 1x$; we again consider two domains.\par
-	\begin{minipage}[t]{0.65\linewidth}\vspace{-8pt}
-	\begin{description}
-		\item[Uniform continuity] on $[a,b)$ whenever $0<a<b\le \infty$.\par
-		Let $\epsilon>0$ be given and let $\delta=a^2\epsilon$. Then,
-		\begin{align*}
-			\nm{x-y}<\delta \implies \nm{g(x)-g(y)}&=\nm{\frac{y-x}{xy}}\\
-			&<\frac\delta{xy}\le\frac{\delta}{a^2}=\epsilon
-		\end{align*}
-		where the last inequality follows because $x,y\ge a$.
-		\item[Non-uniform continuity] on $(0,b)$ whenever $0<b\le\infty$.\par
-		As before, let $\epsilon=1$ and suppose $\delta>0$ is given. 
-		Let
-		\[x=\min\left(\delta,1,\frac b2\right) \quad\text{and}\quad y=\frac x2\]
-		\makebox[0cm][l]{Certainly $x,y\in(0,b)$ and $\nm{x-y}=\frac x2\le\frac\delta 2<\delta$. However,}
-		\[\nm{f(x)-f(y)}=\frac 1x\ge 1=\epsilon\]
-	\end{description}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[t]{0.34\linewidth}\vspace{0pt}
-		\flushright\includegraphics{unifcont2}
-	\end{minipage}\bigbreak
-Think about how $\epsilon$ and $\delta$ must relate as one slides the intervals in the picture up/down and left/right. In this case, large values of $x,y$ are not the problem, it's the vertical asymptote at zero that causes trouble. 
-	
-\end{enumerate}
+			\item[Unbounded domain] We show that $f$ is not uniformly continuous when $\dom f=[0,\infty)$.\par	
+			For contradiction, assume $f$ is uniformly continuous; let $\epsilon=1$ and suppose $\delta>0$ satisfies the definition. Taking $x-y=\frac\delta 2$, we see that
+			\[
+				\nm{x+y}=2y+\frac\delta 2 
+				\implies\nm{f(x)-f(y)}=\frac\delta 2\left(2y+\frac\delta 2\right) 
+				=\delta\left(y+\frac\delta 4\right)>\delta y
+			\]
+			Let $y=\frac 1\delta$ for the contradiction $\nm{f(x)-f(y)}>1=\epsilon$ \ (large $y$ are the problem!).
+		\end{description}
+		
+		\item Let $g(x)=\frac 1x$; we again consider two domains.\par
+		\begin{minipage}[t]{0.65\linewidth}\vspace{-8pt}
+			\begin{description}
+				\item[Uniform continuity] on $[a,b)$ whenever $0<a<b\le \infty$.\par
+				Let $\epsilon>0$ be given and let $\delta=a^2\epsilon$. Then,
+				\begin{align*}
+					\nm{x-y}<\delta \implies \nm{g(x)-g(y)}
+					&=\nm{\frac{y-x}{xy}}\\
+					&<\frac\delta{xy}\le\frac{\delta}{a^2}
+						=\epsilon
+				\end{align*}
+				where the last inequality follows because $x,y\ge a$.
+				\item[Non-uniform continuity] on $(0,b)$ whenever $0<b\le\infty$.\par
+				As before, let $\epsilon=1$ and suppose $\delta>0$ is given. 
+				Let
+				\[
+					x=\min\left(\delta,1,\frac b2\right) 
+					\quad\text{and}\quad 
+					y=\frac x2
+				\]
+				\makebox[0cm][l]{Certainly $x,y\in(0,b)$ and $\nm{x-y}=\frac x2\le\frac\delta 2<\delta$. However,}
+				\[
+					\nm{f(x)-f(y)}=\frac 1x\ge 1=\epsilon
+				\]
+			\end{description}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.34\linewidth}\vspace{0pt}
+			\flushright\includegraphics[scale=0.95]{unifcont2}
+		\end{minipage}\bigbreak
+		Think about how $\epsilon$ and $\delta$ must relate as one slides the intervals in the picture up/down and left/right. In this case, large values of $x,y$ are not the problem, it's the vertical asymptote at zero that causes trouble. 
+		
+	\end{enumerate}
 \end{examples}
 
 
@@ -1513,5 +1529,3 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 \vspace{-15pt}
 
 \footnotetext{Use the definition $g'(0)=\lim\limits_{x\to 0}\frac{g(x)-g(0)}{x-0}$. Limits of functions are covered formally in the next section (course!), but you should be familiar with the idea from elementary calculus.}
-
-\fi
