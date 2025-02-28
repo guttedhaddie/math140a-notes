@@ -7,7 +7,7 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(140,100,IgnoreAspect);
+size(130,100,IgnoreAspect);
 
 real f(real x){return x^2;}
 

@@ -490,11 +490,10 @@ The ratio test is typically the easiest to use, but the least powerful. Every se
 		\end{enumerate}
 		
   
-	   \item%[8.]
-	   Let $\sum a_n$ and $\sum b_n$ be convergent series of non-negative terms. Prove that $\sum \sqrt{a_nb_n}$ converges.\par
-	  	(\emph{Hint: start by showing that $\sqrt{a_nb_n}\le a_n+b_n$})
+	  \item%[8.]
+	  Let $\sum a_n$ and $\sum b_n$ be convergent series of non-negative terms. Prove that $\sum \sqrt{a_nb_n}$ converges.\par
+	  (\emph{Hint: start by showing that $\sqrt{a_nb_n}\le a_n+b_n$})
 	  
-  
   
 	  \item%[6.] + variation
 	  \label{exs:seriesmult}
@@ -532,25 +531,28 @@ The ratio test is typically the easiest to use, but the least powerful. Every se
 		\item Given $\sum_{n=1}^\infty\frac 1{n^2}=\frac{\pi^2}6$, find the values of $\sum \frac 1{(2n)^2}$, \ $\sum\frac 1{(2n+1)^2}$ and $\sum\frac{(-1)^{n+1}}{n^2}$.
 
 	
-	\item The \emph{limit comparison test} states:
-  \begin{quote}
-  	Suppose $\sum a_n$, $\sum b_n$ are series of positive terms and that $L=\lim\frac{a_n}{b_n}\in(0,\infty)$. Then the series have the same convergence status (both converge or both diverge to $\infty$).
-  \end{quote}
-  \begin{enumerate}
-%     \item Determine whether the series $\displaystyle \sum_{n=0}^\infty\frac{(3n^2+4)\sqrt n}{2n^4-1}$ converges or diverges.\marks{5}
-    \item Use the limit comparison test with $b_n=\frac 1{n^2}$ to show that the series $\sum\frac 1n\ln\left(1+\frac 1n\right)$ converges.\par
-    (\emph{Hint: Recall that $e=\lim\left(1+\frac 1n\right)^n$})
-    	
-    \item Prove the limit comparison test.\par
-    (\emph{Hint: first show that $\frac L2<\frac{a_n}{b_n}<\frac{3L}2$ for large $n$})
-    	
-    \item What can you say about the series $\sum a_n$ and $\sum b_n$ if $L=0$ or $L=\infty$? Explain.
-  \end{enumerate}
+		\item The \emph{limit comparison test} states:
+	  \begin{quote}
+	  	Suppose $\sum a_n$, $\sum b_n$ are series of positive terms and that $L=\lim\frac{a_n}{b_n}\in(0,\infty)$. Then the series have the same convergence status (both converge or both diverge to $\infty$).
+	  \end{quote}
+	  \begin{enumerate}
+	%     \item Determine whether the series $\displaystyle \sum_{n=0}^\infty\frac{(3n^2+4)\sqrt n}{2n^4-1}$ converges or diverges.\marks{5}
+	    \item Use the limit comparison test with $b_n=\frac 1{n^2}$ to show that the series $\sum\frac 1n\ln\left(1+\frac 1n\right)$ converges.\par
+	    (\emph{Hint: Recall that $e=\lim\left(1+\frac 1n\right)^n$})
+	    	
+	    \item Prove the limit comparison test.\par
+	    (\emph{Hint: first show that $\frac L2<\frac{a_n}{b_n}<\frac{3L}2$ for large $n$})
+	    	
+	    \item What can you say about the series $\sum a_n$ and $\sum b_n$ if $L=0$ or $L=\infty$? Explain.
+	  \end{enumerate}
   
   
-	  
-	  \item\label{exs:eulersum} Euler asserted that the sine function, written as an infinite polynomial in the form of a Maclaurin series, could also be expressed as an infinite product,
-	  \[\sin x =\sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}x^{2n+1} =x\left(1-\frac{x^2}{\pi^2}\right)\left(1-\frac{x^2}{4\pi^2}\right)\left(1-\frac{x^2}{9\pi^2}\right)\cdots \]
+		\item\label{exs:eulersum} Euler asserted that the sine function, written as an infinite polynomial in the form of a Maclaurin series, could also be expressed as an infinite product,
+	  \[
+	  \sin x =\sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}x^{2n+1} 
+	  =x\left(1-\frac{x^2}{\pi^2}\right)\left(1-\frac{x^2}{4\pi^2}\right)
+	  	\left(1-\frac{x^2}{9\pi^2}\right)\cdots 
+	  \]
 	  By considering the solutions to $\sin x=0$, give some weight to Euler's claim. By comparing coefficients in these expressions, deduce the fact $\sum \frac 1{n^2}=\frac{\pi^2}6$.\par
 	  (\emph{As presented, this argument is non-rigorous!})
 	\end{enumerate}

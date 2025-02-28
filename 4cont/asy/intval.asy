@@ -7,7 +7,7 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(240,120,IgnoreAspect);
+size(230,115,IgnoreAspect);
 
 real a=0.5;
 real b=6.8;

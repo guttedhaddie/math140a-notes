@@ -9,10 +9,10 @@ import graph;
 
 size(120,135,IgnoreAspect);
 
-real f(real x){return 1+2x^2;}
+real f(real x){return 1+2sqrt(x);}
 real g(real x){return 2-x;}
 
-path p=graph(f,0,0.99);
+path p=graph(f,0,0.97);
 path q=graph(g,1,2);
 
 draw(p,blue);
@@ -24,8 +24,8 @@ xaxis(0,2.3,red,RightTicks(new real[]{0,1,2,3}));
 yaxis(0,3.1,red,LeftTicks(new real[]{0,1,2,3}));
 //labelx("$x$",2.3,red);
 
-real de=0.4;
-real x=max(1/sqrt(2),1-de/2);
+real de=0.7;
+real x=max(1/4,1-de/2);
 
 xtick(Label("$x$",align=S),x,S,heavygreen);
 //xtick(1-de,N,heavygreen);
