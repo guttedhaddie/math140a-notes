@@ -1152,7 +1152,7 @@ This is trivial: $(\dag)$ is the $\epsilon$-$\delta$ continuity of $f$ at $y\in 
 			Let $y=\frac 1\delta$ for the contradiction $\nm{f(x)-f(y)}>1=\epsilon$ \ (large $y$ are the problem!).
 		\end{description}
 		
-		\item Let $g(x)=\frac 1x$; we again consider two domains.\par
+		\item\label{ex:1overxnotunif} Let $g(x)=\frac 1x$; we again consider two domains.\par
 		\begin{minipage}[t]{0.65\linewidth}\vspace{-8pt}
 			\begin{description}
 				\item[Uniform continuity] on $[a,b)$ whenever $0<a<b\le \infty$.\par
@@ -1204,6 +1204,7 @@ This is trivial: $(\dag)$ is the $\epsilon$-$\delta$ continuity of $f$ at $y\in 
 % \[\delta=\min\left\{1,\frac{\epsilon}{M(a,1)}\right\}\quad\text{or}\quad \delta=\sqrt{a^2+\epsilon}-a\]
 % 	\end{itemize}
  	
+ 	
 \boldsubsubsection{General Conditions for Uniform Continuity}
 
 For the remainder of this section, we develop a few general ideas related to uniform continuity. The first is a little out of order since it depends on differentiation and the mean value theorem.
@@ -1213,22 +1214,30 @@ For the remainder of this section, we develop a few general ideas related to uni
 \end{thm}
 
 \begin{proof}
-	Suppose $\nm{f'(x)}\le M$. Let $\epsilon>0$ and $\delta=\frac\epsilon M$. 
-	% By the Mean Value Theorem, 
-	Then
-	\[\nm{x-y}<\delta\implies \nm{f(x)-f(y)}=\nm{f'(\xi)}\nm{x-y}<M\delta=\epsilon\]
-	where the existence of $\xi$ between $x,y$ follows from the Mean Value Theorem.\footnotemark{}
+	Suppose $\nm{f'(x)}\le M$. Let $\epsilon>0$ and $\delta=\frac\epsilon M$. Then
+	\[
+		\nm{x-y}<\delta\implies \nm{f(x)-f(y)}=\nm{f'(\xi)}\nm{x-y}<M\delta=\epsilon
+	\]
+	for some $\xi$ between $x$ and $y$. The existence of $\xi$ follows from the mean value theorem.\footnotemark{}
 \end{proof}
 
-\footnotetext{If $x<y$ then $\exists \xi\in (x,y)$ such that $f'(\xi)=\dfrac{f(x)-f(y)}{x-y}$.}
+\footnotetext{%
+	If $x<y$ then $\exists \xi\in (x,y)$ such that $f'(\xi)=\dfrac{f(x)-f(y)}{x-y}$.%
+}
 
 \begin{examples}{}{}
 	\exstart Compare the arguments in the previous exercise. For instance, if $\dom f\subseteq[-T,T]$,
-	\[f(x)=x^2\implies f'(x)=2x\implies \nm{f'(x)}\le 2T\]
+	\[
+		f(x)=x^2\implies f'(x)=2x
+		\implies \nm{f'(x)}\le 2T
+	\]
 	The derivative is bounded, whence $f$ is uniformly continuous on $[-T,T]$.
+	
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item Any polynomial is uniformly continuous on any bounded interval.
+	  
 	  \item The function $f(x)=\sin x$ is uniformly continuous on $\R$ since $f'(x)=\cos x$ is bounded (by 1).
+	  
 	  \item Consider $f(x)=\frac 1x-\frac 5{x^2}$ on $(1,\infty)$. We have
 	  \[
 	  	f'(x)=-\frac 1{x^2}+\frac{10}{x^3}\implies \nm{f'(x)}\le 11
@@ -1237,44 +1246,59 @@ For the remainder of this section, we develop a few general ideas related to uni
 	  The approach is often useful when you are asked to show \emph{using the definition} that a function is uniformly continuous; provided $f'$ is bounded by $M$, you may always choose $\delta=\frac\epsilon M$ to obtain an argument. For instance, with our function:\par
 	  Given $\epsilon>0$, let $\delta=\frac\epsilon{11}$. If $x,y\in(1,\infty)$ and $\nm{x-y}<\delta$, then
 	  \begin{align*}
-	  	\nm{f(x)-f(y)} &=\nm{\frac 1x-\frac 1y+\frac 5{y^2}-\frac 5{x^2}} = \nm{x-y}\nm{\frac{5(x+y)}{x^2y^2}-\frac 1{xy}}\\
+	  	\nm{f(x)-f(y)} 
+	  	&=\nm{\frac 1x-\frac 1y+\frac 5{y^2}-\frac 5{x^2}} 
+	  		=\nm{x-y}\nm{\frac{5(x+y)}{x^2y^2}-\frac 1{xy}}\\
 	  	&=\nm{x-y}\nm{\frac 5{xy^2}+\frac 5{x^2y}-\frac 1{xy}}\\
 	  	&< 11\nm{x-y} \tag{$\triangle$-inequality, since $x,y>1$}\\
-	  	&<11\delta=\epsilon
+	  	&<11\delta =\epsilon
 	  \end{align*}
 	\end{enumerate}
 \end{examples}
 
 As we'll see very shortly, the above result isn't a biconditional: non-differentiable functions and functions with unbounded derivatives can be uniformly continuous.
 
-%\bigbreak
+
 \goodbreak
 
-Our remaining conditions are variations on a theme: uniform continuity on a bounded interval $U$ is roughly the same thing as continuity on its \emph{closure} $\cl U$ (recall Definition \ref{defn:closed}). 
+
+Our remaining conditions are variations on a theme: uniform continuity on a bounded interval $U$ is roughly the same thing as continuity on its \emph{closure} $\cl U$ (Definition \ref{defn:closed}). 
 
 \begin{thm}{}{unifclosed}
-	A continuous function on a closed bounded domain is uniformly continuous.
+	A continuous function on a \textcolor{blue}{closed bounded} domain is uniformly continuous.
 \end{thm}
 
 \begin{proof}
-	Assume $f$ is continuous, but not uniformly so, on a closed bounded domain $U$. Then \[\exists\epsilon>0\text{ such that }\forall\delta>0,\ \exists x,y\in U\text{ with }\nm{x-y}<\delta\text{ and }\nm{f(x)-f(y)}\ge\epsilon\tag*{$(\ast)$}\]
+	Assume $f$ is continuous, but not uniformly so, on a closed bounded domain $U$. Then
+	\[
+		\exists\epsilon>0\text{ such that }
+		\forall\delta>0,\ \exists x,y\in U\text{ with }
+		\nm{x-y}<\delta\text{ and }\nm{f(x)-f(y)}
+		\ge\epsilon \tag*{$(\ast)$}
+	\]
 	Let $\delta=\frac 1n$ for each $n\in\N$ to obtain sequences $(x_n),(y_n)\subseteq U$ satisfying $(\ast)$.\footnotemark{}\smallbreak
 	Since $(x_n)\subseteq U$ is bounded, Bolzano--Weierstraß says there exists a convergent subsequence $(x_{n_k})$ which, since $U$ is closed, converges to some $x_0\in U$.\smallbreak
 	Since $\nm{x_{n_k}-y_{n_k}}<\frac 1{n_k}\le\frac 1k$, we see that $\smash[b]{\lim\limits_{k\to\infty}}y_{n_k}=x_0$. Finally, the continuity of $f$ contradicts ($\ast$):
-	\[\epsilon\le \lim\nm{f(x_{n_k})-f(y_{n_k})}=\nm{f(x_0)-f(x_0)}=0\tag*{\qedhere}\]
+	\[
+		\epsilon\le \lim\nm{f(x_{n_k})-f(y_{n_k})}
+		=\nm{f(x_0)-f(x_0)}=0
+		\tag*{\qedhere}
+	\]
 \end{proof}
 
-\footnotetext{These arguments should feel familiar: compare this line to the proof of Theorem \ref{thm:cont} and the rest to Theorem \ref{thm:extremevalue}.}
+\footnotetext{%
+	These arguments should feel familiar: compare this line to the proof of Theorem \ref{thm:cont} and the rest to Theorem \ref{thm:extremevalue}.%
+}
 
-Both hypotheses are crucial: Examples \ref{ex:unifeasy} provide counter-examples if either is weakened.
+Both \textcolor{blue}{hypotheses} on the domain are crucial: Examples \ref{ex:unifeasy} provide counter-examples if either is weakened.
 
 \begin{example}{}{}
-	$f(x)=\sqrt x$ is uniformly continuous on $[0,1]$. This cannot be concluded from Theorem \ref{thm:unifbddderiv}, since its derivative $f'(x)=\frac 12x^{-1/2}$ is unbounded on $(0,1)$.
+	$f(x)=\sqrt x$ is uniformly continuous on $[0,1]$ since it is already continuous! This \textbf{cannot} be concluded from Theorem \ref{thm:unifbddderiv}, since the derivative $f'(x)=\frac 12x^{-1/2}$ is unbounded on $(0,1)$.
 \end{example}
 
-\smallskip
+%\smallskip
 
-Our next goal is to develop a partial converse, for which we first need a lemma.
+We now develop a partial converse, for which we first need a lemma.
 
 
 \begin{lemm}{}{unifcauchy}
@@ -1283,35 +1307,46 @@ Our next goal is to develop a partial converse, for which we first need a lemma.
 
 To apply the result, consider a convergent (Cauchy) sequence in $U$ whose limit is \emph{not} itself in $U$.
 
-\begin{example}{}{}
-	Let $f(x)=\frac 1{x}$ be defined on $U=(0,\infty)$ and consider the sequence defined by $x_n=\frac 1n$. This is plainly Cauchy since it converges; note crucially that its limit $0$ \emph{does not lie in $U$.} Moreover,
+\begin{example*}{\ref*{ex:unifeasy}.\ref{ex:1overxnotunif}, just easier!}{}
+	Let $f(x)=\frac 1{x}$ have $U=\dom f=(0,\infty)$ and consider the Cauchy sequence defined by $x_n=\frac 1n$; note crucially that its limit $0$ \emph{does not lie in $U$.} Moreover,
 	\[
 		\lim f(x_n)=\lim n=\infty
 	\]
-	$\bigl(f(x_n)\bigr)$ is not Cauchy, whence $f$ is not uniformly continuous. This is a far simpler argument than that presented previously!
-\end{example}
+	Plainly $\bigl(f(x_n)\bigr)$ is not Cauchy, whence $f$ is not uniformly continuous.
+\end{example*}
 
 \begin{proof}
 	Let $\epsilon>0$ be given. Since $f$ is uniformly continuous,
-	\[\exists\delta>0\text{ such that }\forall x,y\in U,\ \nm{x-y}<\delta\implies\nm{f(x)-f(y)}<\epsilon\]
-	Now use this $\delta$ in the definition of $(x_n)$ being Cauchy:\footnotemark
-	\[\exists N\text{ such that }m,n>N\implies\nm{x_n-x_m}<\delta\implies\nm{f(x_n)-f(x_m)}<\epsilon\]
+	\[
+		\exists\delta>0\text{ such that }
+		\forall x,y\in U,\ \nm{x-y}<\delta
+		\implies\nm{f(x)-f(y)}<\epsilon
+	\]
+	Now use this $\delta$ in the definition of $(x_n)$ being Cauchy:
+	\[
+		\exists N\text{ such that }
+		m,n>N\implies\nm{x_n-x_m}<\delta
+		\implies\nm{f(x_n)-f(x_m)}<\epsilon
+	\]
 	Otherwise said, $\bigl(f(x_n)\bigr)$ is Cauchy.
 \end{proof}
-\vspace{-8pt}
 
-\footnotetext{The Cauchy condition is important here: we cannot apply the uniform continuity condition directly to a convergent sequence ($\nm{x_n-x}<\delta\ldots$) if we do not already know that its limit (here $x$) lies in $U$!}
+	The Cauchy condition is critical: we cannot apply uniform continuity directly to a convergent sequence ($\nm{x_n-x}<\delta\ldots$) if we do not already know that its limit ($x$) lies in $U$!
+
 
 \goodbreak
+
 
 We apply the Lemma to show that a continuous function on a \emph{bounded} interval is uniformly continuous if and only if has a \emph{continuous extension.}
 
 \begin{thm}{}{unifext}
 	Suppose $f$ is continuous on a bounded interval $(a,b)$. Define $g:[a,b]\to \R$ via
 	\[
-		g(x):=\begin{cases}
-		f(x)&\text{if }x\in (a,b)\\
-		\lim f(x_n)&\text{whenever $(x_n)\subseteq (a,b)$ and $\lim x_n=a$ or $b$}
+		g(x):=
+		\begin{cases}
+			f(x)&\text{if }x\in (a,b)\\
+			\lim f(x_n)
+				&\text{whenever $(x_n)\subseteq (a,b)$ and $\lim x_n=a$ or $b$}
 		\end{cases}
 	\]
 	Then $f$ is uniformly continuous if and only if $g$ is well-defined; in such a case $g$ is automatically continuous.
@@ -1319,17 +1354,21 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 
 \begin{examples}[lower separated=false, sidebyside, sidebyside align=top seam, sidebyside gap=0pt, righthand width=0.3\linewidth]{}{}
 	\exstart $f(x)=x^2-3x+4$ is uniformly continuous on $(-2,4)$ since it has a continuous extension
-	\[g:[-2,4]\to\R:x\mapsto x^2-3x+4\]
+	\[
+		g:[-2,4]\to\R:x\mapsto x^2-3x+4
+	\]
 	It should be obvious what is happening from the picture: to create the extension $g$, we simply \textcolor{Magenta}{fill in the holes} at the \textcolor{blue}{endpoints} of the graph.   
 	\bigskip\smallskip
 	\begin{enumerate}\setcounter{enumi}{1}
 	  \item The function $f(x)=\frac 1{5-x}$ is continuous, but not uniformly, on the interval $(0,5)$. This follows since
-		\[\lim f\left(5-\frac 1n\right)=\lim n=\infty\]
+		\[
+			\lim f\left(5-\frac 1n\right)=\lim n=\infty
+		\]
 		means we cannot define $g(5)$ unambiguously. Again the picture is helpful; while we can fill in the hole at the left endpoint $(a=0)$, the vertical asymptote at $b=5$ means that there is no hole to fill in and thereby extend the function.
 	\end{enumerate}
 	\tcblower
-	\flushright\includegraphics{unifcont3}\\
-	\includegraphics{unifcont4}
+	\flushright\includegraphics[scale=0.95]{unifcont3}\\
+	\includegraphics[scale=0.95]{unifcont4}
 \end{examples}
 
 \begin{proof}
@@ -1355,27 +1394,32 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 	\begin{enumerate}		
 		\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}
 			\item $f(x)=\sin\frac 1x$ is continuous but \emph{not uniformly so.} To see this, note that $\textcolor{Green}{x_n=\frac 1{(n+\frac 12)\pi}}$ defines a Cauchy sequence ($\lim x_n=0$), and yet
-			\[\textcolor{Magenta}{f(x_n)}=\sin\left(n+\frac 12\right)\pi=(-1)^n\]
+			\[
+				\textcolor{Magenta}{f(x_n)}=\sin\left(n+\frac 12\right)\pi=(-1)^n
+			\]
 			is not Cauchy since it diverges by oscillation.\par
 			Consequently, there is no way to extend $f$ to a continuous function on any interval containing $x=0$.
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
-			\flushright\includegraphics[scale=0.98]{unifcontex3}
+			\flushright\includegraphics[scale=0.95]{unifcontex3}
 		\end{minipage}\par
 	  
 	
 		\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}
 			\item $f(x)=x\sin\frac 1x$ is \emph{uniformly continuous.} One way to see this is to extend the function to the origin by defining
-			\[g(x)=\begin{cases}
-			x\sin \frac 1x&\text{if }x\neq 0\\
-			0&\text{if }x=0
-			\end{cases}\]
+			\[
+				g(x)=
+				\begin{cases}
+					x\sin \frac 1x&\text{if }x\neq 0\\
+					0&\text{if }x=0
+				\end{cases}
+			\]
 			By the squeeze theorem, $\lim x_n=0\implies \lim f(x_n)=0$, so $g$ is well-defined and continuous on $\R$. By Theorem \ref{thm:unifext}, $f$ is uniformly continuous on any bounded interval. Moreover, the derivative
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
-			\flushright\includegraphics[scale=0.98]{unifcontex2}
+			\flushright\includegraphics[scale=0.95]{unifcontex2}
 		\end{minipage}\par\vspace{-4pt}
 		\[
 			f'(x)=\sin\frac 1x-\frac 1x\cos\frac 1x
@@ -1398,7 +1442,7 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.39\linewidth}\vspace{-5pt}
-			\flushright\includegraphics[scale=0.98]{unifcontex1}
+			\flushright\includegraphics[scale=0.95]{unifcontex1}
 		\end{minipage}
 	\end{enumerate}
 \end{examples}
