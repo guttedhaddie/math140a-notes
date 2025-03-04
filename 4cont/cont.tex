@@ -1397,8 +1397,7 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 			\[
 				\textcolor{Magenta}{f(x_n)}=\sin\left(n+\frac 12\right)\pi=(-1)^n
 			\]
-			is not Cauchy since it diverges by oscillation.\par
-			Consequently, there is no way to extend $f$ to a continuous function on any interval containing $x=0$.
+			is not Cauchy (it diverges by oscillation). Consequently, we cannot extend $f$ to a continuous function on any interval containing $x=0$.
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
@@ -1407,7 +1406,7 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 	  
 	
 		\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}
-			\item $f(x)=x\sin\frac 1x$ is \emph{uniformly continuous.} One way to see this is to extend the function to the origin by defining
+			\item $f(x)=x\sin\frac 1x$ is \emph{uniformly} continuous. One way to see this is to extend the function to the origin by defining
 			\[
 				g(x)=
 				\begin{cases}
@@ -1415,7 +1414,8 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 					0&\text{if }x=0
 				\end{cases}
 			\]
-			By the squeeze theorem, $\lim x_n=0\implies \lim f(x_n)=0$, so $g$ is well-defined and continuous on $\R$. By Theorem \ref{thm:unifext}, $f$ is uniformly continuous on any bounded interval. Moreover, the derivative
+			By the squeeze theorem, $\lim x_n=0\implies \lim f(x_n)=0$, so $g$ is well-defined and continuous on $\R$. By Theorem \ref{thm:unifext}, $f$ is uniformly continuous on any bounded interval.\par
+			Moreover, the derivative
 		\end{minipage}
 		\hfill
 		\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}
@@ -1424,18 +1424,17 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 		\[
 			f'(x)=\sin\frac 1x-\frac 1x\cos\frac 1x
 		\]
-		is bounded whenever $x$ is large; together with Exercise \ref{exs:unifcontunion} we could use this to conclude uniform continuity of $f(x)$. Note however that $f'(x)$ is unbounded when $x$ small ($\lim f'\left(\frac 1{2\pi n}\right)=\lim(-2\pi n)=-\infty$)
- so we can't use Theorem \ref{thm:unifbddderiv} to conclude that $f$ is uniformly continuous on its entire domain.
+		is bounded whenever $x$ is large; together with Exercise \ref{exs:unifcontunion} we conclude that $f(x)$ is uniformly continuous on $\R\setminus\{0\}$. We cannot use the derivative argument on the whole domain $\R\setminus\{0\}$, since $f'(x)$ is unbounded when $x$ is small ($\lim f'\left(\frac 1{2\pi n}\right)=\lim(-2\pi n)=-\infty$).
 
 		\begin{minipage}[t]{0.6\linewidth}\vspace{-5pt}
-			\item\label{ex:funkysine3} $f(x)=x^2\sin\frac 1x$ is also \emph{uniformly continuous}: again extend by $g(0)=0$. This time however, we could argue that the derivative is bounded
+			\item\label{ex:funkysine3} $f(x)=x^2\sin\frac 1x$ is also \emph{uniformly} continuous: again extend by $g(0)=0$. This time however, we could argue that the derivative is bounded
 			\[
 			\nm{f'(x)}=
 				\nm{2x\sin\frac 1x-\cos\frac 1x}\le 3
 			\]
-			since $\nm{\sin y}\le\nm y$ for all $y$.\smallbreak
+			since $\nm{\sin y}\le\nm y$ and $\nm{\cos y}\le 1$ for all $y$.\smallbreak
 			
-			In fact something stranger is going on. As you may verify (see Exercise \ref{exs:funkysine}), the \emph{extended function $g$ is everywhere differentiable} with $g'(0)=0$, and yet the derivative $g'(x)$ itself is \emph{discontinuous} at $x=0$!
+			Something stranger is going on. As you may verify (see Exercise \ref{exs:funkysine}), the extended function $g$ is \emph{everywhere differentiable} with $g'(0)=0$, and yet the derivative $g'(x)$ itself is \emph{discontinuous} at $x=0$!
 % 			\[
 % 				g'(0)=\lim_{x\to 0}\frac{g(x)-g(0)}x =\lim_{x\to 0}\frac 1x\sin\frac 1x=0
 % 			\]
@@ -1493,12 +1492,7 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 	  \end{enumerate}
   
   
-  
-%   \item[6.]\begin{enumerate}
-%   \item Let $f(x)=\sqrt x$ for $x\ge 0$. Show that $f'$ is unbounded on $(0,1]$, but that $f$ is nevertheless uniformly continuous on $(0,1]$.
-%   \item Show that $f$ is uniformly continuous on $[1,\infty)$.
-%   \end{enumerate}
-  
+
 %   \item%[8.]
 %   \begin{enumerate}
 %   	\item Use the Mean Value Theorem to prove that
@@ -1506,35 +1500,8 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 %   	for all $x,y\in\R$.
 %   	\item Show that $\sin x$ is uniformly continuous on $\R$.
 %   \end{enumerate}
-  
-%   \item[10.] Let $f(x)=x^2\sin(\frac 1x)$ for $x\neq 0$ and $f(0)=0$
-%   \begin{enumerate}
-%   \item Observe that $f$ is continuous on $\R$.
-%   \item Why is $f$ uniformly continuous on any bounded subset of $\R$?
-%   \item Is $f$ uniformly continuous on $\R$?
-%   \end{enumerate}
-  
-  % 	\begin{enumerate}
-% 	  \item If $0<a<b\le\infty$, then $f:(a,b)\to\R:x\mapsto\frac 1{x^3}$ is uniformly continuous.\\[5pt]
-% 	  Let $\epsilon>0$ be given and let $\delta=\frac 13a^4\epsilon$. Then, $\forall x,y\in(a,b)$,
-% 	  \begin{align*}
-% 	  	\nm{x-y}<\delta\implies \nm{f(x)-f(y)}&=\nm{\frac 1{x^3}-\frac 1{y^3}}=\frac{\nm{y^3-x^3}}{x^3y^3}=\frac{(x^2+xy+y^2)\nm{x-y}}{x^3y^3}\\
-% 	  	&<\left(\frac 1{xy^3}+\frac 1{x^2y^2}+\frac 1{x^3y}\right)\delta <\frac 3{a^4}\delta=\epsilon
-% 	  \end{align*}
-% 	  
-% 	  \item If $0<b\le\infty$, then $f:(0,b)\to\R:x\mapsto\frac 1{x^3}$ is not uniformly continuous.\\[5pt]
-% 	  Let $\epsilon=1$ and let $\delta>0$ be given. Let $x=\min\{1,\delta\}$ and $y=\min\{\frac 12,\frac\delta 2\}$. Then
-% 	  \[\nm{x-y}=\begin{cases}
-% 	  \frac 12&\text{if }\delta\ge 1\\
-% 	  \frac\delta 2&\text{if }\delta<1
-% 	  \end{cases}\]
-% 	  Certainly $\nm{x-y}<\delta$. However,
-% 	  \[\nm{f(x)-f(y)}=\nm{\frac 1{x^3}-\frac 1{y^3}}=\begin{cases}
-% 	  \nm{1-8}=7&\text{if }\delta\ge 1\\
-% 	  \nm{\delta^{-3}-8\delta^{-3}}=7\delta^{-3}&\text{if }\delta<1
-% 	  \end{cases}\]
-% 	  In either case, $\nm{f(x)-f(y)}\ge 7>1=\epsilon$, whence $f$ is not uniformly continuous.
-% 	\end{enumerate}
+
+
 
 
 		\item Suppose $g$ is defined on $U$ and $a\in U$. Give \emph{very brief} (one line!) arguments for the following.
@@ -1572,4 +1539,6 @@ We apply the Lemma to show that a continuous function on a \emph{bounded} interv
 
 \vspace{-15pt}
 
-\footnotetext{Use the definition $g'(0)=\lim\limits_{x\to 0}\frac{g(x)-g(0)}{x-0}$. Limits of functions are covered formally in the next section (course!), but you should be familiar with the idea from elementary calculus.}
+\footnotetext{%
+	Use the definition $g'(0)=\lim\limits_{x\to 0}\frac{g(x)-g(0)}{x-0}$. Limits of functions are covered formally in the next section (course!), but you should be familiar with the idea from elementary calculus.%
+}
