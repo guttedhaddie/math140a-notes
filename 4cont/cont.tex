@@ -928,8 +928,7 @@ For a final corollary, first note a straightforward characterization that helps 
 	  \item $V$ is an interval or a point.
 	  \item If $f$ is strictly increasing (decreasing), then:\vspace{-3pt}
 		\begin{enumerate}
-		  \item $V$ is an interval of positive length.
-		  \item $f$ is \emph{injective}, and therefore bijective.
+		  \item $V$ is an interval of positive length, $f$ is \emph{injective}, and therefore bijective.
 		  \item The inverse function $f^{-1}:V\to U$ is also continuous and strictly increasing (decreasing).
 		\end{enumerate}
 	\end{enumerate}
@@ -950,8 +949,8 @@ For a final corollary, first note a straightforward characterization that helps 
 	\begin{enumerate}
 	  \item If $V$ is not a point, then $\exists a,b\in U$ such that $f(a)<f(b)$. If $y$ lies between these, IVT says $\exists\xi$ between $a$ and $b$ such that $y=f(\xi)$. That is, $y\in f(U)$. By ($\ast$), $V=f(U)$ is an interval.
 	  \item\begin{enumerate}
-	    \item[(a,b)] If $f$ is strictly increasing, then $\forall a,b\in U,\ a<b\Longrightarrow f(a)<f(b)$. Plainly $f$ is injective and $V$ contains at least two points; by part 1 it is an interval of positive length.
-	    \item[(c)] Let $y_1<y_2$ where both lie in $V$, and define $x_i=f^{-1}(y_i)$ for $i=1,2$. Since $f$ is increasing,
+	    \item If $f$ is strictly increasing, then $\forall a,b\in U,\ a<b\Longrightarrow f(a)<f(b)$. Plainly $f$ is injective and $V$ contains at least two points; by part 1 it is an interval of positive length.
+	    \item Let $y_1<y_2$ where both lie in $V$, and define $x_i=f^{-1}(y_i)$ for $i=1,2$. Since $f$ is increasing,
 			\[
 				x_2\le x_1\implies y_2=f(x_2)\le f(x_1)=y_1
 			\]
@@ -961,19 +960,26 @@ For a final corollary, first note a straightforward characterization that helps 
 				\delta:=\min\bigl(\textcolor{Brown}{b-f(a-\epsilon)},
 					\textcolor{Magenta}{f(a+\epsilon)-b}\bigr)
 			\]
-			This is \emph{positive} since $f$ is strictly increasing. Now observe that
+			\begin{minipage}[t]{0.68\linewidth}\vspace{-2pt}
+			This is \emph{positive} since $f$ is strictly increasing. But now
 			\begin{align*}
 				\nm{y-b}<\delta
 				&\implies \textcolor{Brown}{f(a-\epsilon)-b}
 					<y-b
-					<\textcolor{Magenta}{f(a+\epsilon)-b}
-				\implies f(a-\epsilon)<y<f(a+\epsilon)\\
-				&\implies a-\epsilon
+					<\textcolor{Magenta}{f(a+\epsilon)-b}\\
+				&\implies f(a-\epsilon)<y<f(a+\epsilon)\\
+				&\mathrel{\textcolor{teal}{\implies}} a-\epsilon
 					<f^{-1}(y)
-					<a+\epsilon
-					\tag{$f$ strictly increasing}\\
+					<a+\epsilon\\
 				&\implies \nm{f^{-1}(y)-f^{-1}(b)}=\nm{f^{-1}(y)-a}<\epsilon
 			\end{align*}
+			where $(\textcolor{teal}{\Longrightarrow})$ used the fact that $f$ is strictly increasing.
+			\end{minipage}
+			\hfill
+			\begin{minipage}[t]{0.31\linewidth}\vspace{-5pt}
+				\flushright\includegraphics[scale=0.9]{inversecont2}
+			\end{minipage}\medbreak
+			
 			If $a$ is an endpoint of $U$, instead use $\textcolor{Brown}{[a-\epsilon,a]\subseteq U}$ or $\textcolor{Magenta}{[a,a+\epsilon]\subseteq U}$ and only the corresponding half of the expression defining $\delta$.\qedhere
 	  \end{enumerate}
 	\end{enumerate}
@@ -1060,7 +1066,7 @@ For a final corollary, first note a straightforward characterization that helps 
 		  
 		  \item Let $U=\bigcup\limits_{n=1}^\infty I_n$, where $I_n=[\frac 1{2n},\frac 1{2n-1}]$ for each $n\in\N$. Give an example of a continuous function $f:U\to\R$ which is either unbounded or does not attain its bounds. Explain.
 		\end{enumerate}
-		(\emph{This relate to the idea that \textbf{finite} unions of closed sets are closed, but \textbf{infinite} unions need not be})
+		(\emph{This relates to the idea that \textbf{finite} unions of closed sets are closed, but \textbf{infinite} unions need not be})
 	\end{enumerate}
 \end{exercises}
 

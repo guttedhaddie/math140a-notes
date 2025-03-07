@@ -1,10 +1,4 @@
-if(!settings.multipleView) settings.batchView=false;
 settings.tex="pdflatex";
-if(settings.render < 0) settings.render=4;
-settings.outformat="";
-settings.inlineimage=true;
-settings.embed=true;
-settings.toolbar=false;
 
 texpreamble("\usepackage{amsmath}
 \usepackage{amsthm,amssymb}
@@ -13,49 +7,43 @@ texpreamble("\usepackage{amsmath}
 ");
 import graph;
 
-size(220,180,IgnoreAspect);
+size(140,140,IgnoreAspect);
 
-//dotfactor=8;
+real sh=-0.4;
+transform T=shift((sh,0));
+
 
 real f(real x){return (x-1.5)^1.5+1.2;}
+real finv(real y){return (y-1.2)^(2/3)+1.5;}
 real g(real x){return x^2;}
+real h(real x){return f(1.8)*(x-1)/0.8-g(1)*(x-1.8)/0.8;}
 
-path p=graph(g,0.7,1,operator..)--graph(f,1.8,3,operator..);
+path p=graph(g,0.6,1,operator..)--graph(f,1.8,2.7,operator..);
 
-real a=3;
-real b=f(a);
-real ame0=1.4;
-real ame=2;
-real finy=2.57;
-real y=f(finy);
 
-draw(p,blue);
-dot((a,b),red);
-dot((ame,f(ame)),red);
-dot((finy,y),red);
+real a=1.7;
+real b=h(a);
+real ep=0.8;
+real del=min(b-g(a-ep),b+f(a+ep));
 
-xaxis("$x$",0,3.5,red);
-yaxis(0,b+0.2,red);
-label(rotate(90,(0,0))*"$f(x)$",(-0.8,b+0.0),red);
-xtick(Label("$a$",align=S),a,S,red);
-xtick(Label("$a-\epsilon_0$",align=N),ame0,N,red);
-xtick(Label("$a-\epsilon$",align=S),ame,S,red);
-xtick(Label("$f^{-1}(y)$",align=N),finy,N,red);
+draw(T*p,blue+linewidth(1));
+dot(T*(a,b),red);
+
+//draw(Label("$2\epsilon$",align=S),brace((a+ep,-0.1),(a-ep,-0.1)),heavygreen);
+draw(T*(a-ep,0)--T*(a-ep,g(a-ep))--(0,g(a-ep)),dashed+0.7brown+0.3white);
+draw(T*(a+ep,0)--T*(a+ep,f(a+ep))--(0,f(a+ep)),dashed+Magenta);
+draw(T*(finv(b+del),0)--T*(finv(b+del),b+del)--(0,b+del),dashed+heavygreen);
+
+xaxis(0,red);
+yaxis(0,red);
+//label(rotate(90,(0,0))*"$f(x)$",(-0.8,b+0.0),red);
+xtick(Label("$a$",align=S),a+sh,S,red);
+xtick(Label("$a+\epsilon$",align=S),a+ep+sh,S,Magenta);
+xtick(Label("$a-\epsilon$",align=S),a-ep+sh,S,0.7brown+0.3white);
 ytick(Label("$b$",align=W),b,W,red);
-ytick(Label("$f(a-\epsilon)$",align=W),f(ame),W,red);
-ytick(Label("$y$",align=W),y,W,red);
+ytick(Label("$f(a+\epsilon)$",align=W),f(a+ep),W,Magenta);
+ytick(Label("$b+\delta$",align=W),b+del,W,heavygreen);
+//ytick(Label("$b-\delta$",align=W),b-del,W,0.7brown+0.3white);
+ytick(Label("$\begin{array}{@{}c@{}}b-\delta\\[-5pt]\text{\scalebox{0.7}{$\parallel$}}\\[-2pt]f(a-\epsilon)\end{array}$",align=W),b-del,W,0.7brown+0.3white);
 
-draw("$A$",(0.7,0)--(a,0),heavygreen+linewidth(1));
-draw("$B$",(0,g(0.7))--(0,b),heavygreen+linewidth(1));
-
-real v=(b+f(ame))/2;
-label("$\delta$",(0.4,v),red);
-draw((0.4,v+0.15)--(0.4,b),red,Arrow);
-draw((0.4,v-0.15)--(0.4,f(ame)),red,Arrow);
-real h=(a+ame)/2;
-label("$\epsilon$",(h,1),red);
-draw((h+0.12,1)--(a,1),red,Arrow);
-draw((h-0.12,1)--(ame,1),red,Arrow);
-draw((0,b)--(a,b)--(a,0),red+dashed);
-draw((0,f(ame))--(ame,f(ame))--(ame,0),red+dashed);
 
